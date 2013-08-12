@@ -23,11 +23,6 @@ class HotpValue
      */
     public function __construct($value)
     {
-        $length = strlen($value);
-        if (20 !== $length) {
-            throw new Exception\InvalidResultLengthException($length);
-        }
-
         $this->value = $value;
         $this->truncated = $this->truncate($value);
     }
@@ -59,7 +54,9 @@ class HotpValue
      *
      * @param integer|null $length The number of digits in the result string.
      *
-     * @return string The result string.
+     * @return string                                   The result string.
+     * @throws Exception\InvalidPasswordLengthException If the requested length
+     *     is invalid.
      */
     public function string($length = null)
     {
@@ -67,7 +64,7 @@ class HotpValue
             $length = 6;
         }
         if ($length < 6 || $length > 10) {
-            throw new Exception\InvalidOutputLengthException($length);
+            throw new Exception\InvalidPasswordLengthException($length);
         }
 
         return substr(
@@ -88,14 +85,14 @@ class HotpValue
      */
     protected function truncate($value)
     {
-        $hex = bin2hex($value);
-        $parts = str_split($hex, 2);
+        $value = bin2hex($value);
+        $parts = str_split($value, 2);
 
         foreach ($parts as $i => $part) {
             $parts[$i] = hexdec($part);
         }
 
-        $offset = $parts[19] & 0xf;
+        $offset = $parts[count($parts) - 1] & 0xf;
 
         return
             (($parts[$offset] & 0x7f) << 24) |

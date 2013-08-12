@@ -23,22 +23,17 @@ class HotpValueTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1094795585, $result->truncated());
     }
 
-    public function testConstructorFailureInvalidLength()
-    {
-        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidResultLengthException');
-        new HotpValue('AAAAAAAAAAAAAAAAAAA');
-    }
-
     public function stringData()
     {
+        //                             value                   length expected
         return array(
-            'Default length'  => array('AAAAAAAAAAAAAAAAAAAA', null, '795585'),
-            '6 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 6,    '795585'),
-            '8 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 8,    '94795585'),
-            '10 digit A'      => array('AAAAAAAAAAAAAAAAAAAA', 10,   '1094795585'),
-            '6 digit B'       => array('BBBBBBBBBBBBBBBBBBBB', 6,    '638594'),
-            '8 digit B'       => array('BBBBBBBBBBBBBBBBBBBB', 8,    '11638594'),
-            '10 digit B'      => array('BBBBBBBBBBBBBBBBBBBB', 10,   '1111638594'),
+            'Default length'  => array('AAAAAAAAAAAAAAAAAAAA', null,  '795585'),
+            '6 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 6,     '795585'),
+            '8 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 8,     '94795585'),
+            '10 digit A'      => array('AAAAAAAAAAAAAAAAAAAA', 10,    '1094795585'),
+            '6 digit B'       => array('BBBBBBBBBBBBBBBBBBBB', 6,     '638594'),
+            '8 digit B'       => array('BBBBBBBBBBBBBBBBBBBB', 8,     '11638594'),
+            '10 digit B'      => array('BBBBBBBBBBBBBBBBBBBB', 10,    '1111638594'),
         );
     }
 
@@ -54,6 +49,7 @@ class HotpValueTest extends PHPUnit_Framework_TestCase
 
     public function stringFailureInvalidLengthData()
     {
+        //                             length
         return array(
             'Negative'        => array(-1),
             'Zero'            => array(0),
@@ -69,7 +65,7 @@ class HotpValueTest extends PHPUnit_Framework_TestCase
     {
         $result = new HotpValue('AAAAAAAAAAAAAAAAAAAA');
 
-        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidOutputLengthException');
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidPasswordLengthException');
         $result->string($length);
     }
 }

@@ -74,7 +74,7 @@ class HotpValidator implements HotpValidatorInterface
 
             try {
                 $thisPassword = $value->string($length);
-            } catch (Exception\InvalidOutputLengthException $e) {
+            } catch (Exception\InvalidPasswordLengthException $e) {
                 return false;
             }
 

@@ -14,14 +14,14 @@ namespace Eloquent\Otis\Hotp\Exception;
 use Exception;
 
 /**
- * An invalid length HOTP result was supplied.
+ * The requested password length is invalid.
  */
-class InvalidResultLengthException extends Exception
+class InvalidPasswordLengthException extends Exception
 {
     /**
-     * Construct a new invalid result length exception.
+     * Construct a new invalid password length exception.
      *
-     * @param integer        $length   The length of the supplied result.
+     * @param integer        $length   The length requested.
      * @param Exception|null $previous The cause, if available.
      */
     public function __construct($length, Exception $previous = null)
@@ -30,7 +30,7 @@ class InvalidResultLengthException extends Exception
 
         parent::__construct(
             sprintf(
-                'Invalid HOTP result length (%s).',
+                'Invalid HOTP password length (%s).',
                 var_export($length, true)
             ),
             0,
@@ -39,9 +39,9 @@ class InvalidResultLengthException extends Exception
     }
 
     /**
-     * Get the length of the supplied result.
+     * Get the requested password length.
      *
-     * @return integer The length of the result.
+     * @return integer The length requested.
      */
     public function length()
     {

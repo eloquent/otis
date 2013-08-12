@@ -17,6 +17,28 @@ namespace Eloquent\Otis\Hotp;
 class HotpGenerator implements HotpGeneratorInterface
 {
     /**
+     * Construct a new HOTP generator.
+     *
+     * @param string|null $algorithm The hash algorithm to use.
+     */
+    public function __construct($algorithm = null)
+    {
+        if (null === $algorithm) {
+            $algorithm = 'sha1';
+        }
+
+        $this->algorithm = $algorithm;
+    }
+
+    /**
+     * @return string
+     */
+    public function algorithm()
+    {
+        return $this->algorithm;
+    }
+
+    /**
      * Generate an HOTP value.
      *
      * @link http://tools.ietf.org/html/rfc4226#section-5.3
@@ -29,7 +51,7 @@ class HotpGenerator implements HotpGeneratorInterface
     public function generate($secret, $counter)
     {
         return new HotpValue(
-            hash_hmac('sha1', $this->pack($counter), $secret, true)
+            hash_hmac($this->algorithm(), $this->pack($counter), $secret, true)
         );
     }
 
@@ -45,4 +67,6 @@ class HotpGenerator implements HotpGeneratorInterface
 
         return pack('N2', $highPart, $lowPart);
     }
+
+    private $algorithm;
 }

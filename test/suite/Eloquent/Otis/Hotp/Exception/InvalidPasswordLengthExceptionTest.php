@@ -14,15 +14,15 @@ namespace Eloquent\Otis\Hotp\Exception;
 use Exception;
 use PHPUnit_Framework_TestCase;
 
-class InvalidOutputLengthExceptionTest extends PHPUnit_Framework_TestCase
+class InvalidPasswordLengthExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {
         $previous = new Exception;
-        $exception = new InvalidOutputLengthException(111, $previous);
+        $exception = new InvalidPasswordLengthException(111, $previous);
 
         $this->assertSame(111, $exception->length());
-        $this->assertSame('Invalid HOTP output length (111).', $exception->getMessage());
+        $this->assertSame('Invalid HOTP password length (111).', $exception->getMessage());
         $this->assertSame(0, $exception->getCode());
         $this->assertSame($previous, $exception->getPrevious());
     }
