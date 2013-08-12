@@ -13,11 +13,11 @@ namespace Eloquent\Otis\Hotp;
 
 use PHPUnit_Framework_TestCase;
 
-class PathFactoryTest extends PHPUnit_Framework_TestCase
+class HotpValueTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $result = new HotpResult('AAAAAAAAAAAAAAAAAAAA');
+        $result = new HotpValue('AAAAAAAAAAAAAAAAAAAA');
 
         $this->assertSame('AAAAAAAAAAAAAAAAAAAA', $result->value());
         $this->assertSame(1094795585, $result->truncated());
@@ -26,13 +26,13 @@ class PathFactoryTest extends PHPUnit_Framework_TestCase
     public function testConstructorFailureInvalidLength()
     {
         $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidResultLengthException');
-        new HotpResult('AAAAAAAAAAAAAAAAAAA');
+        new HotpValue('AAAAAAAAAAAAAAAAAAA');
     }
 
     public function stringData()
     {
         return array(
-            'Default length'  => array('AAAAAAAAAAAAAAAAAAAA', null, '94795585'),
+            'Default length'  => array('AAAAAAAAAAAAAAAAAAAA', null, '795585'),
             '6 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 6,    '795585'),
             '8 digit A'       => array('AAAAAAAAAAAAAAAAAAAA', 8,    '94795585'),
             '10 digit A'      => array('AAAAAAAAAAAAAAAAAAAA', 10,   '1094795585'),
@@ -47,7 +47,7 @@ class PathFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testString($value, $length, $expected)
     {
-        $result = new HotpResult($value);
+        $result = new HotpValue($value);
 
         $this->assertEquals($expected, $result->string($length));
     }
@@ -67,7 +67,7 @@ class PathFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testStringFailureInvalidLength($length)
     {
-        $result = new HotpResult('AAAAAAAAAAAAAAAAAAAA');
+        $result = new HotpValue('AAAAAAAAAAAAAAAAAAAA');
 
         $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidOutputLengthException');
         $result->string($length);

@@ -14,7 +14,7 @@ namespace Eloquent\Otis\Hotp;
 /**
  * Represents a generated HOTP value.
  */
-class HotpResult
+class HotpValue
 {
     /**
      * Construct a new HOTP value.
@@ -64,7 +64,7 @@ class HotpResult
     public function string($length = null)
     {
         if (null === $length) {
-            $length = 8;
+            $length = 6;
         }
         if ($length < 6 || $length > 10) {
             throw new Exception\InvalidOutputLengthException($length);
