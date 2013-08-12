@@ -1,0 +1,25 @@
+{
+    "name": "eloquent/otis",
+    "description": "One-time password / two-factor authentication library for PHP.",
+    "keywords": ["otp", "2fa", "one", "time", "password", "two", "factor", "auth", "authentication", "google", "authenticator"],
+    "homepage": "https://github.com/eloquent/otis",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erin Millard",
+            "email": "ezzatron@gmail.com",
+            "homepage": "http://ezzatron.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "require-dev": {
+        "icecave/archer": "1.0.0-alpha.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Eloquent\\Otis": "src"
+        }
+    }
+}
