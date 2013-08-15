@@ -12,9 +12,10 @@
 namespace Eloquent\Otis\QrCode;
 
 /**
- * A QR code URI factory that produces Google Charts URIs.
+ * A QR code URI factory that produces URIs pointing to the Kaywa QR code
+ * service.
  */
-class GoogleChartsQrCodeUriFactory implements QrCodeUriFactoryInterface
+class KaywaQrCodeUriFactory implements QrCodeUriFactoryInterface
 {
     /**
      * Create a URI that will generate a QR code with the supplied values.
@@ -31,25 +32,24 @@ class GoogleChartsQrCodeUriFactory implements QrCodeUriFactoryInterface
         ErrorCorrectionLevel $errorCorrection = null
     ) {
         if (null === $size) {
-            $size = 250;
+            $size = 8;
         }
         if (null === $errorCorrection) {
             $errorCorrection = ErrorCorrectionLevel::LOW();
         }
 
-        if (ErrorCorrectionLevel::LOW() === $errorCorrection) {
-            $errorCorrectionString = '';
-        } else {
-            $errorCorrectionString = $errorCorrection->letterCode();
+        $parameters = '';
+        if (8 !== $size) {
+            $parameters .= '&s=' . rawurlencode($size);
+        }
+        if (ErrorCorrectionLevel::MEDIUM() !== $errorCorrection) {
+            $parameters .= '&l=' . rawurlencode($errorCorrection->numberCode());
         }
 
         return sprintf(
-            'https://chart.googleapis.com/chart?cht=qr' .
-                '&chs=%sx%s&chld=%s|0&chl=%s',
-            rawurlencode($size),
-            rawurlencode($size),
-            $errorCorrectionString,
-            $data
+            'http://qrfree.kaywa.com/?d=%s%s',
+            rawurlencode($data),
+            $parameters
         );
     }
 }

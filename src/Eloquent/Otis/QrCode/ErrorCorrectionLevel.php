@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Otis package.
@@ -11,30 +11,58 @@
 
 namespace Eloquent\Otis\QrCode;
 
-use Eloquent\Enumeration\Enumeration;
+use Eloquent\Enumeration\Multiton;
 
 /**
  * The available error correction levels for QR codes.
  */
-final class ErrorCorrectionLevel extends Enumeration
+final class ErrorCorrectionLevel extends Multiton
 {
     /**
-     * Allows recovery of up to 7% data loss.
+     * Get the letter code.
+     *
+     * @return string The letter code.
      */
-    const LOW = 'L';
+    public function letterCode()
+    {
+        return $this->letterCode;
+    }
 
     /**
-     * Allows recovery of up to 15% data loss.
+     * Get the number code.
+     *
+     * @return integer The number code.
      */
-    const MEDIUM = 'M';
+    public function numberCode()
+    {
+        return $this->numberCode;
+    }
+
+    protected static function initializeMembers()
+    {
+        // Allows recovery of up to 7% data loss.
+        new static('LOW', 'L', 1);
+        // Allows recovery of up to 15% data loss.
+        new static('MEDIUM', 'M', 2);
+        // Allows recovery of up to 25% data loss.
+        new static('QUARTILE', 'Q', 3);
+        // Allows recovery of up to 30% data loss.
+        new static('HIGH', 'H', 4);
+    }
 
     /**
-     * Allows recovery of up to 25% data loss.
+     * @param string  $key
+     * @param string  $letterCode
+     * @param integer $numberCode
      */
-    const QUARTILE = 'Q';
+    protected function __construct($key, $letterCode, $numberCode)
+    {
+        parent::__construct($key);
 
-    /**
-     * Allows recovery of up to 30% data loss.
-     */
-    const HIGH = 'H';
+        $this->letterCode = $letterCode;
+        $this->numberCode = $numberCode;
+    }
+
+    private $letterCode;
+    private $numberCode;
 }

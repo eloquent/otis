@@ -11,10 +11,18 @@
 
 namespace Eloquent\Otis\QrCode;
 
+use Eloquent\Liberator\Liberator;
 use PHPUnit_Framework_TestCase;
 
 class ErrorCorrectionLevelTest extends PHPUnit_Framework_TestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+
+        Liberator::liberateClass('Eloquent\Enumeration\Multiton')->members = array();
+    }
+
     public function testMembers()
     {
         $this->assertSame(
@@ -26,5 +34,21 @@ class ErrorCorrectionLevelTest extends PHPUnit_Framework_TestCase
             ),
             ErrorCorrectionLevel::members()
         );
+    }
+
+    public function testLetterCode()
+    {
+        $this->assertSame('L', ErrorCorrectionLevel::LOW()->letterCode());
+        $this->assertSame('M', ErrorCorrectionLevel::MEDIUM()->letterCode());
+        $this->assertSame('Q', ErrorCorrectionLevel::QUARTILE()->letterCode());
+        $this->assertSame('H', ErrorCorrectionLevel::HIGH()->letterCode());
+    }
+
+    public function testNumberCode()
+    {
+        $this->assertSame(1, ErrorCorrectionLevel::LOW()->numberCode());
+        $this->assertSame(2, ErrorCorrectionLevel::MEDIUM()->numberCode());
+        $this->assertSame(3, ErrorCorrectionLevel::QUARTILE()->numberCode());
+        $this->assertSame(4, ErrorCorrectionLevel::HIGH()->numberCode());
     }
 }

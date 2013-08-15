@@ -12,9 +12,10 @@
 namespace Eloquent\Otis\QrCode;
 
 /**
- * A QR code URI factory that produces Google Charts URIs.
+ * A QR code URI factory that produces URIs pointing to the QR-Server QR code
+ * service.
  */
-class GoogleChartsQrCodeUriFactory implements QrCodeUriFactoryInterface
+class QrServerQrCodeUriFactory implements QrCodeUriFactoryInterface
 {
     /**
      * Create a URI that will generate a QR code with the supplied values.
@@ -37,19 +38,24 @@ class GoogleChartsQrCodeUriFactory implements QrCodeUriFactoryInterface
             $errorCorrection = ErrorCorrectionLevel::LOW();
         }
 
-        if (ErrorCorrectionLevel::LOW() === $errorCorrection) {
-            $errorCorrectionString = '';
-        } else {
-            $errorCorrectionString = $errorCorrection->letterCode();
+        $parameters = '';
+        if (250 !== $size) {
+            $parameters .= sprintf(
+                '&size=%sx%s',
+                rawurlencode($size),
+                rawurlencode($size)
+            );
+        }
+        if (ErrorCorrectionLevel::LOW() !== $errorCorrection) {
+            $parameters .=
+                '&ecc=' .
+                rawurlencode($errorCorrection->letterCode());
         }
 
         return sprintf(
-            'https://chart.googleapis.com/chart?cht=qr' .
-                '&chs=%sx%s&chld=%s|0&chl=%s',
-            rawurlencode($size),
-            rawurlencode($size),
-            $errorCorrectionString,
-            $data
+            'https://api.qrserver.com/v1/create-qr-code/?data=%s%s',
+            rawurlencode($data),
+            $parameters
         );
     }
 }

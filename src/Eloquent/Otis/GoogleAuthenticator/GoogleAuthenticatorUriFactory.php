@@ -124,6 +124,18 @@ class GoogleAuthenticatorUriFactory implements
         $algorithm = null,
         $issuerInLabel = null
     ) {
+        if (null === $counter && 'hotp' === $type) {
+            $counter = 1;
+        }
+        if (null === $window && 'totp' === $type) {
+            $window = 30;
+        }
+        if (null === $digits) {
+            $digits = 6;
+        }
+        if (null === $algorithm) {
+            $algorithm = 'SHA1';
+        }
         if (null === $issuerInLabel) {
             $issuerInLabel = false;
         }
@@ -131,16 +143,16 @@ class GoogleAuthenticatorUriFactory implements
         $legacyIssuer = '';
         $parameters = '';
 
-        if (null !== $counter) {
+        if (null !== $counter && 1 !== $counter) {
             $parameters .= '&counter=' . rawurlencode($counter);
         }
-        if (null !== $window) {
+        if (null !== $window && 30 !== $window) {
             $parameters .= '&period=' . rawurlencode($window);
         }
-        if (null !== $digits) {
+        if (null !== $digits && 6 !== $digits) {
             $parameters .= '&digits=' . rawurlencode($digits);
         }
-        if (null !== $algorithm) {
+        if (null !== $algorithm && 'SHA1' !== $algorithm) {
             $parameters .= '&algorithm=' . rawurlencode($algorithm);
         }
         if (null !== $issuer) {

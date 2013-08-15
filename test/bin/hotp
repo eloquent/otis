@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+use Eloquent\Asplode\Asplode;
+use Eloquent\Liftoff\Launcher;
+use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
+use Eloquent\Otis\Hotp\HotpValidator;
+use Eloquent\Otis\QrCode\QrServerQrCodeUriFactory;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+Asplode::instance()->install();
+set_time_limit(0);
+
+$uriFactory = new GoogleAuthenticatorUriFactory;
+$qrCodeUriFactory = new QrServerQrCodeUriFactory;
+$validator = new HotpValidator;
+$launcher = new Launcher;
+
+$secret = sha1(mt_rand());
+$counter = 1;
+
+$uri = $uriFactory->createHotpUri(
+    $secret,
+    'Otis HOTP example',
+    'Eloquent Software'
+);
+$qrCodeUri = $qrCodeUriFactory->createUri($uri);
+
+echo 'Press ctrl+c to exit.' . PHP_EOL;
+echo 'Launching Google Authenticator QR code in browser...' . PHP_EOL;
+$launcher->launch($qrCodeUri);
+
+while (true) {
+    echo 'Enter password: ';
+    $password = trim(fgets(STDIN));
+
+    if ($validator->validate($password, $secret, $counter, 10, $newCounter)) {
+        $actualWindow = $newCounter - $counter;
+        $counter = $newCounter;
+        printf(
+            'Valid password found at %d passwords since last.' . PHP_EOL,
+            $actualWindow
+        );
+    } else {
+        echo 'Invalid password.' . PHP_EOL;
+    }
+}
