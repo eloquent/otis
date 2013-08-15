@@ -45,11 +45,11 @@ class GoogleChartsQrCodeUriFactory implements QrCodeUriFactoryInterface
 
         return sprintf(
             'https://chart.googleapis.com/chart?cht=qr' .
-                '&chs=%sx%s&chld=%s|0&chl=%s',
+                '&chs=%sx%s&chld=%s%%7C0&chl=%s',
             rawurlencode($size),
             rawurlencode($size),
             $errorCorrectionString,
-            $data
+            rawurlencode($data)
         );
     }
 }

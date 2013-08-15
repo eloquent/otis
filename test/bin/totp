@@ -5,7 +5,7 @@ use Eloquent\Asplode\Asplode;
 use Eloquent\Liftoff\Launcher;
 use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
 use Eloquent\Otis\Totp\TotpValidator;
-use Eloquent\Otis\QrCode\QrServerQrCodeUriFactory;
+use Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactory;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -13,7 +13,7 @@ Asplode::instance()->install();
 set_time_limit(0);
 
 $uriFactory = new GoogleAuthenticatorUriFactory;
-$qrCodeUriFactory = new QrServerQrCodeUriFactory;
+$qrCodeUriFactory = new GoogleChartsQrCodeUriFactory;
 $validator = new TotpValidator;
 $launcher = new Launcher;
 
@@ -36,7 +36,8 @@ while (true) {
 
     if ($validator->validate($password, $secret, null, 10, 10, $drift)) {
         printf(
-            'Valid password found at %d windows relative to OS time.' . PHP_EOL,
+            'Valid password found at %d windows relative to system time.' .
+                PHP_EOL,
             $drift
         );
     } else {

@@ -26,8 +26,8 @@ class GoogleChartsQrCodeUriFactoryTest extends PHPUnit_Framework_TestCase
     {
         //                          data       size  errorCorrection               expected
         return array(
-            'All defaults' => array('foo bar', null, null,                         'https://chart.googleapis.com/chart?cht=qr&chs=250x250&chld=|0&chl=foo bar'),
-            'All options'  => array('foo bar', 111,  ErrorCorrectionLevel::HIGH(), 'https://chart.googleapis.com/chart?cht=qr&chs=111x111&chld=H|0&chl=foo bar'),
+            'All defaults' => array('foo bar', null, null,                         'https://chart.googleapis.com/chart?cht=qr&chs=250x250&chld=%7C0&chl=foo%20bar'),
+            'All options'  => array('foo bar', 111,  ErrorCorrectionLevel::HIGH(), 'https://chart.googleapis.com/chart?cht=qr&chs=111x111&chld=H%7C0&chl=foo%20bar'),
         );
     }
 

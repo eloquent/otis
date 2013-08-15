@@ -5,7 +5,7 @@ use Eloquent\Asplode\Asplode;
 use Eloquent\Liftoff\Launcher;
 use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
 use Eloquent\Otis\Hotp\HotpValidator;
-use Eloquent\Otis\QrCode\QrServerQrCodeUriFactory;
+use Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactory;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -13,7 +13,7 @@ Asplode::instance()->install();
 set_time_limit(0);
 
 $uriFactory = new GoogleAuthenticatorUriFactory;
-$qrCodeUriFactory = new QrServerQrCodeUriFactory;
+$qrCodeUriFactory = new GoogleChartsQrCodeUriFactory;
 $validator = new HotpValidator;
 $launcher = new Launcher;
 
