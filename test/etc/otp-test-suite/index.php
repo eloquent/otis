@@ -67,7 +67,7 @@ foreach ($entries as $index => $entry) {
 
         $generator = new HotpGenerator($entry['algorithm']);
         $entries[$index]['values'] = array();
-        for ($i = 1; $i < 7; ++$i) {
+        for ($i = 0; $i < 6; ++$i) {
             $entries[$index]['values'][] = $generator
                 ->generate($secret, $i)
                 ->string($entry['digits']);
@@ -111,7 +111,8 @@ foreach ($entries as $index => $entry) {
                 beginning of the label, this means it does not support legacy-style issuer conventions.
             </p>
             <p>
-                Simply reload this page to get newer values for TOTP passwords.
+                Simply reload this page to get newer values for TOTP passwords. Keep in mind that for some HOTP
+                implementations, the counter starts at 1, wheras others start at 0.
             </p>
 
             <?php $i = 0; foreach ($entries as $entry): ?>
@@ -132,7 +133,7 @@ foreach ($entries as $index => $entry) {
                                         <?php endforeach; ?>
                                     </ul>
                                 <?php else: ?>
-                                    <ol>
+                                    <ol start="0">
                                         <?php foreach ($entry['values'] as $value): ?>
                                             <li><strong><?php echo htmlspecialchars($value) ?></strong></li>
                                         <?php endforeach; ?>
