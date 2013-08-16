@@ -55,7 +55,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $expected,
-            $this->validator->validate($password, $secret, $currentCounter, $window, $newCounter)
+            $this->validator->validate($password, $secret, $currentCounter, $newCounter, $window)
         );
         $this->assertSame($expectedCounter, $newCounter);
     }
@@ -81,7 +81,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             $expected,
-            $this->validator->validateSequence($passwords, $secret, $currentCounter, $window, $newCounter)
+            $this->validator->validateSequence($passwords, $secret, $currentCounter, $newCounter, $window)
         );
         $this->assertSame($expectedCounter, $newCounter);
     }

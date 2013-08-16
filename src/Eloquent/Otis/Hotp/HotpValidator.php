@@ -46,8 +46,8 @@ class HotpValidator implements HotpValidatorInterface
      * @param string       $password       The password to validate.
      * @param string       $secret         The HOTP secret.
      * @param integer      $currentCounter The current counter value.
-     * @param integer|null $window         The amount of counter increments to search through for a match.
      * @param integer|null &$newCounter    Will be set to the new counter value.
+     * @param integer|null $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
      */
@@ -55,8 +55,8 @@ class HotpValidator implements HotpValidatorInterface
         $password,
         $secret,
         $currentCounter,
-        $window = null,
-        &$newCounter = null
+        &$newCounter = null,
+        $window = null
     ) {
         if (null === $window) {
             $window = 0;
@@ -94,8 +94,8 @@ class HotpValidator implements HotpValidatorInterface
      * @param array<string> $passwords      The password sequence to validate.
      * @param string        $secret         The HOTP secret.
      * @param integer       $currentCounter The current counter value.
-     * @param integer|null  $window         The amount of counter increments to search through for a match.
      * @param integer|null  &$newCounter    Will be set to the new counter value.
+     * @param integer|null  $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
      */
@@ -103,8 +103,8 @@ class HotpValidator implements HotpValidatorInterface
         array $passwords,
         $secret,
         $currentCounter,
-        $window = null,
-        &$newCounter = null
+        &$newCounter = null,
+        $window = null
     ) {
         $newCounter = $currentCounter;
 
@@ -117,14 +117,12 @@ class HotpValidator implements HotpValidatorInterface
                 array_shift($passwords),
                 $secret,
                 $currentCounter,
-                $window,
-                $counter
+                $counter,
+                $window
             )
         ) {
             foreach ($passwords as $password) {
-                if (
-                    !$this->validate($password, $secret, $counter, 0, $counter)
-                ) {
+                if (!$this->validate($password, $secret, $counter, $counter)) {
                     return false;
                 }
             }
