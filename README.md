@@ -19,7 +19,7 @@ authentication] systems. *Otis* provides generators and validators for both
 (counter-based passwords as covered in [RFC 4226]). *Otis* supports all hashing
 algorithms (SHA-1, SHA-256, SHA-512).
 
-In addition, *Otis* provides tools for generating the URI format understood by
+In addition, *Otis* provides tools for generating the [URI format] understood by
 [Google Authenticator] and other compatible OTP apps, as well as URIs for QR
 code generation services to further ease integration.
 
@@ -138,53 +138,6 @@ In order to run the test suite follow these steps:
 - Change directory into `test/etc/otp-test-suite`
 - Run `php -S localhost:8000`
 - Visit http://localhost:8000/ in a browser
-
-## OTP app capabilities
-
-Not all OTP apps support the same features. Even [Google Authenticator] does not
-support all the features that its [URI format] is capable of expressing (and
-support varies across platforms).
-
-This table is an attempt to cover some of the most popular available OTP apps,
-and their features, and is accurate at the time of writing (2013-08-16).
-
-To contribute more data to this table, use the OTP test suite as described in
-the [Try Otis](#try-otis) section.
-
-<table>
-    <thead>
-        <tr><th>Name</th>                                                                                                                                       <th>Platform</th>     <th>Version</th>  <th>QR</th><th>TOTP</th><th>HOTP</th><th>6Digit</th><th>8Digit</th><th>10Digit</th><th>SHA1</th><th>SHA256</th><th>SHA512</th><th>BigWindow</th><th>Issuer</th><th>LegacyIssuer</th></tr>
-    </thead>
-    <tbody>
-        <tr><td><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Google Authenticator</a></td>                    <td>Android</td>      <td>2.49</td>     <td>✓</td> <td>✓</td>   <td>✓</td>   <td>✓</td>     <td>✗</td>     <td>✗</td>      <td>✓</td>   <td>✗</td>     <td>✗</td>     <td>✗</td>        <td>✓</td>     <td>✓</td></tr>
-        <tr><td><a href="https://play.google.com/store/apps/details?id=uk.co.bitethebullet.android.token">Android Token</a></td>                                <td>Android</td>      <td>2.02</td>     <td>✓</td> <td>✓</td>   <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✗</td>      <td>✓</td>   <td>✗</td>     <td>✗</td>     <td>✓</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td><a href="https://play.google.com/store/apps/details?id=org.cry.otp">Mobile-OTP</a></td>                                                         <td>Android</td>      <td>1.5</td>      <td>✗</td> <td>✓</td>   <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✗</td>      <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✓</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td><a href="https://itunes.apple.com/au/app/google-authenticator/id388497605">Google Authenticator</a></td>                                        <td>iOS</td>          <td>1.1.4.755</td><td>✓</td> <td>✓</td>   <td>✗</td>   <td>✓</td>     <td>✓</td>     <td>✗</td>      <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✓</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td><a href="https://itunes.apple.com/us/app/otp-auth/id659877384">OTP Auth</a></td>                                                                <td>iOS</td>          <td>1.0.3</td>    <td>✓</td> <td>✓</td>   <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✗</td>      <td>✓</td>   <td>✓</td>     <td>✓</td>     <td>✓</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td><a href="https://itunes.apple.com/us/app/hde-otp-generator/id571240327">HDE OTP Generator</a></td>                                              <td>iOS</td>          <td>1.2.0</td>    <td>✓</td> <td>✓</td>   <td>✗</td>   <td>✓</td>     <td>✗</td>     <td>✗</td>      <td>✓</td>   <td>✗</td>     <td>✗</td>     <td>✗</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td>Google Authenticator</td>                                                                                                                       <td>BlackBerry</td>   <td>1.1.1</td>    <td>✗</td> <td>✓</td>   <td>✓</td>   <td>✓</td>     <td>✗</td>     <td>✗</td>      <td>✓</td>   <td>✗</td>     <td>✗</td>     <td>✗</td>        <td>✗</td>     <td>✗</td></tr>
-        <tr><td><a href="http://appworld.blackberry.com/webstore/content/22517879/">Authomator</a></td>                                                         <td>BlackBerry</td>   <td>1.1.0</td>    <td>?</td> <td>?</td>   <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>      <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>        <td>?</td>     <td>?</td></tr>
-        <tr><td><a href="http://appworld.blackberry.com/webstore/content/29401059/">2 Steps Authenticator</a></td>                                              <td>BlackBerry</td>   <td>10.1.0</td>   <td>?</td> <td>?</td>   <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>      <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>        <td>?</td>     <td>?</td></tr>
-        <tr><td><a href="http://www.windowsphone.com/en-us/store/app/authenticator/021dd79f-0598-e011-986b-78e7d1fa76f8">Authenticator (slugonamission)</a></td><td>Windows Phone</td><td>1.2.0.0</td>  <td>?</td> <td>?</td>   <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>      <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>        <td>?</td>     <td>?</td></tr>
-        <tr><td><a href="http://www.windowsphone.com/en-us/store/app/authenticator/82c12390-0176-43de-916e-5613d17f61a0">Authenticator (Matt McCormick)</a></td><td>Windows Phone</td><td>1.5.0.0</td>  <td>?</td> <td>?</td>   <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>      <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>        <td>?</td>     <td>?</td></tr>
-        <tr><td><a href="http://www.windowsphone.com/en-us/store/app/authenticator/f758eb53-ff04-404b-9382-4d4e26f7bd46">Authenticator+</a></td>                <td>Windows Phone</td><td>1.6.1.1</td>  <td>?</td> <td>?</td>   <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>      <td>?</td>   <td>?</td>     <td>?</td>     <td>?</td>        <td>?</td>     <td>?</td></tr>
-    </tbody>
-</table>
-
-### Capability legend
-
-- **QR** - support for [Google Authenticator] compatible QR codes
-- **TOTP** - support for [TOTP] passwords
-- **HOTP** - support for [HOTP] passwords
-- **6Digit** - support for 6 digit passwords
-- **8Digit** - support for 8 digit passwords
-- **10Digit** - support for 10 digit passwords
-- **SHA1** - support for SHA-1-based passwords
-- **SHA256** - support for SHA-256-based passwords
-- **SHA512** - support for SHA-512-based passwords
-- **BigWindow** - support for alternative TOTP window sizes
-- **Issuer** - support for Issuer names
-- **LegacyIssuer** - legacy support for Issuer names
 
 <!-- References -->
 
