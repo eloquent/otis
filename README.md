@@ -137,7 +137,16 @@ In order to run the test suite follow these steps:
 - Install [Composer] dependencies as above
 - Change directory into `test/etc/otp-test-suite`
 - Run `php -S localhost:8000`
-- Visit http://localhost:8000/ in a browser
+- Visit [localhost:8000](http://localhost:8000/) in a browser
+
+## OTP app capabilities
+
+Not all OTP apps support the same features. Even [Google Authenticator] does not
+support all the features that its [URI format] is capable of expressing (and
+support varies across platforms).
+
+For a table of OTP apps and their capabilities, see [OTP app capabilities] in
+the wiki.
 
 <!-- References -->
 
@@ -148,6 +157,7 @@ In order to run the test suite follow these steps:
 [HOTP]: http://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm
 [Install Google Authenticator]: https://support.google.com/accounts/answer/1066447?hl=en
 [one-time password]: http://en.wikipedia.org/wiki/One-time_password
+[OTP app capabilities]: https://github.com/eloquent/otis/wiki/otp-app-capabilities
 [RFC 4226]: http://tools.ietf.org/html/rfc4226
 [RFC 6238]: http://tools.ietf.org/html/rfc6238
 [TOTP]: http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm
