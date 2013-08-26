@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+use Eloquent\Asplode\Asplode;
+use Eloquent\Liftoff\Launcher;
+use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
+use Eloquent\Otis\Totp\TotpValidator;
+use Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactory;
+
+require __DIR__ . '/../../vendor/autoload.php';
+
+Asplode::instance()->install();
+set_time_limit(0);
+
+$uriFactory = new GoogleAuthenticatorUriFactory;
+$qrCodeUriFactory = new GoogleChartsQrCodeUriFactory;
+$validator = new TotpValidator;
+$launcher = new Launcher;
+
+$secret = sha1(mt_rand());
+
+$uri = $uriFactory->createTotpUri(
+    $secret,
+    'Otis TOTP example',
+    'Eloquent Software'
+);
+$qrCodeUri = $qrCodeUriFactory->createUri($uri);
+
+echo 'Press ctrl+c to exit.' . PHP_EOL;
+echo 'Launching Google Authenticator QR code in browser...' . PHP_EOL;
+$launcher->launch($qrCodeUri);
+
+while (true) {
+    echo 'Enter password: ';
+    $password = trim(fgets(STDIN));
+
+    if ($validator->validate($password, $secret, null, 10, 10, $drift)) {
+        printf(
+            'Valid password found at %d windows relative to system time.' .
+                PHP_EOL,
+            $drift
+        );
+    } else {
+        echo 'Invalid password.' . PHP_EOL;
+    }
+}
