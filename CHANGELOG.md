@@ -2,4 +2,4 @@
 
 ### 0.1.0 (unreleased)
 
-* **[NEW]** Initial implementation.
+- **[NEW]** Initial implementation.

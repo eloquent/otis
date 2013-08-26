@@ -110,7 +110,8 @@ care:
   which one-time passwords have already been used in a successful validation is
   the only way to ensure a password is not re-used.
 - The shared secret should be treated as sensitive information. When storing the
-  secret on the server side, strong two-way encryption should be used.
+  secret on the server side, strong two-way encryption should be used. A
+  solution such as [Lockbox] would be ideal.
 - In order for time-based OTP systems to work well, there should be minimal
   differences in the system time of the server, and the OTP device in use.
   *Otis* defaults allow -1 to +1 time windows (a window is usually 30 seconds),
@@ -151,11 +152,10 @@ the wiki.
 <!-- References -->
 
 [API documentation]: http://lqnt.co/otis/artifacts/documentation/api/
-[Composer]: http://getcomposer.org/
-[eloquent/otis]: https://packagist.org/packages/eloquent/otis
 [Google Authenticator]: http://en.wikipedia.org/wiki/Google_Authenticator
 [HOTP]: http://en.wikipedia.org/wiki/HMAC-based_One-time_Password_Algorithm
 [Install Google Authenticator]: https://support.google.com/accounts/answer/1066447?hl=en
+[Lockbox]: http://lqnt.co/lockbox
 [one-time password]: http://en.wikipedia.org/wiki/One-time_password
 [OTP app capabilities]: https://github.com/eloquent/otis/wiki/otp-app-capabilities
 [RFC 4226]: http://tools.ietf.org/html/rfc4226
@@ -165,6 +165,8 @@ the wiki.
 [URI format]: https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
 
 [Build Status]: https://api.travis-ci.org/eloquent/otis.png?branch=master
+[Composer]: http://getcomposer.org/
+[eloquent/otis]: https://packagist.org/packages/eloquent/otis
 [Latest build]: https://travis-ci.org/eloquent/otis
 [SemVer]: http://semver.org/
 [Test coverage report]: https://coveralls.io/r/eloquent/otis
