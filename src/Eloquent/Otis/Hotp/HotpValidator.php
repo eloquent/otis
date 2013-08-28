@@ -47,6 +47,7 @@ class HotpValidator implements HotpValidatorInterface
      * @param string       $secret         The HOTP secret.
      * @param integer      $currentCounter The current counter value.
      * @param integer|null &$newCounter    Will be set to the new counter value.
+     * @param integer|null $digits         The number of password digits.
      * @param integer|null $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
@@ -56,14 +57,17 @@ class HotpValidator implements HotpValidatorInterface
         $secret,
         $currentCounter,
         &$newCounter = null,
+        $digits = null,
         $window = null
     ) {
+        $newCounter = $currentCounter;
+
+        if (null === $digits) {
+            $digits = 6;
+        }
         if (null === $window) {
             $window = 0;
         }
-
-        $newCounter = $currentCounter;
-        $length = strlen($password);
 
         for (
             $counter = $currentCounter;
@@ -73,7 +77,7 @@ class HotpValidator implements HotpValidatorInterface
             $value = $this->generator()->generate($secret, $counter);
 
             try {
-                $thisPassword = $value->string($length);
+                $thisPassword = $value->string($digits);
             } catch (Exception\InvalidPasswordLengthException $e) {
                 return false;
             }
@@ -95,6 +99,7 @@ class HotpValidator implements HotpValidatorInterface
      * @param string        $secret         The HOTP secret.
      * @param integer       $currentCounter The current counter value.
      * @param integer|null  &$newCounter    Will be set to the new counter value.
+     * @param integer|null  $digits         The number of password digits.
      * @param integer|null  $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
@@ -104,6 +109,7 @@ class HotpValidator implements HotpValidatorInterface
         $secret,
         $currentCounter,
         &$newCounter = null,
+        $digits = null,
         $window = null
     ) {
         $newCounter = $currentCounter;
@@ -118,11 +124,20 @@ class HotpValidator implements HotpValidatorInterface
                 $secret,
                 $currentCounter,
                 $counter,
+                $digits,
                 $window
             )
         ) {
             foreach ($passwords as $password) {
-                if (!$this->validate($password, $secret, $counter, $counter)) {
+                if (
+                    !$this->validate(
+                        $password,
+                        $secret,
+                        $counter,
+                        $counter,
+                        $digits
+                    )
+                ) {
                     return false;
                 }
             }

@@ -52,6 +52,7 @@ class TotpValidator implements TotpValidatorInterface
      *
      * @param string       $password      The password to validate.
      * @param string       $secret        The TOTP secret.
+     * @param integer|null $digits        The number of password digits.
      * @param integer|null $window        The number of seconds each token is valid for.
      * @param integer|null $pastWindows   The number of past windows to check.
      * @param integer|null $futureWindows The number of future windows to check.
@@ -62,11 +63,17 @@ class TotpValidator implements TotpValidatorInterface
     public function validate(
         $password,
         $secret,
+        $digits = null,
         $window = null,
         $pastWindows = null,
         $futureWindows = null,
         &$driftWindows = null
     ) {
+        $driftWindows = null;
+
+        if (null === $digits) {
+            $digits = 6;
+        }
         if (null === $window) {
             $window = 30;
         }
@@ -77,9 +84,11 @@ class TotpValidator implements TotpValidatorInterface
             $futureWindows = 1;
         }
 
-        $driftWindows = null;
+        if (strlen($password) !== $digits) {
+            return false;
+        }
+
         $time = $this->isolator()->time();
-        $length = strlen($password);
 
         for ($i = -$pastWindows; $i <= $futureWindows; ++$i) {
             $result = $this->generator()->generate(
@@ -89,7 +98,7 @@ class TotpValidator implements TotpValidatorInterface
             );
 
             try {
-                $thisPassword = $result->string($length);
+                $thisPassword = $result->string($digits);
             } catch (InvalidPasswordLengthException $e) {
                 return false;
             }

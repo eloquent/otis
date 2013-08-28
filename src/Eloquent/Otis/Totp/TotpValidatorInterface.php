@@ -21,6 +21,7 @@ interface TotpValidatorInterface
      *
      * @param string       $password      The password to validate.
      * @param string       $secret        The TOTP secret.
+     * @param integer|null $digits        The number of password digits.
      * @param integer|null $window        The number of seconds each token is valid for.
      * @param integer|null $pastWindows   The number of past windows to check.
      * @param integer|null $futureWindows The number of future windows to check.
@@ -31,6 +32,7 @@ interface TotpValidatorInterface
     public function validate(
         $password,
         $secret,
+        $digits = null,
         $window = null,
         $pastWindows = null,
         $futureWindows = null,

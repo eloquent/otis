@@ -23,6 +23,7 @@ interface HotpValidatorInterface
      * @param string       $secret         The HOTP secret.
      * @param integer      $currentCounter The current counter value.
      * @param integer|null &$newCounter    Will be set to the new counter value.
+     * @param integer|null $digits         The number of password digits.
      * @param integer|null $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
@@ -32,6 +33,7 @@ interface HotpValidatorInterface
         $secret,
         $currentCounter,
         &$newCounter = null,
+        $digits = null,
         $window = null
     );
 
@@ -42,6 +44,7 @@ interface HotpValidatorInterface
      * @param string        $secret         The HOTP secret.
      * @param integer       $currentCounter The current counter value.
      * @param integer|null  &$newCounter    Will be set to the new counter value.
+     * @param integer|null  $digits         The number of password digits.
      * @param integer|null  $window         The amount of counter increments to search through for a match.
      *
      * @return boolean True if the password is valid.
@@ -51,6 +54,7 @@ interface HotpValidatorInterface
         $secret,
         $currentCounter,
         &$newCounter = null,
+        $digits = null,
         $window = null
     );
 }
