@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Code Coverage for /home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/QrCodeUriFactoryInterface.php</title>
+  <title>Code Coverage for /home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/TotpConfigurationInterface.php</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -18,8 +18,8 @@
      <div class="span12">
       <ul class="breadcrumb">
         <li><a href="index.html">/home/travis/build/eloquent/otis/src/Eloquent/Otis</a> <span class="divider">/</span></li>
-        <li><a href="QrCode.html">QrCode</a> <span class="divider">/</span></li>
-        <li class="active">QrCodeUriFactoryInterface.php</li>
+        <li><a href="Configuration.html">Configuration</a> <span class="divider">/</span></li>
+        <li class="active">TotpConfigurationInterface.php</li>
 
       </ul>
      </div>
@@ -71,28 +71,20 @@
      <tr><td><div align="right"><a name="9"></a><a href="#9">9</a></div></td><td class="codeLine"><span class="comment">&nbsp;*&nbsp;file&nbsp;that&nbsp;was&nbsp;distributed&nbsp;with&nbsp;this&nbsp;source&nbsp;code.</span></td></tr>
      <tr><td><div align="right"><a name="10"></a><a href="#10">10</a></div></td><td class="codeLine"><span class="comment">&nbsp;*/</span></td></tr>
      <tr><td><div align="right"><a name="11"></a><a href="#11">11</a></div></td><td class="codeLine"></td></tr>
-     <tr><td><div align="right"><a name="12"></a><a href="#12">12</a></div></td><td class="codeLine"><span class="keyword">namespace</span><span class="default">&nbsp;</span><span class="default">Eloquent</span><span class="default">\</span><span class="default">Otis</span><span class="default">\</span><span class="default">QrCode</span><span class="keyword">;</span></td></tr>
+     <tr><td><div align="right"><a name="12"></a><a href="#12">12</a></div></td><td class="codeLine"><span class="keyword">namespace</span><span class="default">&nbsp;</span><span class="default">Eloquent</span><span class="default">\</span><span class="default">Otis</span><span class="default">\</span><span class="default">Configuration</span><span class="keyword">;</span></td></tr>
      <tr><td><div align="right"><a name="13"></a><a href="#13">13</a></div></td><td class="codeLine"></td></tr>
      <tr><td><div align="right"><a name="14"></a><a href="#14">14</a></div></td><td class="codeLine"><span class="comment">/**</span></td></tr>
-     <tr><td><div align="right"><a name="15"></a><a href="#15">15</a></div></td><td class="codeLine"><span class="comment">&nbsp;*&nbsp;The&nbsp;interface&nbsp;implemented&nbsp;by&nbsp;QR&nbsp;code&nbsp;URI&nbsp;factories.</span></td></tr>
+     <tr><td><div align="right"><a name="15"></a><a href="#15">15</a></div></td><td class="codeLine"><span class="comment">&nbsp;*&nbsp;The&nbsp;interface&nbsp;implemented&nbsp;by&nbsp;TOTP&nbsp;configurations.</span></td></tr>
      <tr><td><div align="right"><a name="16"></a><a href="#16">16</a></div></td><td class="codeLine"><span class="comment">&nbsp;*/</span></td></tr>
-     <tr><td><div align="right"><a name="17"></a><a href="#17">17</a></div></td><td class="codeLine"><span class="keyword">interface</span><span class="default">&nbsp;</span><span class="default">QrCodeUriFactoryInterface</span></td></tr>
+     <tr><td><div align="right"><a name="17"></a><a href="#17">17</a></div></td><td class="codeLine"><span class="keyword">interface</span><span class="default">&nbsp;</span><span class="default">TotpConfigurationInterface</span><span class="default">&nbsp;</span><span class="keyword">extends</span><span class="default">&nbsp;</span><span class="default">OtpConfigurationInterface</span></td></tr>
      <tr><td><div align="right"><a name="18"></a><a href="#18">18</a></div></td><td class="codeLine"><span class="keyword">{</span></td></tr>
      <tr><td><div align="right"><a name="19"></a><a href="#19">19</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="comment">/**</span></td></tr>
-     <tr><td><div align="right"><a name="20"></a><a href="#20">20</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Create&nbsp;a&nbsp;URI&nbsp;that&nbsp;will&nbsp;generate&nbsp;a&nbsp;QR&nbsp;code&nbsp;with&nbsp;the&nbsp;supplied&nbsp;values.</span></td></tr>
+     <tr><td><div align="right"><a name="20"></a><a href="#20">20</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Get&nbsp;the&nbsp;number&nbsp;of&nbsp;seconds&nbsp;each&nbsp;token&nbsp;is&nbsp;valid&nbsp;for.</span></td></tr>
      <tr><td><div align="right"><a name="21"></a><a href="#21">21</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
-     <tr><td><div align="right"><a name="22"></a><a href="#22">22</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;data&nbsp;to&nbsp;encode.</span></td></tr>
-     <tr><td><div align="right"><a name="23"></a><a href="#23">23</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;integer|null&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;QR&nbsp;code.&nbsp;The&nbsp;units&nbsp;are&nbsp;implementation&nbsp;dependant.</span></td></tr>
-     <tr><td><div align="right"><a name="24"></a><a href="#24">24</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;ErrorCorrectionLevel|null&nbsp;$errorCorrection&nbsp;The&nbsp;level&nbsp;of&nbsp;error&nbsp;correction&nbsp;to&nbsp;use.</span></td></tr>
-     <tr><td><div align="right"><a name="25"></a><a href="#25">25</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></td></tr>
-     <tr><td><div align="right"><a name="26"></a><a href="#26">26</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;string&nbsp;The&nbsp;QR&nbsp;code&nbsp;URI.</span></td></tr>
-     <tr><td><div align="right"><a name="27"></a><a href="#27">27</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
-     <tr><td><div align="right"><a name="28"></a><a href="#28">28</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">createUri</span><span class="keyword">(</span></td></tr>
-     <tr><td><div align="right"><a name="29"></a><a href="#29">29</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$data</span><span class="keyword">,</span></td></tr>
-     <tr><td><div align="right"><a name="30"></a><a href="#30">30</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">$size</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">null</span><span class="keyword">,</span></td></tr>
-     <tr><td><div align="right"><a name="31"></a><a href="#31">31</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="default">ErrorCorrectionLevel</span><span class="default">&nbsp;</span><span class="default">$errorCorrection</span><span class="default">&nbsp;</span><span class="keyword">=</span><span class="default">&nbsp;</span><span class="default">null</span></td></tr>
-     <tr><td><div align="right"><a name="32"></a><a href="#32">32</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
-     <tr><td><div align="right"><a name="33"></a><a href="#33">33</a></div></td><td class="codeLine"><span class="keyword">}</span></td></tr>
+     <tr><td><div align="right"><a name="22"></a><a href="#22">22</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;integer&nbsp;The&nbsp;number&nbsp;of&nbsp;seconds&nbsp;each&nbsp;token&nbsp;is&nbsp;valid&nbsp;for.</span></td></tr>
+     <tr><td><div align="right"><a name="23"></a><a href="#23">23</a></div></td><td class="codeLine"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></td></tr>
+     <tr><td><div align="right"><a name="24"></a><a href="#24">24</a></div></td><td class="codeLine"><span class="default">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="keyword">public</span><span class="default">&nbsp;</span><span class="keyword">function</span><span class="default">&nbsp;</span><span class="default">window</span><span class="keyword">(</span><span class="keyword">)</span><span class="keyword">;</span></td></tr>
+     <tr><td><div align="right"><a name="25"></a><a href="#25">25</a></div></td><td class="codeLine"><span class="keyword">}</span></td></tr>
 
     </tbody>
    </table>

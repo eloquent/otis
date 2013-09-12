@@ -1,13 +1,19 @@
 
 
 Code Coverage Report 
-  2013-08-28 05:15:12
+  2013-09-12 05:38:49
 
  Summary: 
-  Classes: 100.00% (11/11)
-  Methods: 100.00% (33/33)
-  Lines:   100.00% (283/283)
+  Classes: 100.00% (15/15)
+  Methods: 100.00% (42/42)
+  Lines:   100.00% (318/318)
 
+\Eloquent\Otis\Configuration::AbstractOtpConfiguration
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 16/ 16)
+\Eloquent\Otis\Configuration::HotpConfiguration
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 12/ 12)
+\Eloquent\Otis\Configuration::TotpConfiguration
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  7/  7)
 \Eloquent\Otis\GoogleAuthenticator::GoogleAuthenticatorUriFactory
   Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 62/ 62)
 \Eloquent\Otis\Hotp::HotpGenerator

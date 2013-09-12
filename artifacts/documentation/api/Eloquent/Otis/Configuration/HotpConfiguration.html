@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Eloquent\Otis\Configuration\HotpConfiguration | Otis API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Otis API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Eloquent/Otis/Configuration.html">Eloquent\Otis\Configuration</a>\HotpConfiguration</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>HotpConfiguration</strong>        extends <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a>        implements
+        <a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a></p>
+
+            <div class="description">
+            <p>Represents a complete set of HOTP configuration settings.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(integer|null $digits = null, integer|null $window = null, integer|null $initialCounter = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)
+                    <p>Construct a new HOTP configuration.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_digits">digits</a>()
+                    <p>Get the number of password digits.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_digits"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_secretLength">secretLength</a>()
+                    <p>Get the length of the shared secret.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_secretLength"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_algorithm">algorithm</a>()
+                    <p>Get the underlying algorithm name.</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_algorithm"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_window">window</a>()
+                    <p>Get the amount of counter increments to search through for a match.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_initialCounter">initialCounter</a>()
+                    <p>Get the initial counter value.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 29</div>
+        <code>            public            
+    <strong>__construct</strong>(integer|null $digits = null, integer|null $window = null, integer|null $initialCounter = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)</code>
+    </h3>
+    <div class="details">
+        <p>Construct a new HOTP configuration.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer|null</td>
+                <td>$digits</td>
+                <td>The number of password digits.</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
+                <td>$window</td>
+                <td>The amount of counter increments to search through for a match.</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
+                <td>$initialCounter</td>
+                <td>The initial counter value.</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
+                <td>$secretLength</td>
+                <td>The length of the shared secret.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a></td>
+                <td>$algorithm</td>
+                <td>The underlying algorithm to use.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_digits">
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_digits"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 51</div>
+        <code>            public            integer
+    <strong>digits</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the number of password digits.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The number of digits.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_secretLength">
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_secretLength"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 61</div>
+        <code>            public            integer
+    <strong>secretLength</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the length of the shared secret.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The secret length.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_algorithm">
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_algorithm"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 71</div>
+        <code>            public            <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a>
+    <strong>algorithm</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the underlying algorithm name.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a></td>
+            <td>The algorithm name.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_window">
+        <div class="location">at line 54</div>
+        <code>            public            integer
+    <strong>window</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the amount of counter increments to search through for a match.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The amount of counter increments to search through for a match.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_initialCounter">
+        <div class="location">at line 64</div>
+        <code>            public            integer
+    <strong>initialCounter</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the initial counter value.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The initial counter value.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
