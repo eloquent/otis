@@ -25,6 +25,8 @@ class HotpConfiguration extends AbstractOtpConfiguration implements
      * @param integer|null       $initialCounter The initial counter value.
      * @param integer|null       $secretLength   The length of the shared secret.
      * @param HashAlgorithm|null $algorithm      The underlying algorithm to use.
+     *
+     * @throws Exception\InvalidPasswordLengthException If the number of digits is invalid.
      */
     public function __construct(
         $digits = null,

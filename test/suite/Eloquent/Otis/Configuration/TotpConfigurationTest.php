@@ -23,19 +23,16 @@ class TotpConfigurationTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->configuration = new TotpConfiguration(
-            111,
-            222,
-            333,
-            HashAlgorithm::SHA512()
-        );
+        $this->configuration = new TotpConfiguration(10, 222, 333, 444, 555, HashAlgorithm::SHA512());
     }
 
     public function testConstructor()
     {
-        $this->assertSame(111, $this->configuration->digits());
+        $this->assertSame(10, $this->configuration->digits());
         $this->assertSame(222, $this->configuration->window());
-        $this->assertSame(333, $this->configuration->secretLength());
+        $this->assertSame(333, $this->configuration->futureWindows());
+        $this->assertSame(444, $this->configuration->pastWindows());
+        $this->assertSame(555, $this->configuration->secretLength());
         $this->assertSame(HashAlgorithm::SHA512(), $this->configuration->algorithm());
     }
 
@@ -45,7 +42,21 @@ class TotpConfigurationTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(6, $this->configuration->digits());
         $this->assertSame(30, $this->configuration->window());
+        $this->assertSame(1, $this->configuration->futureWindows());
+        $this->assertSame(1, $this->configuration->pastWindows());
         $this->assertSame(10, $this->configuration->secretLength());
         $this->assertSame(HashAlgorithm::SHA1(), $this->configuration->algorithm());
+    }
+
+    public function testConstructorFailurePasswordLengthTooShort()
+    {
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidPasswordLengthException');
+        new TotpConfiguration(5);
+    }
+
+    public function testConstructorFailurePasswordLengthTooLong()
+    {
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidPasswordLengthException');
+        new TotpConfiguration(11);
     }
 }

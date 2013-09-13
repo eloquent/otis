@@ -22,4 +22,18 @@ interface TotpConfigurationInterface extends OtpConfigurationInterface
      * @return integer The number of seconds each token is valid for.
      */
     public function window();
+
+    /**
+     * Get the number of future windows to check.
+     *
+     * @return integer The number of future windows to check.
+     */
+    public function futureWindows();
+
+    /**
+     * Get the number of past windows to check.
+     *
+     * @return integer The number of past windows to check.
+     */
+    public function pastWindows();
 }

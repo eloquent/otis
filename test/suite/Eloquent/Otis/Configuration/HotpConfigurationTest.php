@@ -23,18 +23,12 @@ class HotpConfigurationTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->configuration = new HotpConfiguration(
-            111,
-            222,
-            333,
-            444,
-            HashAlgorithm::SHA512()
-        );
+        $this->configuration = new HotpConfiguration(10, 222, 333, 444, HashAlgorithm::SHA512());
     }
 
     public function testConstructor()
     {
-        $this->assertSame(111, $this->configuration->digits());
+        $this->assertSame(10, $this->configuration->digits());
         $this->assertSame(222, $this->configuration->window());
         $this->assertSame(333, $this->configuration->initialCounter());
         $this->assertSame(444, $this->configuration->secretLength());
@@ -50,5 +44,17 @@ class HotpConfigurationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, $this->configuration->initialCounter());
         $this->assertSame(10, $this->configuration->secretLength());
         $this->assertSame(HashAlgorithm::SHA1(), $this->configuration->algorithm());
+    }
+
+    public function testConstructorFailurePasswordLengthTooShort()
+    {
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidPasswordLengthException');
+        new HotpConfiguration(5);
+    }
+
+    public function testConstructorFailurePasswordLengthTooLong()
+    {
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\InvalidPasswordLengthException');
+        new HotpConfiguration(11);
     }
 }

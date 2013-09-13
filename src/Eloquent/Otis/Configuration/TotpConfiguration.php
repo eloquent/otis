@@ -20,24 +20,38 @@ class TotpConfiguration extends AbstractOtpConfiguration implements
     /**
      * Construct a new TOTP configuration.
      *
-     * @param integer|null       $digits       The number of password digits.
-     * @param integer|null       $window       The number of seconds each token is valid for.
-     * @param integer|null       $secretLength The length of the shared secret.
-     * @param HashAlgorithm|null $algorithm    The underlying algorithm to use.
+     * @param integer|null       $digits        The number of password digits.
+     * @param integer|null       $window        The number of seconds each token is valid for.
+     * @param integer|null       $futureWindows The number of future windows to check.
+     * @param integer|null       $pastWindows   The number of past windows to check.
+     * @param integer|null       $secretLength  The length of the shared secret.
+     * @param HashAlgorithm|null $algorithm     The underlying algorithm to use.
+     *
+     * @throws Exception\InvalidPasswordLengthException If the number of digits is invalid.
      */
     public function __construct(
         $digits = null,
         $window = null,
+        $futureWindows = null,
+        $pastWindows = null,
         $secretLength = null,
         HashAlgorithm $algorithm = null
     ) {
         if (null === $window) {
             $window = 30;
         }
+        if (null === $futureWindows) {
+            $futureWindows = 1;
+        }
+        if (null === $pastWindows) {
+            $pastWindows = 1;
+        }
 
         parent::__construct($digits, $secretLength, $algorithm);
 
         $this->window = $window;
+        $this->futureWindows = $futureWindows;
+        $this->pastWindows = $pastWindows;
     }
 
     /**
@@ -50,5 +64,27 @@ class TotpConfiguration extends AbstractOtpConfiguration implements
         return $this->window;
     }
 
+    /**
+     * Get the number of future windows to check.
+     *
+     * @return integer The number of future windows to check.
+     */
+    public function futureWindows()
+    {
+        return $this->futureWindows;
+    }
+
+    /**
+     * Get the number of past windows to check.
+     *
+     * @return integer The number of past windows to check.
+     */
+    public function pastWindows()
+    {
+        return $this->pastWindows;
+    }
+
     private $window;
+    private $futureWindows;
+    private $pastWindows;
 }

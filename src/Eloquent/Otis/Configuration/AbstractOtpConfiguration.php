@@ -22,6 +22,8 @@ abstract class AbstractOtpConfiguration implements OtpConfigurationInterface
      * @param integer|null       $digits       The number of password digits.
      * @param integer|null       $secretLength The length of the shared secret.
      * @param HashAlgorithm|null $algorithm    The underlying algorithm to use.
+     *
+     * @throws Exception\InvalidPasswordLengthException If the number of digits is invalid.
      */
     public function __construct(
         $digits = null,
@@ -36,6 +38,10 @@ abstract class AbstractOtpConfiguration implements OtpConfigurationInterface
         }
         if (null === $algorithm) {
             $algorithm = HashAlgorithm::SHA1();
+        }
+
+        if ($digits < 6 || $digits > 10) {
+            throw new Exception\InvalidPasswordLengthException($digits);
         }
 
         $this->digits = $digits;

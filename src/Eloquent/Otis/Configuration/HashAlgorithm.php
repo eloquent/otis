@@ -23,19 +23,19 @@ final class HashAlgorithm extends Enumeration
      *
      * @link http://tools.ietf.org/html/rfc3174
      */
-    const SHA1 = 'sha1';
+    const SHA1 = 'SHA1';
 
     /**
      * The SHA-256 hash algorithm.
      *
      * @link http://tools.ietf.org/html/rfc6234
      */
-    const SHA256 = 'sha256';
+    const SHA256 = 'SHA256';
 
     /**
      * The SHA-512 hash algorithm.
      *
      * @link http://tools.ietf.org/html/rfc6234
      */
-    const SHA512 = 'sha512';
+    const SHA512 = 'SHA512';
 }
