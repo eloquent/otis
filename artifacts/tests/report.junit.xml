@@ -1,172 +1,205 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="115" assertions="191" failures="0" errors="0" time="0.907562">
-    <testsuite name="Eloquent\Otis\Configuration\HashAlgorithmTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HashAlgorithmTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="1" assertions="1" failures="0" errors="0" time="0.010370">
-      <testcase name="testEnumeration" class="Eloquent\Otis\Configuration\HashAlgorithmTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HashAlgorithmTest.php" line="18" assertions="1" time="0.010370"/>
+  <testsuite name="" tests="132" assertions="250" failures="0" errors="0" time="1.305047">
+    <testsuite name="Eloquent\Otis\Configuration\Exception\InvalidPasswordLengthExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/Exception/InvalidPasswordLengthExceptionTest.php" namespace="Eloquent\Otis\Configuration\Exception" fullPackage="Eloquent.Otis.Configuration.Exception" tests="1" assertions="4" failures="0" errors="0" time="0.009471">
+      <testcase name="testException" class="Eloquent\Otis\Configuration\Exception\InvalidPasswordLengthExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/Exception/InvalidPasswordLengthExceptionTest.php" line="19" assertions="4" time="0.009471"/>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="2" assertions="10" failures="0" errors="0" time="0.016419">
-      <testcase name="testConstructor" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="35" assertions="5" time="0.009100"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="44" assertions="5" time="0.007319"/>
+    <testsuite name="Eloquent\Otis\Configuration\HashAlgorithmTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HashAlgorithmTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="1" assertions="1" failures="0" errors="0" time="0.007823">
+      <testcase name="testEnumeration" class="Eloquent\Otis\Configuration\HashAlgorithmTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HashAlgorithmTest.php" line="18" assertions="1" time="0.007823"/>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="2" assertions="8" failures="0" errors="0" time="0.013295">
-      <testcase name="testConstructor" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="34" assertions="4" time="0.006880"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="42" assertions="4" time="0.006415"/>
+    <testsuite name="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="4" assertions="12" failures="0" errors="0" time="0.029502">
+      <testcase name="testConstructor" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="29" assertions="5" time="0.008157"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="38" assertions="5" time="0.007619"/>
+      <testcase name="testConstructorFailurePasswordLengthTooShort" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="49" assertions="1" time="0.007786"/>
+      <testcase name="testConstructorFailurePasswordLengthTooLong" class="Eloquent\Otis\Configuration\HotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/HotpConfigurationTest.php" line="55" assertions="1" time="0.005940"/>
     </testsuite>
-    <testsuite name="Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/GoogleAuthenticator/GoogleAuthenticatorUriFactoryTest.php" namespace="Eloquent\Otis\GoogleAuthenticator" fullPackage="Eloquent.Otis.GoogleAuthenticator" tests="6" assertions="6" failures="0" errors="0" time="0.030065">
-      <testsuite name="Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri" tests="3" assertions="3" failures="0" errors="0" time="0.015745">
-        <testcase name="testCreateHotpUri with data set &quot;All defaults&quot;" assertions="1" time="0.006383"/>
-        <testcase name="testCreateHotpUri with data set &quot;All options&quot;" assertions="1" time="0.004699"/>
-        <testcase name="testCreateHotpUri with data set &quot;No legacy issuer&quot;" assertions="1" time="0.004663"/>
-      </testsuite>
-      <testsuite name="Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri" tests="3" assertions="3" failures="0" errors="0" time="0.014320">
-        <testcase name="testCreateTotpUri with data set &quot;All defaults&quot;" assertions="1" time="0.004723"/>
-        <testcase name="testCreateTotpUri with data set &quot;All options&quot;" assertions="1" time="0.004829"/>
-        <testcase name="testCreateTotpUri with data set &quot;No legacy issuer&quot;" assertions="1" time="0.004768"/>
-      </testsuite>
+    <testsuite name="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" namespace="Eloquent\Otis\Configuration" fullPackage="Eloquent.Otis.Configuration" tests="4" assertions="14" failures="0" errors="0" time="0.028804">
+      <testcase name="testConstructor" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="29" assertions="6" time="0.007829"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="39" assertions="6" time="0.007708"/>
+      <testcase name="testConstructorFailurePasswordLengthTooShort" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="51" assertions="1" time="0.006701"/>
+      <testcase name="testConstructorFailurePasswordLengthTooLong" class="Eloquent\Otis\Configuration\TotpConfigurationTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Configuration/TotpConfigurationTest.php" line="57" assertions="1" time="0.006566"/>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Hotp\Exception\InvalidPasswordLengthExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/Exception/InvalidPasswordLengthExceptionTest.php" namespace="Eloquent\Otis\Hotp\Exception" fullPackage="Eloquent.Otis.Hotp.Exception" tests="1" assertions="4" failures="0" errors="0" time="0.005184">
-      <testcase name="testException" class="Eloquent\Otis\Hotp\Exception\InvalidPasswordLengthExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/Exception/InvalidPasswordLengthExceptionTest.php" line="19" assertions="4" time="0.005184"/>
-    </testsuite>
-    <testsuite name="Eloquent\Otis\Hotp\HotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpGeneratorTest.php" namespace="Eloquent\Otis\Hotp" fullPackage="Eloquent.Otis.Hotp" tests="32" assertions="62" failures="0" errors="0" time="0.155698">
-      <testcase name="testConstructor" class="Eloquent\Otis\Hotp\HotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpGeneratorTest.php" line="18" assertions="1" time="0.004765"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Hotp\HotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpGeneratorTest.php" line="25" assertions="1" time="0.004181"/>
-      <testsuite name="Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate" tests="30" assertions="60" failures="0" errors="0" time="0.146752">
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 0&quot;" assertions="2" time="0.005263"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 1&quot;" assertions="2" time="0.004639"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 2&quot;" assertions="2" time="0.006089"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 3&quot;" assertions="2" time="0.005880"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 4&quot;" assertions="2" time="0.004803"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 5&quot;" assertions="2" time="0.004559"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 6&quot;" assertions="2" time="0.004552"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 7&quot;" assertions="2" time="0.004628"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 8&quot;" assertions="2" time="0.004524"/>
-        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 9&quot;" assertions="2" time="0.004583"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 0&quot;" assertions="2" time="0.004645"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 1&quot;" assertions="2" time="0.004676"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 2&quot;" assertions="2" time="0.004766"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 3&quot;" assertions="2" time="0.004697"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 4&quot;" assertions="2" time="0.004566"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 5&quot;" assertions="2" time="0.004623"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 6&quot;" assertions="2" time="0.004588"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 7&quot;" assertions="2" time="0.004612"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 8&quot;" assertions="2" time="0.004958"/>
-        <testcase name="testGenerate with data set &quot;SHA-256 variant count 9&quot;" assertions="2" time="0.005078"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 0&quot;" assertions="2" time="0.004744"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 1&quot;" assertions="2" time="0.004889"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 2&quot;" assertions="2" time="0.004830"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 3&quot;" assertions="2" time="0.004879"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 4&quot;" assertions="2" time="0.004766"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 5&quot;" assertions="2" time="0.005829"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 6&quot;" assertions="2" time="0.005138"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 7&quot;" assertions="2" time="0.004955"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 8&quot;" assertions="2" time="0.005037"/>
-        <testcase name="testGenerate with data set &quot;SHA-512 variant count 9&quot;" assertions="2" time="0.004956"/>
+    <testsuite name="Eloquent\Otis\Generator\HotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/HotpGeneratorTest.php" namespace="Eloquent\Otis\Generator" fullPackage="Eloquent.Otis.Generator" tests="30" assertions="60" failures="0" errors="0" time="0.177139">
+      <testsuite name="Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate" tests="30" assertions="60" failures="0" errors="0" time="0.177139">
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 0&quot;" assertions="2" time="0.007806"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 1&quot;" assertions="2" time="0.005905"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 2&quot;" assertions="2" time="0.005721"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 3&quot;" assertions="2" time="0.006279"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 4&quot;" assertions="2" time="0.006214"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 5&quot;" assertions="2" time="0.006374"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 6&quot;" assertions="2" time="0.005688"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 7&quot;" assertions="2" time="0.005844"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 8&quot;" assertions="2" time="0.005962"/>
+        <testcase name="testGenerate with data set &quot;RFC 4226 test secret count 9&quot;" assertions="2" time="0.005837"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 0&quot;" assertions="2" time="0.005385"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 1&quot;" assertions="2" time="0.005712"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 2&quot;" assertions="2" time="0.005776"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 3&quot;" assertions="2" time="0.005281"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 4&quot;" assertions="2" time="0.006208"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 5&quot;" assertions="2" time="0.006013"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 6&quot;" assertions="2" time="0.005959"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 7&quot;" assertions="2" time="0.005996"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 8&quot;" assertions="2" time="0.005866"/>
+        <testcase name="testGenerate with data set &quot;SHA-256 variant count 9&quot;" assertions="2" time="0.005416"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 0&quot;" assertions="2" time="0.006100"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 1&quot;" assertions="2" time="0.005488"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 2&quot;" assertions="2" time="0.005935"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 3&quot;" assertions="2" time="0.005401"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 4&quot;" assertions="2" time="0.006001"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 5&quot;" assertions="2" time="0.005656"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 6&quot;" assertions="2" time="0.005928"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 7&quot;" assertions="2" time="0.005639"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 8&quot;" assertions="2" time="0.005839"/>
+        <testcase name="testGenerate with data set &quot;SHA-512 variant count 9&quot;" assertions="2" time="0.005910"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Hotp\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpValidatorTest.php" namespace="Eloquent\Otis\Hotp" fullPackage="Eloquent.Otis.Hotp" tests="15" assertions="28" failures="0" errors="0" time="0.113201">
-      <testcase name="testConstructor" class="Eloquent\Otis\Hotp\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpValidatorTest.php" line="26" assertions="1" time="0.005749"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Hotp\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpValidatorTest.php" line="31" assertions="1" time="0.019023"/>
-      <testsuite name="Eloquent\Otis\Hotp\HotpValidatorTest::testValidate" tests="6" assertions="12" failures="0" errors="0" time="0.042721">
-        <testcase name="testValidate with data set &quot;No window, valid&quot;" assertions="2" time="0.005631"/>
-        <testcase name="testValidate with data set &quot;With window, valid&quot;" assertions="2" time="0.010213"/>
-        <testcase name="testValidate with data set &quot;No window, invalid&quot;" assertions="2" time="0.005666"/>
-        <testcase name="testValidate with data set &quot;With window, invalid&quot;" assertions="2" time="0.009729"/>
-        <testcase name="testValidate with data set &quot;Length mismatch&quot;" assertions="2" time="0.005549"/>
-        <testcase name="testValidate with data set &quot;Invalid length&quot;" assertions="2" time="0.005933"/>
+    <testsuite name="Eloquent\Otis\Generator\OtpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/OtpValueTest.php" namespace="Eloquent\Otis\Generator" fullPackage="Eloquent.Otis.Generator" tests="11" assertions="12" failures="0" errors="0" time="0.068515">
+      <testcase name="testConstructor" class="Eloquent\Otis\Generator\OtpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/OtpValueTest.php" line="18" assertions="2" time="0.004662"/>
+      <testsuite name="Eloquent\Otis\Generator\OtpValueTest::testString" tests="7" assertions="7" failures="0" errors="0" time="0.049152">
+        <testcase name="testString with data set &quot;Default length&quot;" assertions="1" time="0.017585"/>
+        <testcase name="testString with data set &quot;6 digit A&quot;" assertions="1" time="0.005266"/>
+        <testcase name="testString with data set &quot;8 digit A&quot;" assertions="1" time="0.005226"/>
+        <testcase name="testString with data set &quot;10 digit A&quot;" assertions="1" time="0.005175"/>
+        <testcase name="testString with data set &quot;6 digit B&quot;" assertions="1" time="0.005468"/>
+        <testcase name="testString with data set &quot;8 digit B&quot;" assertions="1" time="0.005147"/>
+        <testcase name="testString with data set &quot;10 digit B&quot;" assertions="1" time="0.005285"/>
       </testsuite>
-      <testsuite name="Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence" tests="7" assertions="14" failures="0" errors="0" time="0.045709">
-        <testcase name="testValidateSequence with data set &quot;No window, valid&quot;" assertions="2" time="0.006234"/>
-        <testcase name="testValidateSequence with data set &quot;With window, valid&quot;" assertions="2" time="0.009797"/>
-        <testcase name="testValidateSequence with data set &quot;No window, invalid&quot;" assertions="2" time="0.006030"/>
-        <testcase name="testValidateSequence with data set &quot;With window, invalid&quot;" assertions="2" time="0.007035"/>
-        <testcase name="testValidateSequence with data set &quot;Length mismatch&quot;" assertions="2" time="0.005521"/>
-        <testcase name="testValidateSequence with data set &quot;Invalid length&quot;" assertions="2" time="0.006089"/>
-        <testcase name="testValidateSequence with data set &quot;No passwords&quot;" assertions="2" time="0.005003"/>
+      <testcase name="testStringFailureInvalidLengthTooShort" class="Eloquent\Otis\Generator\OtpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/OtpValueTest.php" line="50" assertions="1" time="0.005181"/>
+      <testcase name="testStringFailureInvalidLengthTooLong" class="Eloquent\Otis\Generator\OtpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/OtpValueTest.php" line="58" assertions="1" time="0.004924"/>
+      <testcase name="testToString" class="Eloquent\Otis\Generator\OtpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/OtpValueTest.php" line="66" assertions="1" time="0.004596"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Generator\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/TotpGeneratorTest.php" namespace="Eloquent\Otis\Generator" fullPackage="Eloquent.Otis.Generator" tests="24" assertions="24" failures="0" errors="0" time="0.241285">
+      <testcase name="testConstructor" class="Eloquent\Otis\Generator\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/TotpGeneratorTest.php" line="30" assertions="1" time="0.074591"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Generator\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/TotpGeneratorTest.php" line="35" assertions="1" time="0.007838"/>
+      <testsuite name="Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate" tests="21" assertions="21" failures="0" errors="0" time="0.150336">
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 1&quot;" assertions="1" time="0.007802"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 2&quot;" assertions="1" time="0.006925"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 3&quot;" assertions="1" time="0.007041"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 4&quot;" assertions="1" time="0.007484"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 5&quot;" assertions="1" time="0.006891"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 6&quot;" assertions="1" time="0.007257"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 7&quot;" assertions="1" time="0.007344"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 8&quot;" assertions="1" time="0.006661"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 9&quot;" assertions="1" time="0.007073"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 10&quot;" assertions="1" time="0.007220"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 11&quot;" assertions="1" time="0.007041"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 12&quot;" assertions="1" time="0.007079"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 13&quot;" assertions="1" time="0.007399"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 14&quot;" assertions="1" time="0.006896"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 15&quot;" assertions="1" time="0.007037"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 16&quot;" assertions="1" time="0.007340"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 17&quot;" assertions="1" time="0.006918"/>
+        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 18&quot;" assertions="1" time="0.007244"/>
+        <testcase name="testGenerate with data set &quot;Alternate window SHA-1&quot;" assertions="1" time="0.007304"/>
+        <testcase name="testGenerate with data set &quot;Alternate window SHA-256&quot;" assertions="1" time="0.007056"/>
+        <testcase name="testGenerate with data set &quot;Alternate window SHA-512&quot;" assertions="1" time="0.007324"/>
+      </testsuite>
+      <testcase name="testGenerateCurrentTime" class="Eloquent\Otis\Generator\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Generator/TotpGeneratorTest.php" line="86" assertions="1" time="0.008520"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/GoogleAuthenticator/GoogleAuthenticatorUriFactoryTest.php" namespace="Eloquent\Otis\Uri\GoogleAuthenticator" fullPackage="Eloquent.Otis.Uri.GoogleAuthenticator" tests="6" assertions="6" failures="0" errors="0" time="0.042669">
+      <testsuite name="Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri" tests="3" assertions="3" failures="0" errors="0" time="0.022222">
+        <testcase name="testCreateHotpUri with data set &quot;All defaults&quot;" assertions="1" time="0.008763"/>
+        <testcase name="testCreateHotpUri with data set &quot;All options&quot;" assertions="1" time="0.006787"/>
+        <testcase name="testCreateHotpUri with data set &quot;No legacy issuer&quot;" assertions="1" time="0.006672"/>
+      </testsuite>
+      <testsuite name="Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri" tests="3" assertions="3" failures="0" errors="0" time="0.020447">
+        <testcase name="testCreateTotpUri with data set &quot;All defaults&quot;" assertions="1" time="0.006830"/>
+        <testcase name="testCreateTotpUri with data set &quot;All options&quot;" assertions="1" time="0.006792"/>
+        <testcase name="testCreateTotpUri with data set &quot;No legacy issuer&quot;" assertions="1" time="0.006825"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Hotp\HotpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpValueTest.php" namespace="Eloquent\Otis\Hotp" fullPackage="Eloquent.Otis.Hotp" tests="12" assertions="13" failures="0" errors="0" time="0.060333">
-      <testcase name="testConstructor" class="Eloquent\Otis\Hotp\HotpValueTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Hotp/HotpValueTest.php" line="18" assertions="2" time="0.004443"/>
-      <testsuite name="Eloquent\Otis\Hotp\HotpValueTest::testString" tests="7" assertions="7" failures="0" errors="0" time="0.034590">
-        <testcase name="testString with data set &quot;Default length&quot;" assertions="1" time="0.004875"/>
-        <testcase name="testString with data set &quot;6 digit A&quot;" assertions="1" time="0.005000"/>
-        <testcase name="testString with data set &quot;8 digit A&quot;" assertions="1" time="0.005059"/>
-        <testcase name="testString with data set &quot;10 digit A&quot;" assertions="1" time="0.004914"/>
-        <testcase name="testString with data set &quot;6 digit B&quot;" assertions="1" time="0.004850"/>
-        <testcase name="testString with data set &quot;8 digit B&quot;" assertions="1" time="0.004898"/>
-        <testcase name="testString with data set &quot;10 digit B&quot;" assertions="1" time="0.004994"/>
-      </testsuite>
-      <testsuite name="Eloquent\Otis\Hotp\HotpValueTest::testStringFailureInvalidLength" tests="4" assertions="4" failures="0" errors="0" time="0.021300">
-        <testcase name="testStringFailureInvalidLength with data set &quot;Negative&quot;" assertions="1" time="0.006361"/>
-        <testcase name="testStringFailureInvalidLength with data set &quot;Zero&quot;" assertions="1" time="0.005325"/>
-        <testcase name="testStringFailureInvalidLength with data set &quot;Less than 6&quot;" assertions="1" time="0.004828"/>
-        <testcase name="testStringFailureInvalidLength with data set &quot;Greater than 10&quot;" assertions="1" time="0.004786"/>
+    <testsuite name="Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/ErrorCorrectionLevelTest.php" namespace="Eloquent\Otis\Uri\QrCode" fullPackage="Eloquent.Otis.Uri.QrCode" tests="3" assertions="9" failures="0" errors="0" time="0.030099">
+      <testcase name="testMembers" class="Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/ErrorCorrectionLevelTest.php" line="26" assertions="1" time="0.011528"/>
+      <testcase name="testLetterCode" class="Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/ErrorCorrectionLevelTest.php" line="39" assertions="4" time="0.009419"/>
+      <testcase name="testNumberCode" class="Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/ErrorCorrectionLevelTest.php" line="47" assertions="4" time="0.009152"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/GoogleChartsQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\Uri\QrCode" fullPackage="Eloquent.Otis.Uri.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.011340">
+      <testsuite name="Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.011340">
+        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.006133"/>
+        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.005207"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/ErrorCorrectionLevelTest.php" namespace="Eloquent\Otis\QrCode" fullPackage="Eloquent.Otis.QrCode" tests="3" assertions="9" failures="0" errors="0" time="0.031190">
-      <testcase name="testMembers" class="Eloquent\Otis\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/ErrorCorrectionLevelTest.php" line="26" assertions="1" time="0.010754"/>
-      <testcase name="testLetterCode" class="Eloquent\Otis\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/ErrorCorrectionLevelTest.php" line="39" assertions="4" time="0.010150"/>
-      <testcase name="testNumberCode" class="Eloquent\Otis\QrCode\ErrorCorrectionLevelTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/ErrorCorrectionLevelTest.php" line="47" assertions="4" time="0.010286"/>
-    </testsuite>
-    <testsuite name="Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/GoogleChartsQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\QrCode" fullPackage="Eloquent.Otis.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.011755">
-      <testsuite name="Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.011755">
-        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.006492"/>
-        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.005263"/>
+    <testsuite name="Eloquent\Otis\Uri\QrCode\KaywaQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/KaywaQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\Uri\QrCode" fullPackage="Eloquent.Otis.Uri.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.011820">
+      <testsuite name="Eloquent\Otis\Uri\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.011820">
+        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.006193"/>
+        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.005627"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\QrCode\KaywaQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/KaywaQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\QrCode" fullPackage="Eloquent.Otis.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.010865">
-      <testsuite name="Eloquent\Otis\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.010865">
-        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.006026"/>
-        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.004839"/>
+    <testsuite name="Eloquent\Otis\Uri\QrCode\QrServerQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Uri/QrCode/QrServerQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\Uri\QrCode" fullPackage="Eloquent.Otis.Uri.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.011055">
+      <testsuite name="Eloquent\Otis\Uri\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.011055">
+        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.006116"/>
+        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.004939"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\QrCode\QrServerQrCodeUriFactoryTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/QrCode/QrServerQrCodeUriFactoryTest.php" namespace="Eloquent\Otis\QrCode" fullPackage="Eloquent.Otis.QrCode" tests="2" assertions="2" failures="0" errors="0" time="0.010734">
-      <testsuite name="Eloquent\Otis\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri" tests="2" assertions="2" failures="0" errors="0" time="0.010734">
-        <testcase name="testCreateUri with data set &quot;All defaults&quot;" assertions="1" time="0.005909"/>
-        <testcase name="testCreateUri with data set &quot;All options&quot;" assertions="1" time="0.004825"/>
+    <testsuite name="Eloquent\Otis\Validator\Exception\OtpParametersTypeMismatchExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Exception/OtpParametersTypeMismatchExceptionTest.php" namespace="Eloquent\Otis\Validator\Exception" fullPackage="Eloquent.Otis.Validator.Exception" tests="1" assertions="5" failures="0" errors="0" time="0.007503">
+      <testcase name="testException" class="Eloquent\Otis\Validator\Exception\OtpParametersTypeMismatchExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Exception/OtpParametersTypeMismatchExceptionTest.php" line="20" assertions="5" time="0.007503"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Exception\UnsupportedOtpConfigurationExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Exception/UnsupportedOtpConfigurationExceptionTest.php" namespace="Eloquent\Otis\Validator\Exception" fullPackage="Eloquent.Otis.Validator.Exception" tests="1" assertions="4" failures="0" errors="0" time="0.006979">
+      <testcase name="testException" class="Eloquent\Otis\Validator\Exception\UnsupportedOtpConfigurationExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Exception/UnsupportedOtpConfigurationExceptionTest.php" line="20" assertions="4" time="0.006979"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/HotpValidatorTest.php" namespace="Eloquent\Otis\Validator" fullPackage="Eloquent.Otis.Validator" tests="8" assertions="20" failures="0" errors="0" time="0.087951">
+      <testcase name="testConstructor" class="Eloquent\Otis\Validator\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/HotpValidatorTest.php" line="30" assertions="1" time="0.005664"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Validator\HotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/HotpValidatorTest.php" line="35" assertions="1" time="0.005415"/>
+      <testsuite name="Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence" tests="6" assertions="18" failures="0" errors="0" time="0.076872">
+        <testcase name="testValidateSequence with data set &quot;No window, valid&quot;" assertions="3" time="0.017790"/>
+        <testcase name="testValidateSequence with data set &quot;With window, valid&quot;" assertions="3" time="0.019387"/>
+        <testcase name="testValidateSequence with data set &quot;No window, invalid&quot;" assertions="3" time="0.009022"/>
+        <testcase name="testValidateSequence with data set &quot;With window, invalid&quot;" assertions="3" time="0.013799"/>
+        <testcase name="testValidateSequence with data set &quot;Length mismatch&quot;" assertions="3" time="0.008671"/>
+        <testcase name="testValidateSequence with data set &quot;No passwords&quot;" assertions="3" time="0.008203"/>
       </testsuite>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Totp\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpGeneratorTest.php" namespace="Eloquent\Otis\Totp" fullPackage="Eloquent.Otis.Totp" tests="24" assertions="24" failures="0" errors="0" time="0.192075">
-      <testcase name="testConstructor" class="Eloquent\Otis\Totp\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpGeneratorTest.php" line="21" assertions="1" time="0.005278"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Totp\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpGeneratorTest.php" line="29" assertions="1" time="0.006377"/>
-      <testsuite name="Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate" tests="21" assertions="21" failures="0" errors="0" time="0.106107">
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 1&quot;" assertions="1" time="0.004988"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 2&quot;" assertions="1" time="0.005343"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 3&quot;" assertions="1" time="0.005199"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 4&quot;" assertions="1" time="0.005131"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 5&quot;" assertions="1" time="0.004864"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 6&quot;" assertions="1" time="0.005208"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 7&quot;" assertions="1" time="0.005078"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 8&quot;" assertions="1" time="0.005037"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 9&quot;" assertions="1" time="0.005051"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 10&quot;" assertions="1" time="0.005143"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 11&quot;" assertions="1" time="0.005202"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 12&quot;" assertions="1" time="0.005123"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 13&quot;" assertions="1" time="0.004999"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 14&quot;" assertions="1" time="0.004846"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 15&quot;" assertions="1" time="0.005103"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 16&quot;" assertions="1" time="0.004949"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 17&quot;" assertions="1" time="0.004890"/>
-        <testcase name="testGenerate with data set &quot;RFC 6238 test vector 18&quot;" assertions="1" time="0.004901"/>
-        <testcase name="testGenerate with data set &quot;Alternate window SHA-1&quot;" assertions="1" time="0.004959"/>
-        <testcase name="testGenerate with data set &quot;Alternate window SHA-256&quot;" assertions="1" time="0.005046"/>
-        <testcase name="testGenerate with data set &quot;Alternate window SHA-512&quot;" assertions="1" time="0.005046"/>
+    <testsuite name="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" namespace="Eloquent\Otis\Validator" fullPackage="Eloquent.Otis.Validator" tests="18" assertions="46" failures="0" errors="0" time="0.441070">
+      <testcase name="testConstructor" class="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" line="39" assertions="2" time="0.007933"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" line="45" assertions="2" time="0.006531"/>
+      <testsuite name="Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp" tests="8" assertions="24" failures="0" errors="0" time="0.335393">
+        <testcase name="testValidateTotp with data set &quot;Valid, no drift&quot;" assertions="3" time="0.013419"/>
+        <testcase name="testValidateTotp with data set &quot;Valid, 1 past drift&quot;" assertions="3" time="0.013210"/>
+        <testcase name="testValidateTotp with data set &quot;Valid, 1 future drift&quot;" assertions="3" time="0.014856"/>
+        <testcase name="testValidateTotp with data set &quot;Valid, 10 past drift&quot;" assertions="3" time="0.116795"/>
+        <testcase name="testValidateTotp with data set &quot;Valid, 10 future drift&quot;" assertions="3" time="0.120735"/>
+        <testcase name="testValidateTotp with data set &quot;Invalid, too far past&quot;" assertions="3" time="0.022634"/>
+        <testcase name="testValidateTotp with data set &quot;Invalid, too far future&quot;" assertions="3" time="0.024007"/>
+        <testcase name="testValidateTotp with data set &quot;Length mismatch&quot;" assertions="3" time="0.009737"/>
       </testsuite>
-      <testcase name="testGenerateCurrentTime" class="Eloquent\Otis\Totp\TotpGeneratorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpGeneratorTest.php" line="76" assertions="1" time="0.074313"/>
+      <testsuite name="Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp" tests="5" assertions="15" failures="0" errors="0" time="0.064017">
+        <testcase name="testValidateHotp with data set &quot;No window, valid&quot;" assertions="3" time="0.009357"/>
+        <testcase name="testValidateHotp with data set &quot;With window, valid&quot;" assertions="3" time="0.017473"/>
+        <testcase name="testValidateHotp with data set &quot;No window, invalid&quot;" assertions="3" time="0.010330"/>
+        <testcase name="testValidateHotp with data set &quot;With window, invalid&quot;" assertions="3" time="0.017851"/>
+        <testcase name="testValidateHotp with data set &quot;Length mismatch&quot;" assertions="3" time="0.009006"/>
+      </testsuite>
+      <testcase name="testValidateFailureUnsupportedConfiguration" class="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" line="111" assertions="1" time="0.009171"/>
+      <testcase name="testValidateFailureParametersMismatchTotp" class="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" line="120" assertions="1" time="0.009117"/>
+      <testcase name="testValidateFailureParametersMismatchHotp" class="Eloquent\Otis\Validator\OtpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/OtpValidatorTest.php" line="129" assertions="1" time="0.008908"/>
     </testsuite>
-    <testsuite name="Eloquent\Otis\Totp\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpValidatorTest.php" namespace="Eloquent\Otis\Totp" fullPackage="Eloquent.Otis.Totp" tests="11" assertions="20" failures="0" errors="0" time="0.246377">
-      <testcase name="testConstructor" class="Eloquent\Otis\Totp\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpValidatorTest.php" line="29" assertions="1" time="0.008036"/>
-      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Totp\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Totp/TotpValidatorTest.php" line="34" assertions="1" time="0.012003"/>
-      <testsuite name="Eloquent\Otis\Totp\TotpValidatorTest::testValidate" tests="9" assertions="18" failures="0" errors="0" time="0.226338">
-        <testcase name="testValidate with data set &quot;Valid, no drift&quot;" assertions="2" time="0.010911"/>
-        <testcase name="testValidate with data set &quot;Valid, 1 past drift&quot;" assertions="2" time="0.009081"/>
-        <testcase name="testValidate with data set &quot;Valid, 1 future drift&quot;" assertions="2" time="0.010199"/>
-        <testcase name="testValidate with data set &quot;Valid, 10 past drift&quot;" assertions="2" time="0.068805"/>
-        <testcase name="testValidate with data set &quot;Valid, 10 future drift&quot;" assertions="2" time="0.082235"/>
-        <testcase name="testValidate with data set &quot;Invalid, too far past&quot;" assertions="2" time="0.014387"/>
-        <testcase name="testValidate with data set &quot;Invalid, too far future&quot;" assertions="2" time="0.014480"/>
-        <testcase name="testValidate with data set &quot;Length mismatch&quot;" assertions="2" time="0.007356"/>
-        <testcase name="testValidate with data set &quot;Invalid length&quot;" assertions="2" time="0.008884"/>
-      </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Parameters\HotpParametersTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Parameters/HotpParametersTest.php" namespace="Eloquent\Otis\Validator\Parameters" fullPackage="Eloquent.Otis.Validator.Parameters" tests="1" assertions="3" failures="0" errors="0" time="0.004918">
+      <testcase name="testConstructor" class="Eloquent\Otis\Validator\Parameters\HotpParametersTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Parameters/HotpParametersTest.php" line="29" assertions="3" time="0.004918"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Parameters\TotpParametersTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Parameters/TotpParametersTest.php" namespace="Eloquent\Otis\Validator\Parameters" fullPackage="Eloquent.Otis.Validator.Parameters" tests="1" assertions="2" failures="0" errors="0" time="0.004561">
+      <testcase name="testConstructor" class="Eloquent\Otis\Validator\Parameters\TotpParametersTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Parameters/TotpParametersTest.php" line="29" assertions="2" time="0.004561"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Result\Exception\InvalidResultExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/Exception/InvalidResultExceptionTest.php" namespace="Eloquent\Otis\Validator\Result\Exception" fullPackage="Eloquent.Otis.Validator.Result.Exception" tests="1" assertions="3" failures="0" errors="0" time="0.005287">
+      <testcase name="testException" class="Eloquent\Otis\Validator\Result\Exception\InvalidResultExceptionTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/Exception/InvalidResultExceptionTest.php" line="19" assertions="3" time="0.005287"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Result\HotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/HotpValidationResultTest.php" namespace="Eloquent\Otis\Validator\Result" fullPackage="Eloquent.Otis.Validator.Result" tests="4" assertions="8" failures="0" errors="0" time="0.029627">
+      <testcase name="testConstructorSuccessResult" class="Eloquent\Otis\Validator\Result\HotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/HotpValidationResultTest.php" line="22" assertions="3" time="0.008456"/>
+      <testcase name="testConstructorUnsuccessfulResult" class="Eloquent\Otis\Validator\Result\HotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/HotpValidationResultTest.php" line="31" assertions="3" time="0.009464"/>
+      <testcase name="testConstructorFailureSuccessButNoCounter" class="Eloquent\Otis\Validator\Result\HotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/HotpValidationResultTest.php" line="40" assertions="1" time="0.005763"/>
+      <testcase name="testConstructorFailureUnsuccessfulWithCounter" class="Eloquent\Otis\Validator\Result\HotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/HotpValidationResultTest.php" line="46" assertions="1" time="0.005944"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Result\TotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/TotpValidationResultTest.php" namespace="Eloquent\Otis\Validator\Result" fullPackage="Eloquent.Otis.Validator.Result" tests="4" assertions="8" failures="0" errors="0" time="0.026410">
+      <testcase name="testConstructorSuccessResult" class="Eloquent\Otis\Validator\Result\TotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/TotpValidationResultTest.php" line="22" assertions="3" time="0.007190"/>
+      <testcase name="testConstructorUnsuccessfulResult" class="Eloquent\Otis\Validator\Result\TotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/TotpValidationResultTest.php" line="31" assertions="3" time="0.007085"/>
+      <testcase name="testConstructorFailureSuccessButNoDrift" class="Eloquent\Otis\Validator\Result\TotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/TotpValidationResultTest.php" line="40" assertions="1" time="0.006033"/>
+      <testcase name="testConstructorFailureUnsuccessfulWithDrift" class="Eloquent\Otis\Validator\Result\TotpValidationResultTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/TotpValidationResultTest.php" line="46" assertions="1" time="0.006102"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\Result\ValidationResultTypeTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/ValidationResultTypeTest.php" namespace="Eloquent\Otis\Validator\Result" fullPackage="Eloquent.Otis.Validator.Result" tests="1" assertions="1" failures="0" errors="0" time="0.006967">
+      <testcase name="testEnumeration" class="Eloquent\Otis\Validator\Result\ValidationResultTypeTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/Result/ValidationResultTypeTest.php" line="18" assertions="1" time="0.006967"/>
+    </testsuite>
+    <testsuite name="Eloquent\Otis\Validator\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/TotpValidatorTest.php" namespace="Eloquent\Otis\Validator" fullPackage="Eloquent.Otis.Validator" tests="2" assertions="2" failures="0" errors="0" time="0.014251">
+      <testcase name="testConstructor" class="Eloquent\Otis\Validator\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/TotpValidatorTest.php" line="31" assertions="1" time="0.005656"/>
+      <testcase name="testConstructorDefaults" class="Eloquent\Otis\Validator\TotpValidatorTest" file="/home/travis/build/eloquent/otis/test/suite/Eloquent/Otis/Validator/TotpValidatorTest.php" line="36" assertions="1" time="0.008595"/>
     </testsuite>
   </testsuite>
 </testsuites>

@@ -1,117 +1,134 @@
 TAP version 13
-ok 1 - Eloquent\Otis\Configuration\HashAlgorithmTest::testEnumeration
-ok 2 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructor
-ok 3 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructorDefaults
-ok 4 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructor
-ok 5 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructorDefaults
-ok 6 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "All defaults" ('12345678901234567890', 'test.ease@example.org', NULL, NULL, NULL, NULL, NULL, 'otpauth://hotp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ')
-ok 7 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "All options" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', true, 'otpauth://hotp/Skynet:test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&counter=111&digits=10&algorithm=SHA256&issuer=Skynet')
-ok 8 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "No legacy issuer" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', false, 'otpauth://hotp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&counter=111&digits=10&algorithm=SHA256&issuer=Skynet')
-ok 9 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "All defaults" ('12345678901234567890', 'test.ease@example.org', NULL, NULL, NULL, NULL, NULL, 'otpauth://totp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ')
-ok 10 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "All options" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', true, 'otpauth://totp/Skynet:test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&period=111&digits=10&algorithm=SHA256&issuer=Skynet')
-ok 11 - Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "No legacy issuer" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', false, 'otpauth://totp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&period=111&digits=10&algorithm=SHA256&issuer=Skynet')
-ok 12 - Eloquent\Otis\Hotp\Exception\InvalidPasswordLengthExceptionTest::testException
-ok 13 - Eloquent\Otis\Hotp\HotpGeneratorTest::testConstructor
-ok 14 - Eloquent\Otis\Hotp\HotpGeneratorTest::testConstructorDefaults
-ok 15 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 0" ('12345678901234567890', 0, 1284755224, '755224', NULL)
-ok 16 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 1" ('12345678901234567890', 1, 1094287082, '287082', NULL)
-ok 17 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 2" ('12345678901234567890', 2, 137359152, '359152', NULL)
-ok 18 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 3" ('12345678901234567890', 3, 1726969429, '969429', NULL)
-ok 19 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 4" ('12345678901234567890', 4, 1640338314, '338314', NULL)
-ok 20 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 5" ('12345678901234567890', 5, 868254676, '254676', NULL)
-ok 21 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 6" ('12345678901234567890', 6, 1918287922, '287922', NULL)
-ok 22 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 7" ('12345678901234567890', 7, 82162583, '162583', NULL)
-ok 23 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 8" ('12345678901234567890', 8, 673399871, '399871', NULL)
-ok 24 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 9" ('12345678901234567890', 9, 645520489, '520489', NULL)
-ok 25 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 0" ('12345678901234567890', 0, 2074875740, '875740', 'sha256')
-ok 26 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 1" ('12345678901234567890', 1, 1332247374, '247374', 'sha256')
-ok 27 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 2" ('12345678901234567890', 2, 1766254785, '254785', 'sha256')
-ok 28 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 3" ('12345678901234567890', 3, 667496144, '496144', 'sha256')
-ok 29 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 4" ('12345678901234567890', 4, 1625480556, '480556', 'sha256')
-ok 30 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 5" ('12345678901234567890', 5, 89697997, '697997', 'sha256')
-ok 31 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 6" ('12345678901234567890', 6, 640191609, '191609', 'sha256')
-ok 32 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 7" ('12345678901234567890', 7, 1267579288, '579288', 'sha256')
-ok 33 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 8" ('12345678901234567890', 8, 1883895912, '895912', 'sha256')
-ok 34 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 9" ('12345678901234567890', 9, 223184989, '184989', 'sha256')
-ok 35 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 0" ('12345678901234567890', 0, 604125165, '125165', 'sha512')
-ok 36 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 1" ('12345678901234567890', 1, 369342147, '342147', 'sha512')
-ok 37 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 2" ('12345678901234567890', 2, 671730102, '730102', 'sha512')
-ok 38 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 3" ('12345678901234567890', 3, 573778726, '778726', 'sha512')
-ok 39 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 4" ('12345678901234567890', 4, 1581937510, '937510', 'sha512')
-ok 40 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 5" ('12345678901234567890', 5, 1516848329, '848329', 'sha512')
-ok 41 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 6" ('12345678901234567890', 6, 836266680, '266680', 'sha512')
-ok 42 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 7" ('12345678901234567890', 7, 22588359, '588359', 'sha512')
-ok 43 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 8" ('12345678901234567890', 8, 245039399, '039399', 'sha512')
-ok 44 - Eloquent\Otis\Hotp\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 9" ('12345678901234567890', 9, 1033643409, '643409', 'sha512')
-ok 45 - Eloquent\Otis\Hotp\HotpValidatorTest::testConstructor
-ok 46 - Eloquent\Otis\Hotp\HotpValidatorTest::testConstructorDefaults
-ok 47 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "No window, valid" ('969429', '12345678901234567890', 3, NULL, NULL, true, 4)
-ok 48 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "With window, valid" ('520489', '12345678901234567890', 0, NULL, 9, true, 10)
-ok 49 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "No window, invalid" ('338314', '12345678901234567890', 3, NULL, NULL, false, 3)
-ok 50 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "With window, invalid" ('520489', '12345678901234567890', 0, NULL, 8, false, 0)
-ok 51 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "Length mismatch" ('969429', '12345678901234567890', 3, 8, NULL, false, 3)
-ok 52 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidate with data set "Invalid length" ('12345', '12345678901234567890', 0, 5, 100, false, 0)
-ok 53 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "No window, valid" (array('969429', '338314'), '12345678901234567890', 3, NULL, NULL, true, 5)
-ok 54 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "With window, valid" (array('399871', '520489'), '12345678901234567890', 0, NULL, 8, true, 10)
-ok 55 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "No window, invalid" (array('359152', '969429'), '12345678901234567890', 3, NULL, NULL, false, 3)
-ok 56 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "With window, invalid" (array('755224', '359152'), '12345678901234567890', 0, NULL, 100, false, 0)
-ok 57 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "Length mismatch" (array('969429', '338314'), '12345678901234567890', 3, 8, NULL, false, 3)
-ok 58 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "Invalid length" (array('755224', '12345'), '12345678901234567890', 0, NULL, 100, false, 0)
-ok 59 - Eloquent\Otis\Hotp\HotpValidatorTest::testValidateSequence with data set "No passwords" (array(), '12345678901234567890', 0, NULL, 100, false, 0)
-ok 60 - Eloquent\Otis\Hotp\HotpValueTest::testConstructor
-ok 61 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "Default length" ('AAAAAAAAAAAAAAAAAAAA', NULL, '795585')
-ok 62 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "6 digit A" ('AAAAAAAAAAAAAAAAAAAA', 6, '795585')
-ok 63 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "8 digit A" ('AAAAAAAAAAAAAAAAAAAA', 8, '94795585')
-ok 64 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "10 digit A" ('AAAAAAAAAAAAAAAAAAAA', 10, '1094795585')
-ok 65 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "6 digit B" ('BBBBBBBBBBBBBBBBBBBB', 6, '638594')
-ok 66 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "8 digit B" ('BBBBBBBBBBBBBBBBBBBB', 8, '11638594')
-ok 67 - Eloquent\Otis\Hotp\HotpValueTest::testString with data set "10 digit B" ('BBBBBBBBBBBBBBBBBBBB', 10, '1111638594')
-ok 68 - Eloquent\Otis\Hotp\HotpValueTest::testStringFailureInvalidLength with data set "Negative" (-1)
-ok 69 - Eloquent\Otis\Hotp\HotpValueTest::testStringFailureInvalidLength with data set "Zero" (0)
-ok 70 - Eloquent\Otis\Hotp\HotpValueTest::testStringFailureInvalidLength with data set "Less than 6" (5)
-ok 71 - Eloquent\Otis\Hotp\HotpValueTest::testStringFailureInvalidLength with data set "Greater than 10" (11)
-ok 72 - Eloquent\Otis\QrCode\ErrorCorrectionLevelTest::testMembers
-ok 73 - Eloquent\Otis\QrCode\ErrorCorrectionLevelTest::testLetterCode
-ok 74 - Eloquent\Otis\QrCode\ErrorCorrectionLevelTest::testNumberCode
-ok 75 - Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'https://chart.googleapis.com/chart?cht=qr&chs=250x250&chld=%7C0&chl=foo%20bar')
-ok 76 - Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'https://chart.googleapis.com/chart?cht=qr&chs=111x111&chld=H%7C0&chl=foo%20bar')
-ok 77 - Eloquent\Otis\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'http://qrfree.kaywa.com/?d=foo%20bar&l=1')
-ok 78 - Eloquent\Otis\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'http://qrfree.kaywa.com/?d=foo%20bar&s=111&l=4')
-ok 79 - Eloquent\Otis\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'https://api.qrserver.com/v1/create-qr-code/?data=foo%20bar')
-ok 80 - Eloquent\Otis\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'https://api.qrserver.com/v1/create-qr-code/?data=foo%20bar&size=111x111&ecc=H')
-ok 81 - Eloquent\Otis\Totp\TotpGeneratorTest::testConstructor
-ok 82 - Eloquent\Otis\Totp\TotpGeneratorTest::testConstructorDefaults
-ok 83 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 1" ('12345678901234567890', NULL, 59, '94287082', NULL)
-ok 84 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 2" ('12345678901234567890123456789012', NULL, 59, '46119246', 'sha256')
-ok 85 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 3" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 59, '90693936', 'sha512')
-ok 86 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 4" ('12345678901234567890', NULL, 1111111109, '07081804', NULL)
-ok 87 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 5" ('12345678901234567890123456789012', NULL, 1111111109, '68084774', 'sha256')
-ok 88 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 6" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1111111109, '25091201', 'sha512')
-ok 89 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 7" ('12345678901234567890', NULL, 1111111111, '14050471', NULL)
-ok 90 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 8" ('12345678901234567890123456789012', NULL, 1111111111, '67062674', 'sha256')
-ok 91 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 9" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1111111111, '99943326', 'sha512')
-ok 92 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 10" ('12345678901234567890', NULL, 1234567890, '89005924', NULL)
-ok 93 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 11" ('12345678901234567890123456789012', NULL, 1234567890, '91819424', 'sha256')
-ok 94 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 12" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1234567890, '93441116', 'sha512')
-ok 95 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 13" ('12345678901234567890', NULL, 2000000000, '69279037', NULL)
-ok 96 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 14" ('12345678901234567890123456789012', NULL, 2000000000, '90698825', 'sha256')
-ok 97 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 15" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 2000000000, '38618901', 'sha512')
-ok 98 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 16" ('12345678901234567890', NULL, 20000000000, '65353130', NULL)
-ok 99 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 17" ('12345678901234567890123456789012', NULL, 20000000000, '77737706', 'sha256')
-ok 100 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 18" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 20000000000, '47863826', 'sha512')
-ok 101 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-1" ('12345678901234567890', 60, 1111111111, '19360094', NULL)
-ok 102 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-256" ('12345678901234567890123456789012', 60, 1111111111, '40857319', 'sha256')
-ok 103 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-512" ('1234567890123456789012345678901234567890123456789012345678901234', 60, 1111111111, '37023009', 'sha512')
-ok 104 - Eloquent\Otis\Totp\TotpGeneratorTest::testGenerateCurrentTime
-ok 105 - Eloquent\Otis\Totp\TotpValidatorTest::testConstructor
-ok 106 - Eloquent\Otis\Totp\TotpValidatorTest::testConstructorDefaults
-ok 107 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Valid, no drift" ('14050471', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, true, 0)
-ok 108 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Valid, 1 past drift" ('07081804', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, true, -1)
-ok 109 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Valid, 1 future drift" ('44266759', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, true, 1)
-ok 110 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Valid, 10 past drift" ('13755423', '12345678901234567890', 8, NULL, 1111111111, 100, 100, true, -10)
-ok 111 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Valid, 10 future drift" ('78536305', '12345678901234567890', 8, NULL, 1111111111, 100, 100, true, 10)
-ok 112 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Invalid, too far past" ('13755423', '12345678901234567890', 8, NULL, 1111111111, 9, NULL, false, NULL)
-ok 113 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Invalid, too far future" ('78536305', '12345678901234567890', 8, NULL, 1111111111, NULL, 9, false, NULL)
-ok 114 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Length mismatch" ('14050471', '12345678901234567890', NULL, NULL, 1111111111, NULL, NULL, false, NULL)
-ok 115 - Eloquent\Otis\Totp\TotpValidatorTest::testValidate with data set "Invalid length" ('12345', '12345678901234567890', 5, NULL, 1111111111, NULL, NULL, false, NULL)
-1..115
+ok 1 - Eloquent\Otis\Configuration\Exception\InvalidPasswordLengthExceptionTest::testException
+ok 2 - Eloquent\Otis\Configuration\HashAlgorithmTest::testEnumeration
+ok 3 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructor
+ok 4 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructorDefaults
+ok 5 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructorFailurePasswordLengthTooShort
+ok 6 - Eloquent\Otis\Configuration\HotpConfigurationTest::testConstructorFailurePasswordLengthTooLong
+ok 7 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructor
+ok 8 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructorDefaults
+ok 9 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructorFailurePasswordLengthTooShort
+ok 10 - Eloquent\Otis\Configuration\TotpConfigurationTest::testConstructorFailurePasswordLengthTooLong
+ok 11 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 0" ('12345678901234567890', 0, 1284755224, '755224', NULL)
+ok 12 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 1" ('12345678901234567890', 1, 1094287082, '287082', NULL)
+ok 13 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 2" ('12345678901234567890', 2, 137359152, '359152', NULL)
+ok 14 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 3" ('12345678901234567890', 3, 1726969429, '969429', NULL)
+ok 15 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 4" ('12345678901234567890', 4, 1640338314, '338314', NULL)
+ok 16 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 5" ('12345678901234567890', 5, 868254676, '254676', NULL)
+ok 17 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 6" ('12345678901234567890', 6, 1918287922, '287922', NULL)
+ok 18 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 7" ('12345678901234567890', 7, 82162583, '162583', NULL)
+ok 19 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 8" ('12345678901234567890', 8, 673399871, '399871', NULL)
+ok 20 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "RFC 4226 test secret count 9" ('12345678901234567890', 9, 645520489, '520489', NULL)
+ok 21 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 0" ('12345678901234567890', 0, 2074875740, '875740', 'SHA256')
+ok 22 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 1" ('12345678901234567890', 1, 1332247374, '247374', 'SHA256')
+ok 23 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 2" ('12345678901234567890', 2, 1766254785, '254785', 'SHA256')
+ok 24 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 3" ('12345678901234567890', 3, 667496144, '496144', 'SHA256')
+ok 25 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 4" ('12345678901234567890', 4, 1625480556, '480556', 'SHA256')
+ok 26 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 5" ('12345678901234567890', 5, 89697997, '697997', 'SHA256')
+ok 27 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 6" ('12345678901234567890', 6, 640191609, '191609', 'SHA256')
+ok 28 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 7" ('12345678901234567890', 7, 1267579288, '579288', 'SHA256')
+ok 29 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 8" ('12345678901234567890', 8, 1883895912, '895912', 'SHA256')
+ok 30 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-256 variant count 9" ('12345678901234567890', 9, 223184989, '184989', 'SHA256')
+ok 31 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 0" ('12345678901234567890', 0, 604125165, '125165', 'SHA512')
+ok 32 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 1" ('12345678901234567890', 1, 369342147, '342147', 'SHA512')
+ok 33 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 2" ('12345678901234567890', 2, 671730102, '730102', 'SHA512')
+ok 34 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 3" ('12345678901234567890', 3, 573778726, '778726', 'SHA512')
+ok 35 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 4" ('12345678901234567890', 4, 1581937510, '937510', 'SHA512')
+ok 36 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 5" ('12345678901234567890', 5, 1516848329, '848329', 'SHA512')
+ok 37 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 6" ('12345678901234567890', 6, 836266680, '266680', 'SHA512')
+ok 38 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 7" ('12345678901234567890', 7, 22588359, '588359', 'SHA512')
+ok 39 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 8" ('12345678901234567890', 8, 245039399, '039399', 'SHA512')
+ok 40 - Eloquent\Otis\Generator\HotpGeneratorTest::testGenerate with data set "SHA-512 variant count 9" ('12345678901234567890', 9, 1033643409, '643409', 'SHA512')
+ok 41 - Eloquent\Otis\Generator\OtpValueTest::testConstructor
+ok 42 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "Default length" ('AAAAAAAAAAAAAAAAAAAA', NULL, '795585')
+ok 43 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "6 digit A" ('AAAAAAAAAAAAAAAAAAAA', 6, '795585')
+ok 44 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "8 digit A" ('AAAAAAAAAAAAAAAAAAAA', 8, '94795585')
+ok 45 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "10 digit A" ('AAAAAAAAAAAAAAAAAAAA', 10, '1094795585')
+ok 46 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "6 digit B" ('BBBBBBBBBBBBBBBBBBBB', 6, '638594')
+ok 47 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "8 digit B" ('BBBBBBBBBBBBBBBBBBBB', 8, '11638594')
+ok 48 - Eloquent\Otis\Generator\OtpValueTest::testString with data set "10 digit B" ('BBBBBBBBBBBBBBBBBBBB', 10, '1111638594')
+ok 49 - Eloquent\Otis\Generator\OtpValueTest::testStringFailureInvalidLengthTooShort
+ok 50 - Eloquent\Otis\Generator\OtpValueTest::testStringFailureInvalidLengthTooLong
+ok 51 - Eloquent\Otis\Generator\OtpValueTest::testToString
+ok 52 - Eloquent\Otis\Generator\TotpGeneratorTest::testConstructor
+ok 53 - Eloquent\Otis\Generator\TotpGeneratorTest::testConstructorDefaults
+ok 54 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 1" ('12345678901234567890', NULL, 59, '94287082', NULL)
+ok 55 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 2" ('12345678901234567890123456789012', NULL, 59, '46119246', 'SHA256')
+ok 56 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 3" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 59, '90693936', 'SHA512')
+ok 57 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 4" ('12345678901234567890', NULL, 1111111109, '07081804', NULL)
+ok 58 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 5" ('12345678901234567890123456789012', NULL, 1111111109, '68084774', 'SHA256')
+ok 59 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 6" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1111111109, '25091201', 'SHA512')
+ok 60 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 7" ('12345678901234567890', NULL, 1111111111, '14050471', NULL)
+ok 61 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 8" ('12345678901234567890123456789012', NULL, 1111111111, '67062674', 'SHA256')
+ok 62 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 9" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1111111111, '99943326', 'SHA512')
+ok 63 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 10" ('12345678901234567890', NULL, 1234567890, '89005924', NULL)
+ok 64 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 11" ('12345678901234567890123456789012', NULL, 1234567890, '91819424', 'SHA256')
+ok 65 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 12" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 1234567890, '93441116', 'SHA512')
+ok 66 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 13" ('12345678901234567890', NULL, 2000000000, '69279037', NULL)
+ok 67 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 14" ('12345678901234567890123456789012', NULL, 2000000000, '90698825', 'SHA256')
+ok 68 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 15" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 2000000000, '38618901', 'SHA512')
+ok 69 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 16" ('12345678901234567890', NULL, 20000000000, '65353130', NULL)
+ok 70 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 17" ('12345678901234567890123456789012', NULL, 20000000000, '77737706', 'SHA256')
+ok 71 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "RFC 6238 test vector 18" ('1234567890123456789012345678901234567890123456789012345678901234', NULL, 20000000000, '47863826', 'SHA512')
+ok 72 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-1" ('12345678901234567890', 60, 1111111111, '19360094', NULL)
+ok 73 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-256" ('12345678901234567890123456789012', 60, 1111111111, '40857319', 'SHA256')
+ok 74 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerate with data set "Alternate window SHA-512" ('1234567890123456789012345678901234567890123456789012345678901234', 60, 1111111111, '37023009', 'SHA512')
+ok 75 - Eloquent\Otis\Generator\TotpGeneratorTest::testGenerateCurrentTime
+ok 76 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "All defaults" ('12345678901234567890', 'test.ease@example.org', NULL, NULL, NULL, NULL, NULL, 'otpauth://hotp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ')
+ok 77 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "All options" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', true, 'otpauth://hotp/Skynet:test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&counter=111&digits=10&algorithm=SHA256&issuer=Skynet')
+ok 78 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateHotpUri with data set "No legacy issuer" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', false, 'otpauth://hotp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&counter=111&digits=10&algorithm=SHA256&issuer=Skynet')
+ok 79 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "All defaults" ('12345678901234567890', 'test.ease@example.org', NULL, NULL, NULL, NULL, NULL, 'otpauth://totp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ')
+ok 80 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "All options" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', true, 'otpauth://totp/Skynet:test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&period=111&digits=10&algorithm=SHA256&issuer=Skynet')
+ok 81 - Eloquent\Otis\Uri\GoogleAuthenticator\GoogleAuthenticatorUriFactoryTest::testCreateTotpUri with data set "No legacy issuer" ('12345678901234567890', 'test.ease@example.org', 'Skynet', 111, 10, 'SHA256', false, 'otpauth://totp/test.ease%40example.org?secret=GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ&period=111&digits=10&algorithm=SHA256&issuer=Skynet')
+ok 82 - Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest::testMembers
+ok 83 - Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest::testLetterCode
+ok 84 - Eloquent\Otis\Uri\QrCode\ErrorCorrectionLevelTest::testNumberCode
+ok 85 - Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'https://chart.googleapis.com/chart?cht=qr&chs=250x250&chld=%7C0&chl=foo%20bar')
+ok 86 - Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'https://chart.googleapis.com/chart?cht=qr&chs=111x111&chld=H%7C0&chl=foo%20bar')
+ok 87 - Eloquent\Otis\Uri\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'http://qrfree.kaywa.com/?d=foo%20bar&l=1')
+ok 88 - Eloquent\Otis\Uri\QrCode\KaywaQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'http://qrfree.kaywa.com/?d=foo%20bar&s=111&l=4')
+ok 89 - Eloquent\Otis\Uri\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri with data set "All defaults" ('foo bar', NULL, NULL, 'https://api.qrserver.com/v1/create-qr-code/?data=foo%20bar')
+ok 90 - Eloquent\Otis\Uri\QrCode\QrServerQrCodeUriFactoryTest::testCreateUri with data set "All options" ('foo bar', 111, HIGH, 'https://api.qrserver.com/v1/create-qr-code/?data=foo%20bar&size=111x111&ecc=H')
+ok 91 - Eloquent\Otis\Validator\Exception\OtpParametersTypeMismatchExceptionTest::testException
+ok 92 - Eloquent\Otis\Validator\Exception\UnsupportedOtpConfigurationExceptionTest::testException
+ok 93 - Eloquent\Otis\Validator\HotpValidatorTest::testConstructor
+ok 94 - Eloquent\Otis\Validator\HotpValidatorTest::testConstructorDefaults
+ok 95 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "No window, valid" (array('969429', '338314'), '12345678901234567890', 3, NULL, NULL, 'valid', 5)
+ok 96 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "With window, valid" (array('399871', '520489'), '12345678901234567890', 0, NULL, 8, 'valid', 10)
+ok 97 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "No window, invalid" (array('359152', '969429'), '12345678901234567890', 3, NULL, 0, 'invalid-password', NULL)
+ok 98 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "With window, invalid" (array('755224', '359152'), '12345678901234567890', 0, NULL, 100, 'invalid-password', NULL)
+ok 99 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "Length mismatch" (array('969429', '338314'), '12345678901234567890', 3, 8, NULL, 'password-length-mismatch', NULL)
+ok 100 - Eloquent\Otis\Validator\HotpValidatorTest::testValidateSequence with data set "No passwords" (array(), '12345678901234567890', 0, NULL, 100, 'empty-password-sequence', NULL)
+ok 101 - Eloquent\Otis\Validator\OtpValidatorTest::testConstructor
+ok 102 - Eloquent\Otis\Validator\OtpValidatorTest::testConstructorDefaults
+ok 103 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Valid, no drift" ('14050471', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, 'valid', 0)
+ok 104 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Valid, 1 past drift" ('07081804', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, 'valid', -1)
+ok 105 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Valid, 1 future drift" ('44266759', '12345678901234567890', 8, NULL, 1111111111, NULL, NULL, 'valid', 1)
+ok 106 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Valid, 10 past drift" ('13755423', '12345678901234567890', 8, NULL, 1111111111, 100, 100, 'valid', -10)
+ok 107 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Valid, 10 future drift" ('78536305', '12345678901234567890', 8, NULL, 1111111111, 100, 100, 'valid', 10)
+ok 108 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Invalid, too far past" ('13755423', '12345678901234567890', 8, NULL, 1111111111, 9, NULL, 'invalid-password', NULL)
+ok 109 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Invalid, too far future" ('78536305', '12345678901234567890', 8, NULL, 1111111111, NULL, 9, 'invalid-password', NULL)
+ok 110 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateTotp with data set "Length mismatch" ('14050471', '12345678901234567890', NULL, NULL, 1111111111, NULL, NULL, 'password-length-mismatch', NULL)
+ok 111 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp with data set "No window, valid" ('969429', '12345678901234567890', 3, NULL, NULL, 'valid', 4)
+ok 112 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp with data set "With window, valid" ('520489', '12345678901234567890', 0, NULL, 9, 'valid', 10)
+ok 113 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp with data set "No window, invalid" ('338314', '12345678901234567890', 3, NULL, 0, 'invalid-password', NULL)
+ok 114 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp with data set "With window, invalid" ('520489', '12345678901234567890', 0, NULL, 8, 'invalid-password', NULL)
+ok 115 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateHotp with data set "Length mismatch" ('969429', '12345678901234567890', 3, 8, NULL, 'password-length-mismatch', NULL)
+ok 116 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateFailureUnsupportedConfiguration
+ok 117 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateFailureParametersMismatchTotp
+ok 118 - Eloquent\Otis\Validator\OtpValidatorTest::testValidateFailureParametersMismatchHotp
+ok 119 - Eloquent\Otis\Validator\Parameters\HotpParametersTest::testConstructor
+ok 120 - Eloquent\Otis\Validator\Parameters\TotpParametersTest::testConstructor
+ok 121 - Eloquent\Otis\Validator\Result\Exception\InvalidResultExceptionTest::testException
+ok 122 - Eloquent\Otis\Validator\Result\HotpValidationResultTest::testConstructorSuccessResult
+ok 123 - Eloquent\Otis\Validator\Result\HotpValidationResultTest::testConstructorUnsuccessfulResult
+ok 124 - Eloquent\Otis\Validator\Result\HotpValidationResultTest::testConstructorFailureSuccessButNoCounter
+ok 125 - Eloquent\Otis\Validator\Result\HotpValidationResultTest::testConstructorFailureUnsuccessfulWithCounter
+ok 126 - Eloquent\Otis\Validator\Result\TotpValidationResultTest::testConstructorSuccessResult
+ok 127 - Eloquent\Otis\Validator\Result\TotpValidationResultTest::testConstructorUnsuccessfulResult
+ok 128 - Eloquent\Otis\Validator\Result\TotpValidationResultTest::testConstructorFailureSuccessButNoDrift
+ok 129 - Eloquent\Otis\Validator\Result\TotpValidationResultTest::testConstructorFailureUnsuccessfulWithDrift
+ok 130 - Eloquent\Otis\Validator\Result\ValidationResultTypeTest::testEnumeration
+ok 131 - Eloquent\Otis\Validator\TotpValidatorTest::testConstructor
+ok 132 - Eloquent\Otis\Validator\TotpValidatorTest::testConstructorDefaults
+1..132

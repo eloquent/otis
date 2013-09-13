@@ -41,7 +41,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method___construct">__construct</a>(integer|null $digits = null, integer|null $window = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)
+                    <a href="#method___construct">__construct</a>(integer|null $digits = null, integer|null $window = null, integer|null $futureWindows = null, integer|null $pastWindows = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)
                     <p>Construct a new TOTP configuration.</p>
                 </td>
                 <td></td>
@@ -86,15 +86,35 @@
                 </td>
                 <td></td>
             </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_futureWindows">futureWindows</a>()
+                    <p>Get the number of future windows to check.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_pastWindows">pastWindows</a>()
+                    <p>Get the number of past windows to check.</p>
+                </td>
+                <td></td>
+            </tr>
             </table>
 
 
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 28</div>
+        <div class="location">at line 32</div>
         <code>            public            
-    <strong>__construct</strong>(integer|null $digits = null, integer|null $window = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)</code>
+    <strong>__construct</strong>(integer|null $digits = null, integer|null $window = null, integer|null $futureWindows = null, integer|null $pastWindows = null, integer|null $secretLength = null, <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a> $algorithm = null)</code>
     </h3>
     <div class="details">
         <p>Construct a new TOTP configuration.</p>
@@ -116,6 +136,16 @@
             </tr>
                     <tr>
                 <td>integer|null</td>
+                <td>$futureWindows</td>
+                <td>The number of future windows to check.</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
+                <td>$pastWindows</td>
+                <td>The number of past windows to check.</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
                 <td>$secretLength</td>
                 <td>The length of the shared secret.</td>
             </tr>
@@ -128,12 +158,21 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Exception\InvalidPasswordLengthException">InvalidPasswordLengthException</abbr></td>
+                <td>If the number of digits is invalid.</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_digits">
-        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_digits"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 51</div>
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_digits"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 57</div>
         <code>            public            integer
     <strong>digits</strong>()</code>
     </h3>
@@ -158,7 +197,7 @@
     </div>
 
                 <h3 id="method_secretLength">
-        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_secretLength"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 61</div>
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_secretLength"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 67</div>
         <code>            public            integer
     <strong>secretLength</strong>()</code>
     </h3>
@@ -183,7 +222,7 @@
     </div>
 
                 <h3 id="method_algorithm">
-        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_algorithm"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 71</div>
+        <div class="location">in <a href="../../../Eloquent/Otis/Configuration/AbstractOtpConfiguration.html#method_algorithm"><abbr title="Eloquent\Otis\Configuration\AbstractOtpConfiguration">AbstractOtpConfiguration</abbr></a> at line 77</div>
         <code>            public            <a href="../../../Eloquent/Otis/Configuration/HashAlgorithm.html"><abbr title="Eloquent\Otis\Configuration\HashAlgorithm">HashAlgorithm</abbr></a>
     <strong>algorithm</strong>()</code>
     </h3>
@@ -208,7 +247,7 @@
     </div>
 
                 <h3 id="method_window">
-        <div class="location">at line 48</div>
+        <div class="location">at line 62</div>
         <code>            public            integer
     <strong>window</strong>()</code>
     </h3>
@@ -224,6 +263,56 @@
         <tr>
             <td>integer</td>
             <td>The number of seconds each token is valid for.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_futureWindows">
+        <div class="location">at line 72</div>
+        <code>            public            integer
+    <strong>futureWindows</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the number of future windows to check.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The number of future windows to check.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_pastWindows">
+        <div class="location">at line 82</div>
+        <code>            public            integer
+    <strong>pastWindows</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the number of past windows to check.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>The number of past windows to check.</td>
         </tr>
     </table>
 

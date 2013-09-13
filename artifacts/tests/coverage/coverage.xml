@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1378964329">
-  <project timestamp="1378964329">
+<coverage generated="1379050764">
+  <project timestamp="1379050764">
     <package name="Eloquent\Otis\Configuration">
       <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/AbstractOtpConfiguration.php">
         <class name="AbstractOtpConfiguration" namespace="Eloquent\Otis\Configuration">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="20" coveredelements="20"/>
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
         </class>
-        <line num="26" type="method" name="__construct" crap="4" count="4"/>
-        <line num="31" type="stmt" count="4"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="34" type="stmt" count="4"/>
+        <line num="28" type="method" name="__construct" crap="6" count="8"/>
+        <line num="33" type="stmt" count="8"/>
+        <line num="34" type="stmt" count="2"/>
         <line num="35" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="37" type="stmt" count="4"/>
-        <line num="38" type="stmt" count="2"/>
-        <line num="39" type="stmt" count="2"/>
-        <line num="41" type="stmt" count="4"/>
-        <line num="42" type="stmt" count="4"/>
-        <line num="43" type="stmt" count="4"/>
+        <line num="36" type="stmt" count="8"/>
+        <line num="37" type="stmt" count="6"/>
+        <line num="38" type="stmt" count="6"/>
+        <line num="39" type="stmt" count="8"/>
+        <line num="40" type="stmt" count="6"/>
+        <line num="41" type="stmt" count="6"/>
+        <line num="43" type="stmt" count="8"/>
         <line num="44" type="stmt" count="4"/>
-        <line num="51" type="method" name="digits" crap="1" count="4"/>
-        <line num="53" type="stmt" count="4"/>
-        <line num="61" type="method" name="secretLength" crap="1" count="4"/>
-        <line num="63" type="stmt" count="4"/>
-        <line num="71" type="method" name="algorithm" crap="1" count="4"/>
-        <line num="73" type="stmt" count="4"/>
-        <line num="80" type="stmt" count="0"/>
-        <metrics loc="79" ncloc="46" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="20" coveredelements="20"/>
+        <line num="47" type="stmt" count="8"/>
+        <line num="48" type="stmt" count="8"/>
+        <line num="49" type="stmt" count="8"/>
+        <line num="50" type="stmt" count="8"/>
+        <line num="57" type="method" name="digits" crap="1" count="4"/>
+        <line num="59" type="stmt" count="4"/>
+        <line num="67" type="method" name="secretLength" crap="1" count="4"/>
+        <line num="69" type="stmt" count="4"/>
+        <line num="77" type="method" name="algorithm" crap="1" count="4"/>
+        <line num="79" type="stmt" count="4"/>
+        <line num="86" type="stmt" count="0"/>
+        <metrics loc="85" ncloc="50" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
       </file>
       <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/HashAlgorithm.php">
         <class name="HashAlgorithm" namespace="Eloquent\Otis\Configuration">
@@ -40,135 +42,56 @@
         <class name="HotpConfiguration" namespace="Eloquent\Otis\Configuration">
           <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
         </class>
-        <line num="29" type="method" name="__construct" crap="3" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="39" type="stmt" count="2"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="45" type="stmt" count="2"/>
-        <line num="46" type="stmt" count="2"/>
-        <line num="47" type="stmt" count="2"/>
-        <line num="54" type="method" name="window" crap="1" count="2"/>
-        <line num="56" type="stmt" count="2"/>
-        <line num="64" type="method" name="initialCounter" crap="1" count="2"/>
-        <line num="66" type="stmt" count="2"/>
-        <line num="72" type="stmt" count="0"/>
-        <metrics loc="71" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
+        <line num="31" type="method" name="__construct" crap="3" count="4"/>
+        <line num="38" type="stmt" count="4"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="40" type="stmt" count="3"/>
+        <line num="41" type="stmt" count="4"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="48" type="stmt" count="4"/>
+        <line num="49" type="stmt" count="4"/>
+        <line num="56" type="method" name="window" crap="1" count="2"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="66" type="method" name="initialCounter" crap="1" count="2"/>
+        <line num="68" type="stmt" count="2"/>
+        <line num="74" type="stmt" count="0"/>
+        <metrics loc="73" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
       </file>
       <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/TotpConfiguration.php">
         <class name="TotpConfiguration" namespace="Eloquent\Otis\Configuration">
-          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="21" coveredelements="21"/>
         </class>
-        <line num="28" type="method" name="__construct" crap="2" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="35" type="stmt" count="1"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="2"/>
-        <line num="40" type="stmt" count="2"/>
-        <line num="41" type="stmt" count="2"/>
-        <line num="48" type="method" name="window" crap="1" count="2"/>
-        <line num="50" type="stmt" count="2"/>
-        <line num="55" type="stmt" count="0"/>
-        <metrics loc="54" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+        <line num="32" type="method" name="__construct" crap="4" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="4"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="3"/>
+        <line num="46" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="50" type="stmt" count="4"/>
+        <line num="52" type="stmt" count="4"/>
+        <line num="53" type="stmt" count="4"/>
+        <line num="54" type="stmt" count="4"/>
+        <line num="55" type="stmt" count="4"/>
+        <line num="62" type="method" name="window" crap="1" count="2"/>
+        <line num="64" type="stmt" count="2"/>
+        <line num="72" type="method" name="futureWindows" crap="1" count="2"/>
+        <line num="74" type="stmt" count="2"/>
+        <line num="82" type="method" name="pastWindows" crap="1" count="2"/>
+        <line num="84" type="stmt" count="2"/>
+        <line num="91" type="stmt" count="0"/>
+        <metrics loc="90" ncloc="52" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="21" coveredelements="21"/>
       </file>
     </package>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/HotpConfigurationInterface.php">
-      <line num="33" type="stmt" count="0"/>
-      <metrics loc="32" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/OtpConfigurationInterface.php">
-      <line num="40" type="stmt" count="0"/>
-      <metrics loc="39" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/TotpConfigurationInterface.php">
-      <line num="26" type="stmt" count="0"/>
-      <metrics loc="25" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <package name="Eloquent\Otis\GoogleAuthenticator">
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/GoogleAuthenticator/GoogleAuthenticatorUriFactory.php">
-        <class name="GoogleAuthenticatorUriFactory" namespace="Eloquent\Otis\GoogleAuthenticator">
-          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="62" coveredstatements="62" elements="65" coveredelements="65"/>
-        </class>
-        <line num="0" type="stmt" count="0"/>
-        <line num="41" type="method" name="createHotpUri" crap="1" count="3"/>
-        <line num="50" type="stmt" count="3"/>
-        <line num="51" type="stmt" count="3"/>
-        <line num="52" type="stmt" count="3"/>
-        <line num="53" type="stmt" count="3"/>
-        <line num="54" type="stmt" count="3"/>
-        <line num="55" type="stmt" count="3"/>
-        <line num="56" type="stmt" count="3"/>
-        <line num="57" type="stmt" count="3"/>
-        <line num="58" type="stmt" count="3"/>
-        <line num="60" type="stmt" count="3"/>
-        <line num="81" type="method" name="createTotpUri" crap="1" count="3"/>
-        <line num="90" type="stmt" count="3"/>
-        <line num="91" type="stmt" count="3"/>
-        <line num="92" type="stmt" count="3"/>
-        <line num="93" type="stmt" count="3"/>
-        <line num="94" type="stmt" count="3"/>
-        <line num="95" type="stmt" count="3"/>
-        <line num="96" type="stmt" count="3"/>
-        <line num="97" type="stmt" count="3"/>
-        <line num="98" type="stmt" count="3"/>
-        <line num="100" type="stmt" count="3"/>
-        <line num="116" type="method" name="createUri" crap="18" count="6"/>
-        <line num="127" type="stmt" count="6"/>
-        <line num="128" type="stmt" count="1"/>
-        <line num="129" type="stmt" count="1"/>
-        <line num="130" type="stmt" count="6"/>
-        <line num="131" type="stmt" count="1"/>
-        <line num="132" type="stmt" count="1"/>
-        <line num="133" type="stmt" count="6"/>
-        <line num="134" type="stmt" count="2"/>
-        <line num="135" type="stmt" count="2"/>
-        <line num="136" type="stmt" count="6"/>
-        <line num="137" type="stmt" count="2"/>
-        <line num="138" type="stmt" count="2"/>
-        <line num="139" type="stmt" count="6"/>
-        <line num="140" type="stmt" count="2"/>
-        <line num="141" type="stmt" count="2"/>
-        <line num="143" type="stmt" count="6"/>
-        <line num="144" type="stmt" count="6"/>
-        <line num="146" type="stmt" count="6"/>
-        <line num="147" type="stmt" count="2"/>
-        <line num="148" type="stmt" count="2"/>
-        <line num="149" type="stmt" count="6"/>
-        <line num="150" type="stmt" count="2"/>
-        <line num="151" type="stmt" count="2"/>
-        <line num="152" type="stmt" count="6"/>
-        <line num="153" type="stmt" count="4"/>
-        <line num="154" type="stmt" count="4"/>
-        <line num="155" type="stmt" count="6"/>
-        <line num="156" type="stmt" count="4"/>
-        <line num="157" type="stmt" count="4"/>
-        <line num="158" type="stmt" count="6"/>
-        <line num="159" type="stmt" count="4"/>
-        <line num="160" type="stmt" count="2"/>
-        <line num="161" type="stmt" count="2"/>
-        <line num="163" type="stmt" count="4"/>
-        <line num="164" type="stmt" count="4"/>
-        <line num="166" type="stmt" count="6"/>
-        <line num="167" type="stmt" count="6"/>
-        <line num="168" type="stmt" count="6"/>
-        <line num="169" type="stmt" count="6"/>
-        <line num="170" type="stmt" count="6"/>
-        <line num="171" type="stmt" count="6"/>
-        <line num="173" type="stmt" count="6"/>
-        <line num="176" type="stmt" count="0"/>
-        <metrics loc="175" ncloc="114" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="62" coveredstatements="62" elements="65" coveredelements="65"/>
-      </file>
-    </package>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/GoogleAuthenticator/GoogleAuthenticatorUriFactoryInterface.php">
-      <line num="75" type="stmt" count="0"/>
-      <metrics loc="74" ncloc="27" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <package name="Eloquent\Otis\Hotp\Exception">
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/Exception/InvalidPasswordLengthException.php">
-        <class name="InvalidPasswordLengthException" namespace="Eloquent\Otis\Hotp\Exception">
+    <package name="Eloquent\Otis\Configuration\Exception">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/Exception/InvalidPasswordLengthException.php">
+        <class name="InvalidPasswordLengthException" namespace="Eloquent\Otis\Configuration\Exception">
           <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
         </class>
         <line num="27" type="method" name="__construct" crap="1" count="1"/>
@@ -181,148 +104,196 @@
         <line num="36" type="stmt" count="1"/>
         <line num="38" type="stmt" count="1"/>
         <line num="39" type="stmt" count="1"/>
-        <line num="46" type="method" name="length" crap="1" count="1"/>
+        <line num="46" type="method" name="digits" crap="1" count="1"/>
         <line num="48" type="stmt" count="1"/>
         <line num="53" type="stmt" count="0"/>
         <metrics loc="52" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
       </file>
     </package>
-    <package name="Eloquent\Otis\Hotp">
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/HotpGenerator.php">
-        <class name="HotpGenerator" namespace="Eloquent\Otis\Hotp">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/HotpConfigurationInterface.php">
+      <line num="33" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/OtpConfigurationInterface.php">
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="39" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Configuration/TotpConfigurationInterface.php">
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="39" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Eloquent\Otis\Generator">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/HotpGenerator.php">
+        <class name="HotpGenerator" namespace="Eloquent\Otis\Generator">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
         </class>
-        <line num="24" type="method" name="__construct" crap="2" count="32"/>
-        <line num="26" type="stmt" count="32"/>
-        <line num="27" type="stmt" count="11"/>
-        <line num="28" type="stmt" count="11"/>
-        <line num="30" type="stmt" count="32"/>
-        <line num="31" type="stmt" count="32"/>
-        <line num="36" type="method" name="algorithm" crap="1" count="32"/>
-        <line num="38" type="stmt" count="32"/>
-        <line num="51" type="method" name="generate" crap="1" count="30"/>
+        <line num="32" type="method" name="generate" crap="2" count="30"/>
+        <line num="34" type="stmt" count="30"/>
+        <line num="35" type="stmt" count="10"/>
+        <line num="36" type="stmt" count="10"/>
+        <line num="38" type="stmt" count="30"/>
+        <line num="39" type="stmt" count="30"/>
+        <line num="40" type="stmt" count="30"/>
+        <line num="50" type="method" name="pack" crap="1" count="30"/>
+        <line num="52" type="stmt" count="30"/>
         <line num="53" type="stmt" count="30"/>
-        <line num="54" type="stmt" count="30"/>
         <line num="55" type="stmt" count="30"/>
-        <line num="63" type="method" name="pack" crap="1" count="30"/>
-        <line num="65" type="stmt" count="30"/>
-        <line num="66" type="stmt" count="30"/>
-        <line num="68" type="stmt" count="30"/>
-        <line num="73" type="stmt" count="0"/>
-        <metrics loc="72" ncloc="38" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="16" coveredelements="16"/>
+        <line num="58" type="stmt" count="0"/>
+        <metrics loc="57" ncloc="28" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="11" coveredelements="11"/>
       </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/HotpValidator.php">
-        <class name="HotpValidator" namespace="Eloquent\Otis\Hotp">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="53" coveredelements="53"/>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/OtpValue.php">
+        <class name="OtpValue" namespace="Eloquent\Otis\Generator">
+          <metrics methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="35" coveredelements="35"/>
         </class>
-        <line num="24" type="method" name="__construct" crap="2" count="15"/>
-        <line num="26" type="stmt" count="15"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="15"/>
-        <line num="31" type="stmt" count="15"/>
-        <line num="38" type="method" name="generator" crap="1" count="14"/>
-        <line num="40" type="stmt" count="14"/>
-        <line num="55" type="method" name="validate" crap="6" count="12"/>
-        <line num="63" type="stmt" count="12"/>
-        <line num="65" type="stmt" count="12"/>
-        <line num="66" type="stmt" count="9"/>
-        <line num="67" type="stmt" count="9"/>
-        <line num="68" type="stmt" count="12"/>
-        <line num="69" type="stmt" count="9"/>
-        <line num="70" type="stmt" count="9"/>
-        <line num="73" type="stmt" count="12"/>
-        <line num="74" type="stmt" count="12"/>
-        <line num="76" type="stmt" count="9"/>
-        <line num="77" type="stmt" count="12"/>
-        <line num="80" type="stmt" count="12"/>
-        <line num="81" type="stmt" count="12"/>
-        <line num="82" type="stmt" count="1"/>
-        <line num="85" type="stmt" count="11"/>
-        <line num="86" type="stmt" count="6"/>
-        <line num="88" type="stmt" count="6"/>
-        <line num="90" type="stmt" count="9"/>
-        <line num="92" type="stmt" count="7"/>
-        <line num="107" type="method" name="validateSequence" crap="5" count="7"/>
-        <line num="115" type="stmt" count="7"/>
-        <line num="117" type="stmt" count="7"/>
-        <line num="118" type="stmt" count="1"/>
-        <line num="122" type="stmt" count="6"/>
-        <line num="123" type="stmt" count="6"/>
-        <line num="124" type="stmt" count="6"/>
-        <line num="125" type="stmt" count="6"/>
-        <line num="126" type="stmt" count="6"/>
-        <line num="127" type="stmt" count="6"/>
-        <line num="129" type="stmt" count="6"/>
-        <line num="130" type="stmt" count="6"/>
-        <line num="131" type="stmt" count="4"/>
-        <line num="133" type="stmt" count="4"/>
-        <line num="134" type="stmt" count="4"/>
-        <line num="135" type="stmt" count="4"/>
-        <line num="136" type="stmt" count="4"/>
-        <line num="137" type="stmt" count="4"/>
-        <line num="139" type="stmt" count="4"/>
-        <line num="140" type="stmt" count="4"/>
-        <line num="141" type="stmt" count="2"/>
-        <line num="143" type="stmt" count="2"/>
-        <line num="145" type="stmt" count="2"/>
-        <line num="147" type="stmt" count="2"/>
-        <line num="150" type="stmt" count="2"/>
-        <line num="155" type="stmt" count="0"/>
-        <metrics loc="154" ncloc="109" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="53" coveredelements="53"/>
-      </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/HotpValue.php">
-        <class name="HotpValue" namespace="Eloquent\Otis\Hotp">
-          <metrics methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="33" coveredelements="33"/>
-        </class>
-        <line num="24" type="method" name="__construct" crap="1" count="12"/>
-        <line num="26" type="stmt" count="12"/>
-        <line num="27" type="stmt" count="12"/>
-        <line num="28" type="stmt" count="12"/>
-        <line num="35" type="method" name="value" crap="1" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="47" type="method" name="truncated" crap="1" count="8"/>
-        <line num="49" type="stmt" count="8"/>
-        <line num="61" type="method" name="string" crap="4" count="11"/>
-        <line num="63" type="stmt" count="11"/>
-        <line num="64" type="stmt" count="1"/>
+        <line num="26" type="method" name="__construct" crap="1" count="11"/>
+        <line num="28" type="stmt" count="11"/>
+        <line num="29" type="stmt" count="11"/>
+        <line num="30" type="stmt" count="11"/>
+        <line num="37" type="method" name="value" crap="1" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="49" type="method" name="truncated" crap="1" count="9"/>
+        <line num="51" type="stmt" count="9"/>
+        <line num="62" type="method" name="string" crap="4" count="10"/>
+        <line num="64" type="stmt" count="10"/>
         <line num="65" type="stmt" count="1"/>
-        <line num="66" type="stmt" count="11"/>
-        <line num="67" type="stmt" count="4"/>
-        <line num="70" type="stmt" count="7"/>
-        <line num="71" type="stmt" count="7"/>
-        <line num="72" type="stmt" count="7"/>
-        <line num="73" type="stmt" count="7"/>
-        <line num="74" type="stmt" count="7"/>
-        <line num="76" type="stmt" count="7"/>
-        <line num="78" type="stmt" count="7"/>
-        <line num="86" type="method" name="truncate" crap="2" count="12"/>
-        <line num="88" type="stmt" count="12"/>
-        <line num="89" type="stmt" count="12"/>
-        <line num="91" type="stmt" count="12"/>
-        <line num="92" type="stmt" count="12"/>
-        <line num="93" type="stmt" count="12"/>
-        <line num="95" type="stmt" count="12"/>
-        <line num="98" type="stmt" count="12"/>
-        <line num="99" type="stmt" count="12"/>
-        <line num="100" type="stmt" count="12"/>
-        <line num="101" type="stmt" count="12"/>
-        <line num="102" type="stmt" count="12"/>
-        <line num="108" type="stmt" count="0"/>
-        <metrics loc="107" ncloc="65" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="33" coveredelements="33"/>
+        <line num="66" type="stmt" count="1"/>
+        <line num="67" type="stmt" count="10"/>
+        <line num="68" type="stmt" count="2"/>
+        <line num="71" type="stmt" count="8"/>
+        <line num="72" type="stmt" count="8"/>
+        <line num="73" type="stmt" count="8"/>
+        <line num="74" type="stmt" count="8"/>
+        <line num="75" type="stmt" count="8"/>
+        <line num="77" type="stmt" count="8"/>
+        <line num="79" type="stmt" count="8"/>
+        <line num="87" type="method" name="__toString" crap="1" count="1"/>
+        <line num="89" type="stmt" count="1"/>
+        <line num="101" type="method" name="truncate" crap="2" count="11"/>
+        <line num="103" type="stmt" count="11"/>
+        <line num="104" type="stmt" count="11"/>
+        <line num="106" type="stmt" count="11"/>
+        <line num="107" type="stmt" count="11"/>
+        <line num="108" type="stmt" count="11"/>
+        <line num="110" type="stmt" count="11"/>
+        <line num="113" type="stmt" count="11"/>
+        <line num="114" type="stmt" count="11"/>
+        <line num="115" type="stmt" count="11"/>
+        <line num="116" type="stmt" count="11"/>
+        <line num="117" type="stmt" count="11"/>
+        <line num="123" type="stmt" count="0"/>
+        <metrics loc="122" ncloc="72" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="35" coveredelements="35"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/TotpGenerator.php">
+        <class name="TotpGenerator" namespace="Eloquent\Otis\Generator">
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
+        </class>
+        <line num="28" type="method" name="__construct" crap="2" count="24"/>
+        <line num="32" type="stmt" count="24"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="24"/>
+        <line num="37" type="stmt" count="24"/>
+        <line num="38" type="stmt" count="24"/>
+        <line num="45" type="method" name="generator" crap="1" count="24"/>
+        <line num="47" type="stmt" count="24"/>
+        <line num="62" type="method" name="generate" crap="3" count="22"/>
+        <line num="68" type="stmt" count="22"/>
+        <line num="69" type="stmt" count="19"/>
+        <line num="70" type="stmt" count="19"/>
+        <line num="71" type="stmt" count="22"/>
+        <line num="72" type="stmt" count="1"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="22"/>
+        <line num="76" type="stmt" count="22"/>
+        <line num="77" type="stmt" count="22"/>
+        <line num="79" type="stmt" count="22"/>
+        <line num="87" type="method" name="isolator" crap="1" count="1"/>
+        <line num="89" type="stmt" count="1"/>
+        <line num="95" type="stmt" count="0"/>
+        <metrics loc="94" ncloc="55" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
       </file>
     </package>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/HotpGeneratorInterface.php">
-      <line num="31" type="stmt" count="0"/>
-      <metrics loc="30" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/HotpGeneratorInterface.php">
+      <line num="38" type="stmt" count="0"/>
+      <metrics loc="37" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Hotp/HotpValidatorInterface.php">
-      <line num="61" type="stmt" count="0"/>
-      <metrics loc="60" ncloc="25" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/OtpValueInterface.php">
+      <line num="54" type="stmt" count="0"/>
+      <metrics loc="53" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="Eloquent\Otis\QrCode">
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/ErrorCorrectionLevel.php">
-        <class name="ErrorCorrectionLevel" namespace="Eloquent\Otis\QrCode">
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Generator/TotpGeneratorInterface.php">
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="39" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Eloquent\Otis\Uri\GoogleAuthenticator">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/GoogleAuthenticator/GoogleAuthenticatorUriFactory.php">
+        <class name="GoogleAuthenticatorUriFactory" namespace="Eloquent\Otis\Uri\GoogleAuthenticator">
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="52" coveredelements="52"/>
+        </class>
+        <line num="0" type="stmt" count="0"/>
+        <line num="43" type="method" name="createTotpUri" crap="2" count="3"/>
+        <line num="50" type="stmt" count="3"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="52" type="stmt" count="1"/>
+        <line num="53" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="3"/>
+        <line num="57" type="stmt" count="3"/>
+        <line num="58" type="stmt" count="3"/>
+        <line num="59" type="stmt" count="3"/>
+        <line num="60" type="stmt" count="3"/>
+        <line num="61" type="stmt" count="3"/>
+        <line num="62" type="stmt" count="3"/>
+        <line num="64" type="stmt" count="3"/>
+        <line num="84" type="method" name="createHotpUri" crap="3" count="3"/>
+        <line num="92" type="stmt" count="3"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="98" type="stmt" count="3"/>
+        <line num="99" type="stmt" count="3"/>
+        <line num="100" type="stmt" count="3"/>
+        <line num="101" type="stmt" count="3"/>
+        <line num="102" type="stmt" count="3"/>
+        <line num="103" type="stmt" count="3"/>
+        <line num="104" type="stmt" count="3"/>
+        <line num="106" type="stmt" count="3"/>
+        <line num="127" type="method" name="createUri" crap="6" count="6"/>
+        <line num="136" type="stmt" count="6"/>
+        <line num="137" type="stmt" count="2"/>
+        <line num="138" type="stmt" count="2"/>
+        <line num="140" type="stmt" count="6"/>
+        <line num="141" type="stmt" count="4"/>
+        <line num="142" type="stmt" count="4"/>
+        <line num="144" type="stmt" count="6"/>
+        <line num="145" type="stmt" count="4"/>
+        <line num="146" type="stmt" count="4"/>
+        <line num="147" type="stmt" count="4"/>
+        <line num="148" type="stmt" count="4"/>
+        <line num="150" type="stmt" count="6"/>
+        <line num="151" type="stmt" count="6"/>
+        <line num="152" type="stmt" count="4"/>
+        <line num="153" type="stmt" count="2"/>
+        <line num="154" type="stmt" count="2"/>
+        <line num="156" type="stmt" count="4"/>
+        <line num="157" type="stmt" count="4"/>
+        <line num="159" type="stmt" count="6"/>
+        <line num="160" type="stmt" count="6"/>
+        <line num="161" type="stmt" count="6"/>
+        <line num="162" type="stmt" count="6"/>
+        <line num="163" type="stmt" count="6"/>
+        <line num="164" type="stmt" count="6"/>
+        <line num="166" type="stmt" count="6"/>
+        <line num="169" type="stmt" count="0"/>
+        <metrics loc="168" ncloc="105" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="52" coveredelements="52"/>
+      </file>
+    </package>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/GoogleAuthenticator/GoogleAuthenticatorUriFactoryInterface.php">
+      <line num="72" type="stmt" count="0"/>
+      <metrics loc="71" ncloc="27" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Eloquent\Otis\Uri\QrCode">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/QrCode/ErrorCorrectionLevel.php">
+        <class name="ErrorCorrectionLevel" namespace="Eloquent\Otis\Uri\QrCode">
           <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="15" coveredelements="15"/>
         </class>
         <line num="26" type="method" name="letterCode" crap="1" count="1"/>
@@ -342,8 +313,8 @@
         <line num="64" type="stmt" count="3"/>
         <metrics loc="68" ncloc="34" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="15" coveredelements="15"/>
       </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/GoogleChartsQrCodeUriFactory.php">
-        <class name="GoogleChartsQrCodeUriFactory" namespace="Eloquent\Otis\QrCode">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/QrCode/GoogleChartsQrCodeUriFactory.php">
+        <class name="GoogleChartsQrCodeUriFactory" namespace="Eloquent\Otis\Uri\QrCode">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
         </class>
         <line num="28" type="method" name="createUri" crap="4" count="2"/>
@@ -367,8 +338,8 @@
         <line num="56" type="stmt" count="0"/>
         <metrics loc="55" ncloc="35" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
       </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/KaywaQrCodeUriFactory.php">
-        <class name="KaywaQrCodeUriFactory" namespace="Eloquent\Otis\QrCode">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/QrCode/KaywaQrCodeUriFactory.php">
+        <class name="KaywaQrCodeUriFactory" namespace="Eloquent\Otis\Uri\QrCode">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
         </class>
         <line num="29" type="method" name="createUri" crap="5" count="2"/>
@@ -392,8 +363,8 @@
         <line num="56" type="stmt" count="0"/>
         <metrics loc="55" ncloc="34" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="17" elements="18" coveredelements="18"/>
       </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/QrServerQrCodeUriFactory.php">
-        <class name="QrServerQrCodeUriFactory" namespace="Eloquent\Otis\QrCode">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/QrCode/QrServerQrCodeUriFactory.php">
+        <class name="QrServerQrCodeUriFactory" namespace="Eloquent\Otis\Uri\QrCode">
           <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
         </class>
         <line num="29" type="method" name="createUri" crap="5" count="2"/>
@@ -422,98 +393,348 @@
         <metrics loc="61" ncloc="40" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="22" coveredelements="22"/>
       </file>
     </package>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/QrCode/QrCodeUriFactoryInterface.php">
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Uri/QrCode/QrCodeUriFactoryInterface.php">
       <line num="34" type="stmt" count="0"/>
       <metrics loc="33" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <package name="Eloquent\Otis\Totp">
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Totp/TotpGenerator.php">
-        <class name="TotpGenerator" namespace="Eloquent\Otis\Totp">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
+    <package name="Eloquent\Otis\Validator\Exception">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Exception/OtpParametersTypeMismatchException.php">
+        <class name="OtpParametersTypeMismatchException" namespace="Eloquent\Otis\Validator\Exception">
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
         </class>
-        <line num="30" type="method" name="__construct" crap="2" count="24"/>
-        <line num="34" type="stmt" count="24"/>
-        <line num="35" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="38" type="stmt" count="24"/>
-        <line num="39" type="stmt" count="24"/>
-        <line num="40" type="stmt" count="24"/>
-        <line num="47" type="method" name="generator" crap="1" count="24"/>
-        <line num="49" type="stmt" count="24"/>
-        <line num="63" type="method" name="generate" crap="3" count="22"/>
-        <line num="65" type="stmt" count="22"/>
-        <line num="66" type="stmt" count="19"/>
-        <line num="67" type="stmt" count="19"/>
-        <line num="68" type="stmt" count="22"/>
-        <line num="69" type="stmt" count="1"/>
-        <line num="70" type="stmt" count="1"/>
-        <line num="72" type="stmt" count="22"/>
-        <line num="73" type="stmt" count="22"/>
-        <line num="74" type="stmt" count="22"/>
-        <line num="75" type="stmt" count="22"/>
-        <line num="81" type="method" name="isolator" crap="1" count="1"/>
-        <line num="83" type="stmt" count="1"/>
-        <line num="89" type="stmt" count="0"/>
-        <metrics loc="88" ncloc="52" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="22" coveredelements="22"/>
+        <line num="30" type="method" name="__construct" crap="1" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="54" type="method" name="requiredType" crap="1" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="64" type="method" name="parameters" crap="1" count="1"/>
+        <line num="66" type="stmt" count="1"/>
+        <line num="72" type="stmt" count="0"/>
+        <metrics loc="71" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="16" coveredelements="16"/>
       </file>
-      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Totp/TotpValidator.php">
-        <class name="TotpValidator" namespace="Eloquent\Otis\Totp">
-          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="42" coveredelements="42"/>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Exception/UnsupportedOtpConfigurationException.php">
+        <class name="UnsupportedOtpConfigurationException" namespace="Eloquent\Otis\Validator\Exception">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
         </class>
-        <line num="28" type="method" name="__construct" crap="2" count="11"/>
-        <line num="32" type="stmt" count="11"/>
-        <line num="33" type="stmt" count="1"/>
+        <line num="28" type="method" name="__construct" crap="1" count="1"/>
+        <line num="32" type="stmt" count="1"/>
         <line num="34" type="stmt" count="1"/>
-        <line num="36" type="stmt" count="11"/>
-        <line num="37" type="stmt" count="11"/>
-        <line num="38" type="stmt" count="11"/>
-        <line num="45" type="method" name="generator" crap="1" count="10"/>
-        <line num="47" type="stmt" count="10"/>
-        <line num="63" type="method" name="validate" crap="9" count="9"/>
-        <line num="72" type="stmt" count="9"/>
-        <line num="74" type="stmt" count="9"/>
-        <line num="75" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="1"/>
-        <line num="77" type="stmt" count="9"/>
-        <line num="78" type="stmt" count="9"/>
-        <line num="79" type="stmt" count="9"/>
-        <line num="80" type="stmt" count="9"/>
-        <line num="81" type="stmt" count="6"/>
-        <line num="82" type="stmt" count="6"/>
-        <line num="83" type="stmt" count="9"/>
-        <line num="84" type="stmt" count="6"/>
-        <line num="85" type="stmt" count="6"/>
-        <line num="87" type="stmt" count="9"/>
-        <line num="88" type="stmt" count="1"/>
-        <line num="91" type="stmt" count="8"/>
-        <line num="93" type="stmt" count="8"/>
-        <line num="94" type="stmt" count="8"/>
-        <line num="95" type="stmt" count="8"/>
-        <line num="96" type="stmt" count="8"/>
-        <line num="97" type="stmt" count="8"/>
-        <line num="98" type="stmt" count="8"/>
-        <line num="101" type="stmt" count="8"/>
-        <line num="102" type="stmt" count="8"/>
-        <line num="103" type="stmt" count="1"/>
-        <line num="106" type="stmt" count="7"/>
-        <line num="107" type="stmt" count="5"/>
-        <line num="109" type="stmt" count="5"/>
-        <line num="111" type="stmt" count="6"/>
-        <line num="113" type="stmt" count="2"/>
-        <line num="119" type="method" name="isolator" crap="1" count="8"/>
-        <line num="121" type="stmt" count="8"/>
-        <line num="127" type="stmt" count="0"/>
-        <metrics loc="126" ncloc="88" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="38" elements="42" coveredelements="42"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="49" type="method" name="configuration" crap="1" count="1"/>
+        <line num="51" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="0"/>
+        <metrics loc="55" ncloc="33" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="12" coveredelements="12"/>
       </file>
     </package>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Totp/TotpGeneratorInterface.php">
+    <package name="Eloquent\Otis\Validator">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/HotpValidator.php">
+        <class name="HotpValidator" namespace="Eloquent\Otis\Validator">
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="59" coveredelements="59"/>
+        </class>
+        <line num="30" type="method" name="__construct" crap="2" count="26"/>
+        <line num="32" type="stmt" count="26"/>
+        <line num="33" type="stmt" count="19"/>
+        <line num="34" type="stmt" count="19"/>
+        <line num="36" type="stmt" count="26"/>
+        <line num="37" type="stmt" count="26"/>
+        <line num="44" type="method" name="generator" crap="1" count="10"/>
+        <line num="46" type="stmt" count="10"/>
+        <line num="57" type="method" name="validate" crap="4" count="10"/>
+        <line num="61" type="stmt" count="10"/>
+        <line num="62" type="stmt" count="2"/>
+        <line num="63" type="stmt" count="2"/>
+        <line num="64" type="stmt" count="2"/>
+        <line num="68" type="stmt" count="8"/>
+        <line num="69" type="stmt" count="8"/>
+        <line num="71" type="stmt" count="6"/>
+        <line num="72" type="stmt" count="8"/>
+        <line num="73" type="stmt" count="8"/>
+        <line num="74" type="stmt" count="8"/>
+        <line num="75" type="stmt" count="8"/>
+        <line num="76" type="stmt" count="8"/>
+        <line num="79" type="stmt" count="8"/>
+        <line num="80" type="stmt" count="8"/>
+        <line num="81" type="stmt" count="8"/>
+        <line num="82" type="stmt" count="8"/>
+        <line num="83" type="stmt" count="5"/>
+        <line num="84" type="stmt" count="5"/>
+        <line num="86" type="stmt" count="5"/>
+        <line num="88" type="stmt" count="6"/>
+        <line num="90" type="stmt" count="4"/>
+        <line num="91" type="stmt" count="4"/>
+        <line num="92" type="stmt" count="4"/>
+        <line num="105" type="method" name="validateSequence" crap="5" count="6"/>
+        <line num="111" type="stmt" count="6"/>
+        <line num="112" type="stmt" count="1"/>
+        <line num="113" type="stmt" count="1"/>
+        <line num="114" type="stmt" count="1"/>
+        <line num="117" type="stmt" count="5"/>
+        <line num="118" type="stmt" count="5"/>
+        <line num="119" type="stmt" count="5"/>
+        <line num="120" type="stmt" count="5"/>
+        <line num="121" type="stmt" count="5"/>
+        <line num="122" type="stmt" count="3"/>
+        <line num="125" type="stmt" count="5"/>
+        <line num="126" type="stmt" count="5"/>
+        <line num="127" type="stmt" count="5"/>
+        <line num="128" type="stmt" count="5"/>
+        <line num="129" type="stmt" count="5"/>
+        <line num="130" type="stmt" count="5"/>
+        <line num="131" type="stmt" count="5"/>
+        <line num="132" type="stmt" count="5"/>
+        <line num="133" type="stmt" count="5"/>
+        <line num="134" type="stmt" count="5"/>
+        <line num="136" type="stmt" count="5"/>
+        <line num="137" type="stmt" count="3"/>
+        <line num="140" type="stmt" count="3"/>
+        <line num="141" type="stmt" count="3"/>
+        <line num="142" type="stmt" count="5"/>
+        <line num="144" type="stmt" count="5"/>
+        <line num="149" type="stmt" count="0"/>
+        <metrics loc="148" ncloc="109" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="59" coveredelements="59"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/OtpValidator.php">
+        <class name="OtpValidator" namespace="Eloquent\Otis\Validator">
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="33" coveredelements="33"/>
+        </class>
+        <line num="32" type="method" name="__construct" crap="3" count="18"/>
+        <line num="36" type="stmt" count="18"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="18"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="18"/>
+        <line num="44" type="stmt" count="18"/>
+        <line num="45" type="stmt" count="18"/>
+        <line num="52" type="method" name="totpValidator" crap="1" count="10"/>
+        <line num="54" type="stmt" count="10"/>
+        <line num="62" type="method" name="hotpValidator" crap="1" count="7"/>
+        <line num="64" type="stmt" count="7"/>
+        <line num="77" type="method" name="validate" crap="5" count="16"/>
+        <line num="81" type="stmt" count="16"/>
+        <line num="82" type="stmt" count="9"/>
+        <line num="83" type="stmt" count="1"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="8"/>
+        <line num="90" type="stmt" count="8"/>
+        <line num="92" type="stmt" count="8"/>
+        <line num="93" type="stmt" count="7"/>
+        <line num="94" type="stmt" count="6"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="101" type="stmt" count="5"/>
+        <line num="102" type="stmt" count="5"/>
+        <line num="104" type="stmt" count="5"/>
+        <line num="107" type="stmt" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="115" type="stmt" count="0"/>
+        <metrics loc="114" ncloc="77" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="33" coveredelements="33"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/TotpValidator.php">
+        <class name="TotpValidator" namespace="Eloquent\Otis\Validator">
+          <metrics methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="37" coveredelements="37"/>
+        </class>
+        <line num="31" type="method" name="__construct" crap="2" count="20"/>
+        <line num="35" type="stmt" count="20"/>
+        <line num="36" type="stmt" count="19"/>
+        <line num="37" type="stmt" count="19"/>
+        <line num="39" type="stmt" count="20"/>
+        <line num="40" type="stmt" count="20"/>
+        <line num="41" type="stmt" count="20"/>
+        <line num="48" type="method" name="generator" crap="1" count="9"/>
+        <line num="50" type="stmt" count="9"/>
+        <line num="61" type="method" name="validate" crap="4" count="8"/>
+        <line num="65" type="stmt" count="8"/>
+        <line num="66" type="stmt" count="1"/>
+        <line num="67" type="stmt" count="1"/>
+        <line num="68" type="stmt" count="1"/>
+        <line num="71" type="stmt" count="7"/>
+        <line num="74" type="stmt" count="7"/>
+        <line num="75" type="stmt" count="7"/>
+        <line num="77" type="stmt" count="6"/>
+        <line num="78" type="stmt" count="7"/>
+        <line num="79" type="stmt" count="7"/>
+        <line num="80" type="stmt" count="7"/>
+        <line num="81" type="stmt" count="7"/>
+        <line num="82" type="stmt" count="7"/>
+        <line num="83" type="stmt" count="7"/>
+        <line num="86" type="stmt" count="7"/>
+        <line num="87" type="stmt" count="7"/>
+        <line num="88" type="stmt" count="7"/>
+        <line num="89" type="stmt" count="7"/>
+        <line num="90" type="stmt" count="5"/>
+        <line num="91" type="stmt" count="5"/>
+        <line num="93" type="stmt" count="5"/>
+        <line num="95" type="stmt" count="6"/>
+        <line num="97" type="stmt" count="2"/>
+        <line num="98" type="stmt" count="2"/>
+        <line num="99" type="stmt" count="2"/>
+        <line num="107" type="method" name="isolator" crap="1" count="7"/>
+        <line num="109" type="stmt" count="7"/>
+        <line num="115" type="stmt" count="0"/>
+        <metrics loc="114" ncloc="79" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="37" coveredelements="37"/>
+      </file>
+    </package>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/HotpValidatorInterface.php">
+      <line num="51" type="stmt" count="0"/>
+      <metrics loc="50" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/OtpValidatorInterface.php">
+      <line num="36" type="stmt" count="0"/>
+      <metrics loc="35" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Eloquent\Otis\Validator\Parameters">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/AbstractOtpParameters.php">
+        <class name="AbstractOtpParameters" namespace="Eloquent\Otis\Validator\Parameters">
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+        </class>
+        <line num="25" type="method" name="__construct" crap="1" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="36" type="method" name="secret" crap="1" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="46" type="method" name="password" crap="1" count="2"/>
+        <line num="48" type="stmt" count="2"/>
+        <line num="54" type="stmt" count="0"/>
+        <metrics loc="53" ncloc="26" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="8" coveredelements="8"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/HotpParameters.php">
+        <class name="HotpParameters" namespace="Eloquent\Otis\Validator\Parameters">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+        </class>
+        <line num="27" type="method" name="__construct" crap="1" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="39" type="method" name="counter" crap="1" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="0"/>
+        <metrics loc="45" ncloc="22" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/TotpParameters.php">
+        <class name="TotpParameters" namespace="Eloquent\Otis\Validator\Parameters">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="21" type="stmt" count="0"/>
+        <metrics loc="20" ncloc="9" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/HotpParametersInterface.php">
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="25" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/OtpParametersInterface.php">
+      <line num="33" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Parameters/TotpParametersInterface.php">
+      <line num="20" type="stmt" count="0"/>
+      <metrics loc="19" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="Eloquent\Otis\Validator\Result">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/AbstractOtpValidationResult.php">
+        <class name="AbstractOtpValidationResult" namespace="Eloquent\Otis\Validator\Result">
+          <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
+        </class>
+        <line num="25" type="method" name="__construct" crap="1" count="4"/>
+        <line num="27" type="stmt" count="4"/>
+        <line num="28" type="stmt" count="4"/>
+        <line num="35" type="method" name="type" crap="1" count="4"/>
+        <line num="37" type="stmt" count="4"/>
+        <line num="45" type="method" name="isSuccessful" crap="1" count="4"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="52" type="stmt" count="0"/>
+        <metrics loc="51" ncloc="25" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/HotpValidationResult.php">
+        <class name="HotpValidationResult" namespace="Eloquent\Otis\Validator\Result">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+        </class>
+        <line num="28" type="method" name="__construct" crap="5" count="4"/>
+        <line num="31" type="stmt" count="4"/>
+        <line num="32" type="stmt" count="3"/>
+        <line num="33" type="stmt" count="4"/>
+        <line num="34" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="47" type="method" name="counter" crap="1" count="2"/>
+        <line num="49" type="stmt" count="2"/>
+        <line num="54" type="stmt" count="0"/>
+        <metrics loc="53" ncloc="29" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/TotpValidationResult.php">
+        <class name="TotpValidationResult" namespace="Eloquent\Otis\Validator\Result">
+          <metrics methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+        </class>
+        <line num="28" type="method" name="__construct" crap="5" count="4"/>
+        <line num="33" type="stmt" count="4"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="35" type="stmt" count="4"/>
+        <line num="36" type="stmt" count="2"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="41" type="stmt" count="2"/>
+        <line num="42" type="stmt" count="2"/>
+        <line num="49" type="method" name="drift" crap="1" count="2"/>
+        <line num="51" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="0"/>
+        <metrics loc="55" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+      </file>
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/ValidationResultType.php">
+        <class name="ValidationResultType" namespace="Eloquent\Otis\Validator\Result">
+          <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <line num="41" type="stmt" count="0"/>
+        <metrics loc="40" ncloc="17" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="Eloquent\Otis\Validator\Result\Exception">
+      <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/Exception/InvalidResultException.php">
+        <class name="InvalidResultException" namespace="Eloquent\Otis\Validator\Result\Exception">
+          <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        </class>
+        <line num="26" type="method" name="__construct" crap="1" count="1"/>
+        <line num="28" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="0"/>
+        <metrics loc="30" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </file>
+    </package>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/HotpValidationResultInterface.php">
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="25" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/OtpValidationResultInterface.php">
+      <line num="33" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/Result/TotpValidationResultInterface.php">
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="25" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Validator/TotpValidatorInterface.php">
       <line num="34" type="stmt" count="0"/>
-      <metrics loc="33" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="33" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/home/travis/build/eloquent/otis/src/Eloquent/Otis/Totp/TotpValidatorInterface.php">
-      <line num="42" type="stmt" count="0"/>
-      <metrics loc="41" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <metrics files="24" loc="1625" ncloc="906" classes="15" methods="42" coveredmethods="42" conditionals="0" coveredconditionals="0" statements="318" coveredstatements="318" elements="360" coveredelements="360"/>
+    <metrics files="43" loc="2489" ncloc="1335" classes="26" methods="65" coveredmethods="65" conditionals="0" coveredconditionals="0" statements="399" coveredstatements="399" elements="464" coveredelements="464"/>
   </project>
 </coverage>

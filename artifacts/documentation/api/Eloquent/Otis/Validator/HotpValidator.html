@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Eloquent\Otis\Validator\HotpValidator | Otis API</title>
+                    <link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Otis API</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Eloquent/Otis/Validator.html">Eloquent\Otis\Validator</a>\HotpValidator</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>HotpValidator</strong>        implements
+        <a href="../../../Eloquent/Otis/Validator/HotpValidatorInterface.html"><abbr title="Eloquent\Otis\Validator\HotpValidatorInterface">HotpValidatorInterface</abbr></a></p>
+
+            <div class="description">
+            <p>Validates HOTP passwords.</p>
+            <p>
+</p>
+        </div>
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a> $generator = null)
+                    <p>Construct a new HOTP validator.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_generator">generator</a>()
+                    <p>Get the generator.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_validate">validate</a>(<a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a> $configuration, <a href="../../../Eloquent/Otis/Validator/Parameters/HotpParametersInterface.html"><abbr title="Eloquent\Otis\Validator\Parameters\HotpParametersInterface">HotpParametersInterface</abbr></a> $parameters)
+                    <p>Validate an HOTP password.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_validateSequence">validateSequence</a>(<a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a> $configuration, string $secret, array $passwords, integer $counter)
+                    <p>Validate a sequence of HOTP passwords.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 30</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a> $generator = null)</code>
+    </h3>
+    <div class="details">
+        <p>Construct a new HOTP validator.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a></td>
+                <td>$generator</td>
+                <td>The generator to use.</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_generator">
+        <div class="location">at line 44</div>
+        <code>            public            <a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a>
+    <strong>generator</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the generator.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Eloquent/Otis/Generator/HotpGeneratorInterface.html"><abbr title="Eloquent\Otis\Generator\HotpGeneratorInterface">HotpGeneratorInterface</abbr></a></td>
+            <td>The generator.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_validate">
+        <div class="location">at line 57</div>
+        <code>            public            <a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a>
+    <strong>validate</strong>(<a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a> $configuration, <a href="../../../Eloquent/Otis/Validator/Parameters/HotpParametersInterface.html"><abbr title="Eloquent\Otis\Validator\Parameters\HotpParametersInterface">HotpParametersInterface</abbr></a> $parameters)</code>
+    </h3>
+    <div class="details">
+        <p>Validate an HOTP password.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a></td>
+                <td>$configuration</td>
+                <td>The configuration to use for validation.</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Eloquent/Otis/Validator/Parameters/HotpParametersInterface.html"><abbr title="Eloquent\Otis\Validator\Parameters\HotpParametersInterface">HotpParametersInterface</abbr></a></td>
+                <td>$parameters</td>
+                <td>The parameters to validate.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a></td>
+            <td>The validation result.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_validateSequence">
+        <div class="location">at line 105</div>
+        <code>            public            <a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a>
+    <strong>validateSequence</strong>(<a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a> $configuration, string $secret, array $passwords, integer $counter)</code>
+    </h3>
+    <div class="details">
+        <p>Validate a sequence of HOTP passwords.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Eloquent/Otis/Configuration/HotpConfigurationInterface.html"><abbr title="Eloquent\Otis\Configuration\HotpConfigurationInterface">HotpConfigurationInterface</abbr></a></td>
+                <td>$configuration</td>
+                <td>The configuration to use for validation.</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$secret</td>
+                <td>The shared secret.</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$passwords</td>
+                <td>The password sequence to validate.</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$counter</td>
+                <td>The current counter value.</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Eloquent/Otis/Validator/Result/HotpValidationResultInterface.html"><abbr title="Eloquent\Otis\Validator\Result\HotpValidationResultInterface">HotpValidationResultInterface</abbr></a></td>
+            <td>The validation result.</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
