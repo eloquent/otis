@@ -12,12 +12,13 @@
 namespace Eloquent\Otis\Validator\Parameters;
 
 /**
- * An abstract base class for implementing OTP validation parameters.
+ * An abstract base class for implementing one-time password validation
+ * parameters.
  */
 abstract class AbstractOtpParameters implements OtpParametersInterface
 {
     /**
-     * Construct a new OTP validation parameters instance.
+     * Construct a new one-time password validation parameters instance.
      *
      * @param string $secret   The shared secret.
      * @param string $password The password.

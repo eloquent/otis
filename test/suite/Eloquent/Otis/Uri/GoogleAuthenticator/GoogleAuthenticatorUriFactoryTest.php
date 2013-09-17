@@ -11,9 +11,9 @@
 
 namespace Eloquent\Otis\Uri\GoogleAuthenticator;
 
-use Eloquent\Otis\Configuration\HashAlgorithm;
-use Eloquent\Otis\Configuration\HotpConfiguration;
-use Eloquent\Otis\Configuration\TotpConfiguration;
+use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
+use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
 
 class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
@@ -53,7 +53,7 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
             null,
             null,
             null,
-            HashAlgorithm::memberByValueWithDefault($algorithm)
+            HotpHashAlgorithm::memberByValueWithDefault($algorithm)
         );
 
         $this->assertSame($expected, $this->factory->createHotpUri($configuration, $secret, $label, $counter, $issuer, $issuerInLabel));
@@ -88,7 +88,7 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
             null,
             null,
             null,
-            HashAlgorithm::memberByValueWithDefault($algorithm)
+            HotpHashAlgorithm::memberByValueWithDefault($algorithm)
         );
 
         $this->assertSame(

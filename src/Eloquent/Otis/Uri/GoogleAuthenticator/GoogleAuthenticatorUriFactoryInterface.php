@@ -11,8 +11,8 @@
 
 namespace Eloquent\Otis\Uri\GoogleAuthenticator;
 
-use Eloquent\Otis\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Configuration\TotpConfigurationInterface;
+use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
  * The interface implemented by Google Authenticator URI factories.

@@ -14,7 +14,7 @@ namespace Eloquent\Otis\Validator\Parameters;
 /**
  * The interface implemented by OTP validation parameters.
  */
-interface OtpParametersInterface
+interface OtpParametersInterface extends MfaParametersInterface
 {
     /**
      * Get the shared secret.

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Result;
+namespace Eloquent\Otis\Configuration;
 
 /**
- * The interface implemented by one-time password validation results.
+ * The interface used to identify multi-factor authentication configurations.
  */
-interface OtpValidationResultInterface extends MfaValidationResultInterface
+interface MfaConfigurationInterface
 {
 }

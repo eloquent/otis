@@ -12,10 +12,10 @@
 namespace Eloquent\Otis\Uri\GoogleAuthenticator;
 
 use Base32\Base32;
-use Eloquent\Otis\Configuration\HashAlgorithm;
-use Eloquent\Otis\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Configuration\OtpConfigurationInterface;
-use Eloquent\Otis\Configuration\TotpConfigurationInterface;
+use Eloquent\Otis\Hotp\Configuration\HotpBasedConfigurationInterface;
+use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
  * Generates URIs for use with Google Authenticator, and other compatible OTP
@@ -114,20 +114,20 @@ class GoogleAuthenticatorUriFactory implements
      * code, and follows a special set of conventions understood by Google
      * Authenticator, and other OTP apps.
      *
-     * @param string                    $type          The otp type identifier.
-     * @param string                    $parameters    Additional URI parameters.
-     * @param OtpConfigurationInterface $configuration The OTP configuration.
-     * @param string                    $secret        The shared secret.
-     * @param string                    $label         The label for the account.
-     * @param string|null               $issuer        The issuer name.
-     * @param boolean|null              $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
+     * @param string                          $type          The otp type identifier.
+     * @param string                          $parameters    Additional URI parameters.
+     * @param HotpBasedConfigurationInterface $configuration The OTP configuration.
+     * @param string                          $secret        The shared secret.
+     * @param string                          $label         The label for the account.
+     * @param string|null                     $issuer        The issuer name.
+     * @param boolean|null                    $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
      *
      * @return string The OTP URI.
      */
     protected function createUri(
         $type,
         $parameters,
-        OtpConfigurationInterface $configuration,
+        HotpBasedConfigurationInterface $configuration,
         $secret,
         $label,
         $issuer = null,
@@ -141,7 +141,7 @@ class GoogleAuthenticatorUriFactory implements
             $parameters .= '&digits=' . rawurlencode($configuration->digits());
         }
 
-        if (HashAlgorithm::SHA1() !== $configuration->algorithm()) {
+        if (HotpHashAlgorithm::SHA1() !== $configuration->algorithm()) {
             $parameters .= '&algorithm=' . rawurlencode(
                 $configuration->algorithm()->value()
             );
