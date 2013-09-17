@@ -35,6 +35,6 @@ interface TotpGeneratorInterface
         $secret,
         $window = null,
         $time = null,
-        HotpHashAlgorithm $lagorithm = null
+        HotpHashAlgorithm $algorithm = null
     );
 }
