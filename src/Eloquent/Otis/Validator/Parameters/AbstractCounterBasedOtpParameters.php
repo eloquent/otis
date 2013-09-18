@@ -22,10 +22,10 @@ abstract class AbstractCounterBasedOtpParameters extends AbstractOtpParameters
      * Construct a new HOTP validation parameters instance.
      *
      * @param string  $secret   The shared secret.
-     * @param string  $password The password.
      * @param integer $counter  The current counter value.
+     * @param string  $password The password.
      */
-    public function __construct($secret, $password, $counter)
+    public function __construct($secret, $counter, $password)
     {
         parent::__construct($secret, $password);
 

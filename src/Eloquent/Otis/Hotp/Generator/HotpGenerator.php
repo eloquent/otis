@@ -29,8 +29,11 @@ class HotpGenerator implements HotpGeneratorInterface
      *
      * @return HotpValueInterface The generated HOTP value.
      */
-    public function generate($secret, $counter, HotpHashAlgorithm $algorithm = null)
-    {
+    public function generate(
+        $secret,
+        $counter,
+        HotpHashAlgorithm $algorithm = null
+    ) {
         if (null === $algorithm) {
             $algorithm = HotpHashAlgorithm::SHA1();
         }

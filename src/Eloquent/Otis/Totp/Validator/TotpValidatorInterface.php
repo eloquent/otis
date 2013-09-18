@@ -26,7 +26,7 @@ interface TotpValidatorInterface
      *
      * @return Result\TotpValidationResultInterface The validation result.
      */
-    public function validate(
+    public function validateTotp(
         TotpConfigurationInterface $configuration,
         Parameters\TotpParametersInterface $parameters
     );

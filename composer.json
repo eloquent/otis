@@ -1,7 +1,7 @@
 {
     "name": "eloquent/otis",
-    "description": "One-time password / two-factor authentication library for PHP.",
-    "keywords": ["otp", "2fa", "one", "time", "password", "two", "factor", "auth", "authentication", "google", "authenticator", "oath"],
+    "description": "One-time password / multi-factor authentication library for PHP.",
+    "keywords": ["otp", "2fa", "one", "time", "password", "multi", "two", "factor", "auth", "authentication", "google", "authenticator", "oath"],
     "homepage": "https://github.com/eloquent/otis",
     "license": "MIT",
     "authors": [

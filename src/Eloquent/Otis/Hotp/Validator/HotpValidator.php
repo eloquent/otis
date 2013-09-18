@@ -11,15 +11,20 @@
 
 namespace Eloquent\Otis\Hotp\Validator;
 
+use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
+use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
+use Eloquent\Otis\Validator\MfaValidatorInterface;
+use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
+use Eloquent\Otis\Validator\Result\MfaValidationResultInterface;
 
 /**
  * Validates HOTP passwords.
  */
-class HotpValidator implements HotpValidatorInterface
+class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
 {
     /**
      * Construct a new HOTP validator.
@@ -46,6 +51,46 @@ class HotpValidator implements HotpValidatorInterface
     }
 
     /**
+     * Returns true if this validator supports the supplied combination of
+     * configuration and parameters.
+     *
+     * @param MfaConfigurationInterface $configuration The configuration to use for validation.
+     * @param MfaParametersInterface    $parameters    The parameters to validate.
+     *
+     * @return boolean True if this validator supports the supplied combination.
+     */
+    public function supports(
+        MfaConfigurationInterface $configuration,
+        MfaParametersInterface $parameters
+    ) {
+        return $configuration instanceof HotpConfigurationInterface &&
+            $parameters instanceof Parameters\HotpParametersInterface;
+    }
+
+    /**
+     * Validate a set of multi-factor authentication parameters.
+     *
+     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
+     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     *
+     * @return Result\MfaValidationResultInterface          The validation result.
+     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
+     */
+    public function validate(
+        MfaConfigurationInterface $configuration,
+        MfaParametersInterface $parameters
+    ) {
+        if (!$this->supports($configuration, $parameters)) {
+            throw new UnsupportedMfaCombinationException(
+                $configuration,
+                $parameters
+            );
+        }
+
+        return $this->validateHotp($configuration, $parameters);
+    }
+
+    /**
      * Validate an HOTP password.
      *
      * @param HotpConfigurationInterface         $configuration The configuration to use for validation.
@@ -53,7 +98,7 @@ class HotpValidator implements HotpValidatorInterface
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
-    public function validate(
+    public function validateHotp(
         HotpConfigurationInterface $configuration,
         Parameters\HotpParametersInterface $parameters
     ) {
@@ -101,7 +146,7 @@ class HotpValidator implements HotpValidatorInterface
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
-    public function validateSequence(
+    public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
         $secret,
         array $passwords,
@@ -121,7 +166,7 @@ class HotpValidator implements HotpValidatorInterface
                 $window = 0;
             }
 
-            $result = $this->validate(
+            $result = $this->validateHotp(
                 new HotpConfiguration(
                     $configuration->digits(),
                     $window,
@@ -129,7 +174,7 @@ class HotpValidator implements HotpValidatorInterface
                     $configuration->secretLength(),
                     $configuration->algorithm()
                 ),
-                new Parameters\HotpParameters($secret, $password, $counter)
+                new Parameters\HotpParameters($secret, $counter, $password)
             );
 
             if (!$result->isSuccessful()) {

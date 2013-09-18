@@ -12,31 +12,37 @@
 namespace Eloquent\Otis\Validator\Exception;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
 use Exception;
 
 /**
- * An unsupported multi-factor authentication configuration was supplied.
+ * An unsupported combination of multi-factor authentication configuration and
+ * parameters was supplied.
  */
-class UnsupportedMfaConfigurationException extends Exception
+class UnsupportedMfaCombinationException extends Exception
 {
     /**
-     * Construct a new unsupported multi-factor authentication configuration
+     * Construct a new unsupported multi-factor authentication combination
      * exception.
      *
      * @param MfaConfigurationInterface $configuration The supplied configuration.
+     * @param MfaParametersInterface    $parameters    The supplied parameters.
      * @param Exception|null            $previous      The cause, if available.
      */
     public function __construct(
         MfaConfigurationInterface $configuration,
+        MfaParametersInterface $parameters,
         Exception $previous = null
     ) {
         $this->configuration = $configuration;
+        $this->parameters = $parameters;
 
         parent::__construct(
             sprintf(
-                'Multi-factor authentication configuration of type %s '.
-                    'is not supported.',
-                var_export(get_class($configuration), true)
+                'Unsupported multi-factor configuration and parameters ' .
+                    'combination (%s and %s).',
+                var_export(get_class($configuration), true),
+                var_export(get_class($parameters), true)
             ),
             0,
             $previous
@@ -53,5 +59,16 @@ class UnsupportedMfaConfigurationException extends Exception
         return $this->configuration;
     }
 
+    /**
+     * Get the supplied parameters.
+     *
+     * @return MfaParametersInterface The supplied parameters.
+     */
+    public function parameters()
+    {
+        return $this->parameters;
+    }
+
     private $configuration;
+    private $parameters;
 }

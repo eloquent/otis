@@ -19,14 +19,27 @@ use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 interface MfaValidatorInterface
 {
     /**
+     * Returns true if this validator supports the supplied combination of
+     * configuration and parameters.
+     *
+     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
+     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     *
+     * @return boolean True if this validator supports the supplied combination.
+     */
+    public function supports(
+        MfaConfigurationInterface $configuration,
+        Parameters\MfaParametersInterface $parameters
+    );
+
+    /**
      * Validate a set of multi-factor authentication parameters.
      *
      * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
      * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
      *
-     * @return Result\MfaValidationResultInterface            The validation result.
-     * @throws Exception\UnsupportedMfaConfigurationException If the configuration is not supported.
-     * @throws Exception\MfaParametersTypeMismatchException   If the parameters are the wrong type for the validator.
+     * @return Result\MfaValidationResultInterface          The validation result.
+     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,

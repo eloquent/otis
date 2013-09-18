@@ -26,7 +26,7 @@ interface HotpValidatorInterface
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
-    public function validate(
+    public function validateHotp(
         HotpConfigurationInterface $configuration,
         Parameters\HotpParametersInterface $parameters
     );
@@ -41,7 +41,7 @@ interface HotpValidatorInterface
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
-    public function validateSequence(
+    public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
         $secret,
         array $passwords,

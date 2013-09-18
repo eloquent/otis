@@ -9,34 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Validator;
+namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
-use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
-use Eloquent\Otis\Totp\Generator\TotpGenerator;
-use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
+use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
+use Eloquent\Otis\Motp\Generator\MotpGenerator;
+use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
 use Icecave\Isolator\Isolator;
 
 /**
- * Validates TOTP passwords.
+ * Validates mOTP passwords.
  */
-class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
+class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
 {
     /**
-     * Construct a new TOTP validator.
+     * Construct a new mOTP validator.
      *
-     * @param TotpGeneratorInterface|null $generator The generator to use.
+     * @param MotpGeneratorInterface|null $generator The generator to use.
      * @param Isolator|null               $isolator  The isolator to use.
      */
     public function __construct(
-        TotpGeneratorInterface $generator = null,
+        MotpGeneratorInterface $generator = null,
         Isolator $isolator = null
     ) {
         if (null === $generator) {
-            $generator = new TotpGenerator;
+            $generator = new MotpGenerator;
         }
 
         $this->generator = $generator;
@@ -46,7 +46,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
     /**
      * Get the generator.
      *
-     * @return TotpGeneratorInterface The generator.
+     * @return MotpGeneratorInterface The generator.
      */
     public function generator()
     {
@@ -66,8 +66,8 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         MfaConfigurationInterface $configuration,
         MfaParametersInterface $parameters
     ) {
-        return $configuration instanceof TotpConfigurationInterface &&
-            $parameters instanceof Parameters\TotpParametersInterface;
+        return $configuration instanceof MotpConfigurationInterface &&
+            $parameters instanceof Parameters\MotpParametersInterface;
     }
 
     /**
@@ -90,24 +90,24 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
             );
         }
 
-        return $this->validateTotp($configuration, $parameters);
+        return $this->validateMotp($configuration, $parameters);
     }
 
     /**
-     * Validate a TOTP password.
+     * Validate an mOTP password.
      *
-     * @param TotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\TotpParametersInterface $parameters    The parameters to validate.
+     * @param MotpConfigurationInterface         $configuration The configuration to use for validation.
+     * @param Parameters\MotpParametersInterface $parameters    The parameters to validate.
      *
-     * @return Result\TotpValidationResultInterface The validation result.
+     * @return Result\MotpValidationResultInterface The validation result.
      */
-    public function validateTotp(
-        TotpConfigurationInterface $configuration,
-        Parameters\TotpParametersInterface $parameters
+    public function validateMotp(
+        MotpConfigurationInterface $configuration,
+        Parameters\MotpParametersInterface $parameters
     ) {
-        if (strlen($parameters->password()) !== $configuration->digits()) {
-            return new Result\TotpValidationResult(
-                Result\TotpValidationResult::PASSWORD_LENGTH_MISMATCH
+        if (strlen($parameters->password()) !== 6) {
+            return new Result\MotpValidationResult(
+                Result\MotpValidationResult::PASSWORD_LENGTH_MISMATCH
             );
         }
 
@@ -120,25 +120,20 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         ) {
             $value = $this->generator()->generate(
                 $parameters->secret(),
-                $configuration->window(),
-                $time + ($i * $configuration->window()),
-                $configuration->algorithm()
+                $parameters->pin(),
+                $time + ($i * 10)
             );
 
-            if (
-                $parameters->password() === $value->string(
-                    $configuration->digits()
-                )
-            ) {
-                return new Result\TotpValidationResult(
-                    Result\TotpValidationResult::VALID,
+            if ($parameters->password() === $value) {
+                return new Result\MotpValidationResult(
+                    Result\MotpValidationResult::VALID,
                     $i
                 );
             }
         }
 
-        return new Result\TotpValidationResult(
-            Result\TotpValidationResult::INVALID_PASSWORD
+        return new Result\MotpValidationResult(
+            Result\MotpValidationResult::INVALID_PASSWORD
         );
     }
 

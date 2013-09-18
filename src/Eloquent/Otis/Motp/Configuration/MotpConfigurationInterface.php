@@ -9,22 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Configuration;
+namespace Eloquent\Otis\Motp\Configuration;
 
-use Eloquent\Otis\Hotp\Configuration\HotpBasedConfigurationInterface;
+use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 
 /**
- * The interface implemented by TOTP configurations.
+ * The interface implemented by mOTP configurations.
  */
-interface TotpConfigurationInterface extends HotpBasedConfigurationInterface
+interface MotpConfigurationInterface extends MfaConfigurationInterface
 {
-    /**
-     * Get the number of seconds each token is valid for.
-     *
-     * @return integer The number of seconds each token is valid for.
-     */
-    public function window();
-
     /**
      * Get the number of future windows to check.
      *

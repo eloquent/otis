@@ -12,14 +12,9 @@
 namespace Eloquent\Otis\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
-use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Hotp\Validator\HotpValidator;
-use Eloquent\Otis\Hotp\Validator\HotpValidatorInterface;
-use Eloquent\Otis\Hotp\Validator\Parameters\HotpParametersInterface;
-use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
-use Eloquent\Otis\Totp\Validator\Parameters\TotpParametersInterface;
+use Eloquent\Otis\Motp\Validator\MotpValidator;
 use Eloquent\Otis\Totp\Validator\TotpValidator;
-use Eloquent\Otis\Totp\Validator\TotpValidatorInterface;
 
 /**
  * A generic multi-factor authentication validator.
@@ -29,42 +24,51 @@ class MfaValidator implements MfaValidatorInterface
     /**
      * Construct a new multi-factor authentication validator.
      *
-     * @param TotpValidatorInterface|null $totpValidator The TOTP validator to use.
-     * @param HotpValidatorInterface|null $hotpValidator The HOTP validator to use.
+     * @param array<MfaValidatorInterface>|null $validators The validators to aggregate.
      */
-    public function __construct(
-        TotpValidatorInterface $totpValidator = null,
-        HotpValidatorInterface $hotpValidator = null
+    public function __construct(array $validators = null)
+    {
+        if (null === $validators) {
+            $validators = array(
+                new TotpValidator,
+                new HotpValidator,
+                new MotpValidator,
+            );
+        }
+
+        $this->validators = $validators;
+    }
+
+    /**
+     * Get the aggregated validators.
+     *
+     * @return array<MfaValidatorInterface> The aggregated validators.
+     */
+    public function validators()
+    {
+        return $this->validators;
+    }
+
+    /**
+     * Returns true if this validator supports the supplied combination of
+     * configuration and parameters.
+     *
+     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
+     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     *
+     * @return boolean True if this validator supports the supplied combination.
+     */
+    public function supports(
+        MfaConfigurationInterface $configuration,
+        Parameters\MfaParametersInterface $parameters
     ) {
-        if (null === $totpValidator) {
-            $totpValidator = new TotpValidator;
+        foreach ($this->validators() as $validator) {
+            if ($validator->supports($configuration, $parameters)) {
+                return true;
+            }
         }
-        if (null === $hotpValidator) {
-            $hotpValidator = new HotpValidator;
-        }
 
-        $this->totpValidator = $totpValidator;
-        $this->hotpValidator = $hotpValidator;
-    }
-
-    /**
-     * Get the TOTP validator.
-     *
-     * @return TotpValidatorInterface The TOTP validator.
-     */
-    public function totpValidator()
-    {
-        return $this->totpValidator;
-    }
-
-    /**
-     * Get the HOTP validator.
-     *
-     * @return HotpValidatorInterface The HOTP validator.
-     */
-    public function hotpValidator()
-    {
-        return $this->hotpValidator;
+        return false;
     }
 
     /**
@@ -73,45 +77,24 @@ class MfaValidator implements MfaValidatorInterface
      * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
      * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
      *
-     * @return Result\MfaValidationResultInterface            The validation result.
-     * @throws Exception\UnsupportedMfaConfigurationException If the configuration is not supported.
-     * @throws Exception\MfaParametersTypeMismatchException   If the parameters are the wrong type for the validator.
+     * @return Result\MfaValidationResultInterface          The validation result.
+     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
         Parameters\MfaParametersInterface $parameters
     ) {
-        if ($configuration instanceof TotpConfigurationInterface) {
-            if (!$parameters instanceof TotpParametersInterface) {
-                throw new Exception\MfaParametersTypeMismatchException(
-                    __NAMESPACE__ . '\Parameters\TotpParametersInterface',
-                    $parameters
-                );
+        foreach ($this->validators() as $validator) {
+            if ($validator->supports($configuration, $parameters)) {
+                return $validator->validate($configuration, $parameters);
             }
-
-            return $this->totpValidator()->validate(
-                $configuration,
-                $parameters
-            );
-        } elseif ($configuration instanceof HotpConfigurationInterface) {
-            if (!$parameters instanceof HotpParametersInterface) {
-                throw new Exception\MfaParametersTypeMismatchException(
-                    __NAMESPACE__ . '\Parameters\HotpParametersInterface',
-                    $parameters
-                );
-            }
-
-            return $this->hotpValidator()->validate(
-                $configuration,
-                $parameters
-            );
         }
 
-        throw new Exception\UnsupportedMfaConfigurationException(
-            $configuration
+        throw new Exception\UnsupportedMfaCombinationException(
+            $configuration,
+            $parameters
         );
     }
 
-    private $totpValidator;
-    private $hotpValidator;
+    private $validators;
 }

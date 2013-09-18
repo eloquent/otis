@@ -13,6 +13,8 @@ namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
+use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
+use Eloquent\Otis\Totp\Validator\Parameters\TotpParameters;
 use PHPUnit_Framework_TestCase;
 
 class HotpValidatorTest extends PHPUnit_Framework_TestCase
@@ -37,7 +39,34 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->generator, $this->validator->generator());
     }
 
-    public function validateSequenceData()
+    public function supportsData()
+    {
+        //                                       configuration          parameters                                                expected
+        return array(
+            'Valid combination'         => array(new HotpConfiguration, new Parameters\HotpParameters('secret', 111, 'password'), true),
+            'Unsupported parameters'    => array(new HotpConfiguration, new TotpParameters('secret', 'password'),                 false),
+            'Unsupported configuration' => array(new TotpConfiguration, new Parameters\HotpParameters('secret', 111, 'password'), false),
+        );
+    }
+
+    /**
+     * @dataProvider supportsData
+     */
+    public function testSupports($configuration, $parameters, $expected)
+    {
+        $this->assertSame($expected, $this->validator->supports($configuration, $parameters));
+    }
+
+    public function testValidateFailureUnsupported()
+    {
+        $configuration = new TotpConfiguration;
+        $parameters = new TotpParameters('secret', 'password');
+
+        $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
+        $this->validator->validate($configuration, $parameters);
+    }
+
+    public function validateHotpSequenceData()
     {
         //                                  passwords                  secret                  currentCounter digits window result                      newCounter
         return array(
@@ -52,12 +81,12 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider validateSequenceData
+     * @dataProvider validateHotpSequenceData
      */
-    public function testValidateSequence($passwords, $secret, $currentCounter, $digits, $window, $result, $newCounter)
+    public function testValidateHotpSequence($passwords, $secret, $currentCounter, $digits, $window, $result, $newCounter)
     {
         $configuration = new HotpConfiguration($digits, $window);
-        $actual = $this->validator->validateSequence($configuration, $secret, $passwords, $currentCounter);
+        $actual = $this->validator->validateHotpSequence($configuration, $secret, $passwords, $currentCounter);
 
         $this->assertInstanceOf(__NAMESPACE__ . '\Result\HotpValidationResult', $actual);
         $this->assertSame($result, $actual->type());

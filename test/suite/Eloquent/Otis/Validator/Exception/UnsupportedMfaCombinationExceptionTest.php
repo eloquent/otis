@@ -11,22 +11,26 @@
 
 namespace Eloquent\Otis\Validator\Exception;
 
+use Eloquent\Otis\Hotp\Validator\Parameters\HotpParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Exception;
 use PHPUnit_Framework_TestCase;
 
-class UnsupportedMfaConfigurationExceptionTest extends PHPUnit_Framework_TestCase
+class UnsupportedMfaCombinationExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {
         $previous = new Exception;
         $configuration = new TotpConfiguration;
-        $exception = new UnsupportedMfaConfigurationException($configuration, $previous);
+        $parameters = new HotpParameters('secret', 111, 'password');
+        $exception = new UnsupportedMfaCombinationException($configuration, $parameters, $previous);
 
         $this->assertSame($configuration, $exception->configuration());
+        $this->assertSame($parameters, $exception->parameters());
         $this->assertSame(
-            "Multi-factor authentication configuration of type " .
-                "'Eloquent\\\\Otis\\\\Totp\\\\Configuration\\\\TotpConfiguration' is not supported.",
+            "Unsupported multi-factor configuration and parameters combination " .
+                "('Eloquent\\\\Otis\\\\Totp\\\\Configuration\\\\TotpConfiguration' and " .
+                "'Eloquent\\\\Otis\\\\Hotp\\\\Validator\\\\Parameters\\\\HotpParameters').",
             $exception->getMessage()
         );
         $this->assertSame(0, $exception->getCode());

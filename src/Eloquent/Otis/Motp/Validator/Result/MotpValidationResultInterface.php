@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Validator\Result;
+namespace Eloquent\Otis\Motp\Validator\Result;
 
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
 
 /**
- * The interface implemented by TOTP validation results.
+ * The interface implemented by mOTP validation results.
  */
-interface TotpValidationResultInterface extends
+interface MotpValidationResultInterface extends
     TimeBasedOtpValidationResultInterface
 {
 }

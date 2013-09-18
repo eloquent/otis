@@ -1,6 +1,6 @@
 # Otis
 
-*One-time password / two-factor authentication library for PHP.*
+*One-time password / multi-factor authentication library for PHP.*
 
 [![Build Status]][Latest build]
 [![Test Coverage]][Test coverage report]
@@ -13,7 +13,7 @@
 
 ## What is *Otis*?
 
-*Otis* is a PHP library for implementing [one-time password] / [two-factor
+*Otis* is a PHP library for implementing [one-time password] / [multi-factor
 authentication] systems. *Otis* provides generators and validators for both
 [TOTP][] (time-based passwords as defined in [RFC 6238]) and [HOTP][]
 (counter-based passwords as covered in [RFC 4226]). *Otis* supports all hashing
@@ -161,7 +161,7 @@ the wiki.
 [RFC 4226]: http://tools.ietf.org/html/rfc4226
 [RFC 6238]: http://tools.ietf.org/html/rfc6238
 [TOTP]: http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm
-[two-factor authentication]: http://en.wikipedia.org/wiki/Multi-factor_authentication
+[multi-factor authentication]: http://en.wikipedia.org/wiki/Multi-factor_authentication
 [URI format]: https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
 
 [Build Status]: https://api.travis-ci.org/eloquent/otis.png?branch=master

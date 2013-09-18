@@ -15,6 +15,7 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers \Eloquent\Otis\Hotp\Validator\Result\HotpValidationResult
+ * @covers \Eloquent\Otis\Validator\Result\AbstractCounterBasedOtpValidationResult
  * @covers \Eloquent\Otis\Validator\Result\AbstractMfaValidationResult
  */
 class HotpValidationResultTest extends PHPUnit_Framework_TestCase

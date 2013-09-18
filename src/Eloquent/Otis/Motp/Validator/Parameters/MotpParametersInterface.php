@@ -9,13 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Validator\Parameters;
+namespace Eloquent\Otis\Motp\Validator\Parameters;
 
 use Eloquent\Otis\Validator\Parameters\OtpParametersInterface;
 
 /**
- * The interface implemented by TOTP validation parameters.
+ * The interface implemented by mOTP validation parameters.
  */
-interface TotpParametersInterface extends OtpParametersInterface
+interface MotpParametersInterface extends OtpParametersInterface
 {
+    /**
+     * Get the PIN.
+     *
+     * @return string The PIN.
+     */
+    public function pin();
 }

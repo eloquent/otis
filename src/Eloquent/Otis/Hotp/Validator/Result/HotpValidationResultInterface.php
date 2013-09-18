@@ -11,17 +11,12 @@
 
 namespace Eloquent\Otis\Hotp\Validator\Result;
 
-use Eloquent\Otis\Validator\Result\OtpValidationResultInterface;
+use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResultInterface;
 
 /**
  * The interface implemented by HOTP validation results.
  */
-interface HotpValidationResultInterface extends OtpValidationResultInterface
+interface HotpValidationResultInterface extends
+    CounterBasedOtpValidationResultInterface
 {
-    /**
-     * Get the new counter value.
-     *
-     * @return integer|null The new counter value, or null if the counter should not change.
-     */
-    public function counter();
 }

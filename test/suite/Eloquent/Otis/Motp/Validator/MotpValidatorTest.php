@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Validator;
+namespace Eloquent\Otis\Motp\Validator;
 
-use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Validator\Parameters\HotpParameters;
+use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
+use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Generator\TotpGenerator;
+use Eloquent\Otis\Totp\Validator\Parameters\TotpParameters;
 use Icecave\Isolator\Isolator;
 use PHPUnit_Framework_TestCase;
 use Phake;
 
-class TotpValidatorTest extends PHPUnit_Framework_TestCase
+class MotpValidatorTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->generator = new TotpGenerator;
+        $this->generator = new MotpGenerator;
         $this->isolator = Phake::mock(Isolator::className());
-        $this->validator = new TotpValidator($this->generator, $this->isolator);
+        $this->validator = new MotpValidator($this->generator, $this->isolator);
     }
 
     public function testConstructor()
@@ -37,18 +37,18 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorDefaults()
     {
-        $this->validator = new TotpValidator;
+        $this->validator = new MotpValidator;
 
         $this->assertEquals($this->generator, $this->validator->generator());
     }
 
     public function supportsData()
     {
-        //                                       configuration          parameters                                           expected
+        //                                       configuration          parameters                                                expected
         return array(
-            'Valid combination'         => array(new TotpConfiguration, new Parameters\TotpParameters('secret', 'password'), true),
-            'Unsupported parameters'    => array(new TotpConfiguration, new HotpParameters('secret', 111, 'password'),       false),
-            'Unsupported configuration' => array(new HotpConfiguration, new Parameters\TotpParameters('secret', 'password'), false),
+            'Valid combination'         => array(new MotpConfiguration, new Parameters\MotpParameters('secret', 111, 'password'), true),
+            'Unsupported parameters'    => array(new MotpConfiguration, new TotpParameters('secret', 'password'),                 false),
+            'Unsupported configuration' => array(new TotpConfiguration, new Parameters\MotpParameters('secret', 111, 'password'), false),
         );
     }
 
@@ -62,8 +62,8 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function testValidateFailureUnsupported()
     {
-        $configuration = new HotpConfiguration;
-        $parameters = new HotpParameters('secret', 111, 'password');
+        $configuration = new TotpConfiguration;
+        $parameters = new TotpParameters('secret', 'password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
         $this->validator->validate($configuration, $parameters);
