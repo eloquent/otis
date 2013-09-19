@@ -11,16 +11,15 @@
 
 namespace Eloquent\Otis\Totp\Validator;
 
+use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Credentials\HotpCredentials;
 use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Credentials\TotpCredentials;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Parameters\TotpSharedParameters;
 use Icecave\Isolator\Isolator;
-use PHPUnit_Framework_TestCase;
 use Phake;
+use PHPUnit_Framework_TestCase;
 
 class TotpValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -47,12 +46,12 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function supportsData()
     {
-        //                                           configuration          shared                                   credentials                      expected
+        //                                           configuration          shared                                   credentials                                                       expected
         return array(
-            'Valid combination'             => array(new TotpConfiguration, new TotpSharedParameters('secret'),      new TotpCredentials('password'), true),
-            'Unsupported credentials'       => array(new TotpConfiguration, new TotpSharedParameters('secret'),      new HotpCredentials('password'), false),
-            'Unsupported shared parameters' => array(new TotpConfiguration, new HotpSharedParameters('secret', 123), new TotpCredentials('password'), false),
-            'Unsupported configuration'     => array(new HotpConfiguration, new TotpSharedParameters('secret'),      new TotpCredentials('password'), false),
+            'Valid combination'             => array(new TotpConfiguration, new TotpSharedParameters('secret'),      new OtpCredentials('password'),                                   true),
+            'Unsupported credentials'       => array(new TotpConfiguration, new TotpSharedParameters('secret', 123), Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'), false),
+            'Unsupported shared parameters' => array(new TotpConfiguration, new HotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   false),
+            'Unsupported configuration'     => array(new HotpConfiguration, new TotpSharedParameters('secret'),      new OtpCredentials('password'),                                   false),
         );
     }
 
@@ -68,7 +67,7 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         $configuration = new HotpConfiguration;
         $shared = new HotpSharedParameters('secret', 111);
-        $credentials = new HotpCredentials('password');
+        $credentials = new OtpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
         $this->validator->validate($configuration, $shared, $credentials);

@@ -11,13 +11,13 @@
 
 namespace Eloquent\Otis\Hotp\Validator;
 
+use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Credentials\HotpCredentials;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Credentials\TotpCredentials;
 use Eloquent\Otis\Totp\Parameters\TotpSharedParameters;
+use Phake;
 use PHPUnit_Framework_TestCase;
 
 class HotpValidatorTest extends PHPUnit_Framework_TestCase
@@ -44,12 +44,12 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function supportsData()
     {
-        //                                           configuration          shared                                   credentials                      expected
+        //                                           configuration          shared                                   credentials                                                       expected
         return array(
-            'Valid combination'             => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), new HotpCredentials('password'), true),
-            'Unsupported credentials'       => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), new TotpCredentials('password'), false),
-            'Unsupported shared parameters' => array(new HotpConfiguration, new TotpSharedParameters('secret'),      new HotpCredentials('password'), false),
-            'Unsupported configuration'     => array(new TotpConfiguration, new HotpSharedParameters('secret', 123), new HotpCredentials('password'), false),
+            'Valid combination'             => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   true),
+            'Unsupported credentials'       => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'), false),
+            'Unsupported shared parameters' => array(new HotpConfiguration, new TotpSharedParameters('secret'),      new OtpCredentials('password'),                                   false),
+            'Unsupported configuration'     => array(new TotpConfiguration, new HotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   false),
         );
     }
 
@@ -65,7 +65,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         $configuration = new TotpConfiguration;
         $shared = new TotpSharedParameters('secret');
-        $credentials = new TotpCredentials('password');
+        $credentials = new OtpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
         $this->validator->validate($configuration, $shared, $credentials);
@@ -94,7 +94,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
         $shared = new HotpSharedParameters($secret, $currentCounter);
         $credentialSequence = array();
         foreach ($passwords as $password) {
-            $credentialSequence[] = new HotpCredentials($password);
+            $credentialSequence[] = new OtpCredentials($password);
         }
         $actual = $this->validator->validateHotpSequence($configuration, $shared, $credentialSequence);
 

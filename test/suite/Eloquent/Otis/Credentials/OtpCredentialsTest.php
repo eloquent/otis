@@ -9,25 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Credentials;
+namespace Eloquent\Otis\Credentials;
 
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers \Eloquent\Otis\Hotp\Credentials\HotpCredentials
- * @covers \Eloquent\Otis\Credentials\AbstractOtpCredentials
- */
-class HotpCredentialsTest extends PHPUnit_Framework_TestCase
+class OtpCredentialsTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->parameters = new HotpCredentials('password');
+        $this->credentials = new OtpCredentials('password');
     }
 
     public function testConstructor()
     {
-        $this->assertSame('password', $this->parameters->password());
+        $this->assertSame('password', $this->credentials->password());
     }
 }

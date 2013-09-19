@@ -11,8 +11,8 @@
 
 namespace Eloquent\Otis\Hotp\Validator;
 
+use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Hotp\Credentials\HotpCredentialsInterface;
 use Eloquent\Otis\Hotp\Parameters\HotpSharedParametersInterface;
 
 /**
@@ -25,22 +25,22 @@ interface HotpValidatorInterface
      *
      * @param HotpConfigurationInterface    $configuration The configuration to use for validation.
      * @param HotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param HotpCredentialsInterface      $credentials   The credentials to validate.
+     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
         HotpSharedParametersInterface $shared,
-        HotpCredentialsInterface $credentials
+        OtpCredentialsInterface $credentials
     );
 
     /**
      * Validate a sequence of HOTP passwords.
      *
-     * @param HotpConfigurationInterface      $configuration      The configuration to use for validation.
-     * @param HotpSharedParametersInterface   $shared             The shared parameters to use for validation.
-     * @param array<HotpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
+     * @param HotpConfigurationInterface     $configuration      The configuration to use for validation.
+     * @param HotpSharedParametersInterface  $shared             The shared parameters to use for validation.
+     * @param array<OtpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */

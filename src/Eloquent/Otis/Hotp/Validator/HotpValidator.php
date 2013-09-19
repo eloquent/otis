@@ -13,9 +13,9 @@ namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
+use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Hotp\Credentials\HotpCredentialsInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
 use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
@@ -71,7 +71,7 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
     ) {
         return $configuration instanceof HotpConfigurationInterface &&
             $shared instanceof HotpSharedParametersInterface &&
-            $credentials instanceof HotpCredentialsInterface;
+            $credentials instanceof OtpCredentialsInterface;
     }
 
     /**
@@ -105,14 +105,14 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
      *
      * @param HotpConfigurationInterface    $configuration The configuration to use for validation.
      * @param HotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param HotpCredentialsInterface      $credentials   The credentials to validate.
+     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
         HotpSharedParametersInterface $shared,
-        HotpCredentialsInterface $credentials
+        OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
             return new Result\HotpValidationResult(
@@ -151,9 +151,9 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
     /**
      * Validate a sequence of HOTP passwords.
      *
-     * @param HotpConfigurationInterface      $configuration      The configuration to use for validation.
-     * @param HotpSharedParametersInterface   $shared             The shared parameters to use for validation.
-     * @param array<HotpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
+     * @param HotpConfigurationInterface     $configuration      The configuration to use for validation.
+     * @param HotpSharedParametersInterface  $shared             The shared parameters to use for validation.
+     * @param array<OtpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */

@@ -12,9 +12,9 @@
 namespace Eloquent\Otis\Credentials;
 
 /**
- * An abstract base class for implementing one-time password credentials.
+ * Represents one-time password credentials.
  */
-abstract class AbstractOtpCredentials implements OtpCredentialsInterface
+class OtpCredentials implements OtpCredentialsInterface
 {
     /**
      * Construct a new one-time password credentials instance.

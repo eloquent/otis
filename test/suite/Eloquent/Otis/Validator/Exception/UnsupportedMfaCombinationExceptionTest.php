@@ -11,8 +11,8 @@
 
 namespace Eloquent\Otis\Validator\Exception;
 
+use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
-use Eloquent\Otis\Motp\Credentials\MotpCredentials;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Exception;
 use PHPUnit_Framework_TestCase;
@@ -24,7 +24,7 @@ class UnsupportedMfaCombinationExceptionTest extends PHPUnit_Framework_TestCase
         $previous = new Exception;
         $configuration = new TotpConfiguration;
         $shared = new HotpSharedParameters('secret', 111);
-        $credentials = new MotpCredentials('password');
+        $credentials = new OtpCredentials('password');
         $exception = new UnsupportedMfaCombinationException($configuration, $shared, $credentials, $previous);
 
         $this->assertSame($configuration, $exception->configuration());
@@ -34,7 +34,7 @@ class UnsupportedMfaCombinationExceptionTest extends PHPUnit_Framework_TestCase
             "Unsupported combination of multi-factor authentication configuration, shared parameters, and " .
                 "credentials ('Eloquent\\\\Otis\\\\Totp\\\\Configuration\\\\TotpConfiguration', " .
                 "'Eloquent\\\\Otis\\\\Hotp\\\\Parameters\\\\HotpSharedParameters' and " .
-                "'Eloquent\\\\Otis\\\\Motp\\\\Credentials\\\\MotpCredentials').",
+                "'Eloquent\\\\Otis\\\\Credentials\\\\OtpCredentials').",
             $exception->getMessage()
         );
         $this->assertSame(0, $exception->getCode());
