@@ -9,25 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Parameters;
+namespace Eloquent\Otis\Parameters;
 
 use PHPUnit_Framework_TestCase;
 
-/**
- * @covers \Eloquent\Otis\Totp\Parameters\TotpSharedParameters
- * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
- */
-class TotpSharedParametersTest extends PHPUnit_Framework_TestCase
+class CounterBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->parameters = new TotpSharedParameters('secret');
+        $this->parameters = new CounterBasedOtpSharedParameters('secret', 111);
     }
 
     public function testConstructor()
     {
         $this->assertSame('secret', $this->parameters->secret());
+        $this->assertSame(111, $this->parameters->counter());
     }
 }

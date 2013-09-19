@@ -13,13 +13,13 @@ namespace Eloquent\Otis\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
 use Eloquent\Otis\Hotp\Validator\HotpValidator;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use Eloquent\Otis\Motp\Validator\MotpValidator;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\OtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Parameters\TotpSharedParameters;
 use Eloquent\Otis\Totp\Validator\TotpValidator;
 use Icecave\Isolator\Isolator;
 use PHPUnit_Framework_TestCase;
@@ -65,12 +65,12 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
 
     public function supportsData()
     {
-        //                                     configuration          shared                                    credentials                      expected
+        //                                     configuration          shared                                              credentials                     expected
         return array(
-            'TOTP'                    => array(new TotpConfiguration, new TotpSharedParameters('secret'),       new OtpCredentials('password'), true),
-            'HOTP'                    => array(new HotpConfiguration, new HotpSharedParameters('secret', 111),  new OtpCredentials('password'), true),
-            'mOTP'                    => array(new MotpConfiguration, new MotpSharedParameters('secret', 1234), new OtpCredentials('password'), true),
-            'Unsupported combination' => array(new HotpConfiguration, new TotpSharedParameters('secret'),       new OtpCredentials('password'), false),
+            'TOTP'                    => array(new TotpConfiguration, new OtpSharedParameters('secret'),                  new OtpCredentials('password'), true),
+            'HOTP'                    => array(new HotpConfiguration, new CounterBasedOtpSharedParameters('secret', 111), new OtpCredentials('password'), true),
+            'mOTP'                    => array(new MotpConfiguration, new MotpSharedParameters('secret', 1234),           new OtpCredentials('password'), true),
+            'Unsupported combination' => array(new HotpConfiguration, new OtpSharedParameters('secret'),                  new OtpCredentials('password'), false),
         );
     }
 
@@ -105,7 +105,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     {
         Phake::when($this->isolator)->time()->thenReturn($time);
         $configuration = new TotpConfiguration($digits, $window, $futureWindows, $pastWindows);
-        $shared = new TotpSharedParameters($secret);
+        $shared = new OtpSharedParameters($secret);
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
@@ -133,7 +133,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateHotp($password, $secret, $currentCounter, $digits, $window, $result, $newCounter)
     {
         $configuration = new HotpConfiguration($digits, $window);
-        $shared = new HotpSharedParameters($secret, $currentCounter);
+        $shared = new CounterBasedOtpSharedParameters($secret, $currentCounter);
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
@@ -177,7 +177,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupportedCombination()
     {
         $configuration = new HotpConfiguration;
-        $shared = new TotpSharedParameters('secret');
+        $shared = new OtpSharedParameters('secret');
         $credentials = new OtpCredentials('password');
 
         $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');

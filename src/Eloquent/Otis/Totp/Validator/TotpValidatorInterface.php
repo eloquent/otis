@@ -12,8 +12,8 @@
 namespace Eloquent\Otis\Totp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
+use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
-use Eloquent\Otis\Totp\Parameters\TotpSharedParametersInterface;
 
 /**
  * The interface implemented by TOTP validators.
@@ -23,15 +23,15 @@ interface TotpValidatorInterface
     /**
      * Validate a TOTP password.
      *
-     * @param TotpConfigurationInterface    $configuration The configuration to use for validation.
-     * @param TotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
+     * @param TotpConfigurationInterface   $configuration The configuration to use for validation.
+     * @param OtpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param OtpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\TotpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,
-        TotpSharedParametersInterface $shared,
+        OtpSharedParametersInterface $shared,
         OtpCredentialsInterface $credentials
     );
 }

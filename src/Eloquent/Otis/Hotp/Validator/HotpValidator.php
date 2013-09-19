@@ -18,8 +18,8 @@ use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
-use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
-use Eloquent\Otis\Hotp\Parameters\HotpSharedParametersInterface;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
@@ -70,7 +70,7 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof HotpConfigurationInterface &&
-            $shared instanceof HotpSharedParametersInterface &&
+            $shared instanceof CounterBasedOtpSharedParametersInterface &&
             $credentials instanceof OtpCredentialsInterface;
     }
 
@@ -103,15 +103,15 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
     /**
      * Validate an HOTP password.
      *
-     * @param HotpConfigurationInterface    $configuration The configuration to use for validation.
-     * @param HotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
+     * @param HotpConfigurationInterface               $configuration The configuration to use for validation.
+     * @param CounterBasedOtpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param OtpCredentialsInterface                  $credentials   The credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
-        HotpSharedParametersInterface $shared,
+        CounterBasedOtpSharedParametersInterface $shared,
         OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
@@ -151,15 +151,15 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
     /**
      * Validate a sequence of HOTP passwords.
      *
-     * @param HotpConfigurationInterface     $configuration      The configuration to use for validation.
-     * @param HotpSharedParametersInterface  $shared             The shared parameters to use for validation.
-     * @param array<OtpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
+     * @param HotpConfigurationInterface               $configuration      The configuration to use for validation.
+     * @param CounterBasedOtpSharedParametersInterface $shared             The shared parameters to use for validation.
+     * @param array<OtpCredentialsInterface>           $credentialSequence The sequence of credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
-        HotpSharedParametersInterface $shared,
+        CounterBasedOtpSharedParametersInterface $shared,
         array $credentialSequence
     ) {
         if (count($credentialSequence) < 1) {
@@ -185,7 +185,10 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
                     $configuration->secretLength(),
                     $configuration->algorithm()
                 ),
-                new HotpSharedParameters($shared->secret(), $counter),
+                new CounterBasedOtpSharedParameters(
+                    $shared->secret(),
+                    $counter
+                ),
                 $credentials
             );
 

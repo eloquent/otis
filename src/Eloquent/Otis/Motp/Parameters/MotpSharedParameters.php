@@ -11,12 +11,12 @@
 
 namespace Eloquent\Otis\Motp\Parameters;
 
-use Eloquent\Otis\Parameters\AbstractOtpSharedParameters;
+use Eloquent\Otis\Parameters\OtpSharedParameters;
 
 /**
  * Represents a set of mOTP shared parameters.
  */
-class MotpSharedParameters extends AbstractOtpSharedParameters
+class MotpSharedParameters extends OtpSharedParameters
     implements MotpSharedParametersInterface
 {
     /**

@@ -13,15 +13,14 @@ namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
+use Eloquent\Otis\Parameters\OtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Parameters\TotpSharedParameters;
 use Icecave\Isolator\Isolator;
-use Phake;
 use PHPUnit_Framework_TestCase;
+use Phake;
 
 class MotpValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -48,12 +47,15 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function supportsData()
     {
-        //                                           configuration          shared                                   credentials                                                       expected
+        $mockCredentials = Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface');
+        $mockSharedParameters = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
+
+        //                                           configuration          shared                                   credentials                     expected
         return array(
-            'Valid combination'             => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   true),
-            'Unsupported credentials'       => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'), false),
-            'Unsupported shared parameters' => array(new MotpConfiguration, new HotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   false),
-            'Unsupported configuration'     => array(new HotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'),                                   false),
+            'Valid combination'             => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'), true),
+            'Unsupported credentials'       => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), $mockCredentials,               false),
+            'Unsupported shared parameters' => array(new MotpConfiguration, $mockSharedParameters,                   new OtpCredentials('password'), false),
+            'Unsupported configuration'     => array(new HotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'), false),
         );
     }
 
@@ -68,7 +70,7 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupported()
     {
         $configuration = new TotpConfiguration;
-        $shared = new TotpSharedParameters('secret');
+        $shared = new OtpSharedParameters('secret');
         $credentials = new OtpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');

@@ -12,11 +12,10 @@
 namespace Eloquent\Otis\Parameters;
 
 /**
- * An abstract base class for implementing counter-based one-time password
- * shared parameters.
+ * Represents a set of caounter-based one-time password authentication shared
+ * parameters.
  */
-abstract class AbstractCounterBasedOtpSharedParameters
-    extends AbstractOtpSharedParameters
+class CounterBasedOtpSharedParameters extends OtpSharedParameters
     implements CounterBasedOtpSharedParametersInterface
 {
     /**

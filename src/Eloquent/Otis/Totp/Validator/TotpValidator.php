@@ -15,10 +15,10 @@ use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
+use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
-use Eloquent\Otis\Totp\Parameters\TotpSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Icecave\Isolator\Isolator;
@@ -72,7 +72,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof TotpConfigurationInterface &&
-            $shared instanceof TotpSharedParametersInterface &&
+            $shared instanceof OtpSharedParametersInterface &&
             $credentials instanceof OtpCredentialsInterface;
     }
 
@@ -105,15 +105,15 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
     /**
      * Validate a TOTP password.
      *
-     * @param TotpConfigurationInterface    $configuration The configuration to use for validation.
-     * @param TotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
+     * @param TotpConfigurationInterface   $configuration The configuration to use for validation.
+     * @param OtpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param OtpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\TotpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,
-        TotpSharedParametersInterface $shared,
+        OtpSharedParametersInterface $shared,
         OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
