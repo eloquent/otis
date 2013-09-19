@@ -16,7 +16,7 @@ namespace Eloquent\Otis\Validator\Result;
  * results.
  */
 interface TimeBasedOtpValidationResultInterface extends
-    OtpValidationResultInterface
+    MfaValidationResultInterface
 {
     /**
      * Get the number of windows of clock drift.

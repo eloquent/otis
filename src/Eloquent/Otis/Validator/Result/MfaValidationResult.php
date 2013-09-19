@@ -12,10 +12,9 @@
 namespace Eloquent\Otis\Validator\Result;
 
 /**
- * An abstract base class for implementing multi-factor authentication results.
+ * Represents a multi-factor authentication validation result.
  */
-abstract class AbstractMfaValidationResult implements
-    OtpValidationResultInterface
+class MfaValidationResult implements MfaValidationResultInterface
 {
     /**
      * Construct a new multi-factor authentication validation result.

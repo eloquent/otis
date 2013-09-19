@@ -14,6 +14,7 @@ namespace Eloquent\Otis\Hotp\Validator;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
+use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResultInterface;
 
 /**
  * The interface implemented by HOTP validators.
@@ -27,7 +28,7 @@ interface HotpValidatorInterface
      * @param CounterBasedOtpSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param OtpCredentialsInterface                  $credentials   The credentials to validate.
      *
-     * @return Result\HotpValidationResultInterface The validation result.
+     * @return CounterBasedOtpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
@@ -42,7 +43,7 @@ interface HotpValidatorInterface
      * @param CounterBasedOtpSharedParametersInterface $shared             The shared parameters to use for validation.
      * @param array<OtpCredentialsInterface>           $credentialSequence The sequence of credentials to validate.
      *
-     * @return Result\HotpValidationResultInterface The validation result.
+     * @return CounterBasedOtpValidationResultInterface The validation result.
      */
     public function validateHotpSequence(
         HotpConfigurationInterface $configuration,

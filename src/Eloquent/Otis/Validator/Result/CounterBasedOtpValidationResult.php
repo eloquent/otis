@@ -12,11 +12,9 @@
 namespace Eloquent\Otis\Validator\Result;
 
 /**
- * An abstract base class for implementing counter-based one-time password
- * authentication results.
+ * Represents a counter-based one-time password validation result.
  */
-abstract class AbstractCounterBasedOtpValidationResult
-    extends AbstractMfaValidationResult
+class CounterBasedOtpValidationResult extends MfaValidationResult
     implements CounterBasedOtpValidationResultInterface
 {
     /**

@@ -23,6 +23,8 @@ use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
+use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult;
+use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResultInterface;
 use Eloquent\Otis\Validator\Result\MfaValidationResultInterface;
 
 /**
@@ -107,7 +109,7 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
      * @param CounterBasedOtpSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param OtpCredentialsInterface                  $credentials   The credentials to validate.
      *
-     * @return Result\HotpValidationResultInterface The validation result.
+     * @return CounterBasedOtpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
@@ -115,8 +117,8 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
         OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
-            return new Result\HotpValidationResult(
-                Result\HotpValidationResult::CREDENTIAL_LENGTH_MISMATCH
+            return new CounterBasedOtpValidationResult(
+                CounterBasedOtpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
         }
 
@@ -136,15 +138,15 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
                     $configuration->digits()
                 )
             ) {
-                return new Result\HotpValidationResult(
-                    Result\HotpValidationResult::VALID,
+                return new CounterBasedOtpValidationResult(
+                    CounterBasedOtpValidationResult::VALID,
                     $counter + 1
                 );
             }
         }
 
-        return new Result\HotpValidationResult(
-            Result\HotpValidationResult::INVALID_CREDENTIALS
+        return new CounterBasedOtpValidationResult(
+            CounterBasedOtpValidationResult::INVALID_CREDENTIALS
         );
     }
 
@@ -155,7 +157,7 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
      * @param CounterBasedOtpSharedParametersInterface $shared             The shared parameters to use for validation.
      * @param array<OtpCredentialsInterface>           $credentialSequence The sequence of credentials to validate.
      *
-     * @return Result\HotpValidationResultInterface The validation result.
+     * @return CounterBasedOtpValidationResultInterface The validation result.
      */
     public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
@@ -163,8 +165,8 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
         array $credentialSequence
     ) {
         if (count($credentialSequence) < 1) {
-            return new Result\HotpValidationResult(
-                Result\HotpValidationResult::EMPTY_CREDENTIAL_SEQUENCE
+            return new CounterBasedOtpValidationResult(
+                CounterBasedOtpValidationResult::EMPTY_CREDENTIAL_SEQUENCE
             );
         }
 

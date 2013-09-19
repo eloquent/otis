@@ -14,6 +14,7 @@ namespace Eloquent\Otis\Totp\Validator;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
+use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
 
 /**
  * The interface implemented by TOTP validators.
@@ -27,7 +28,7 @@ interface TotpValidatorInterface
      * @param OtpSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param OtpCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\TotpValidationResultInterface The validation result.
+     * @return TimeBasedOtpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,

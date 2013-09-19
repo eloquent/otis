@@ -21,6 +21,8 @@ use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
+use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
+use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
 use Icecave\Isolator\Isolator;
 
 /**
@@ -109,7 +111,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
      * @param OtpSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param OtpCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\TotpValidationResultInterface The validation result.
+     * @return TimeBasedOtpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,
@@ -117,8 +119,8 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
-            return new Result\TotpValidationResult(
-                Result\TotpValidationResult::CREDENTIAL_LENGTH_MISMATCH
+            return new TimeBasedOtpValidationResult(
+                TimeBasedOtpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
         }
 
@@ -141,15 +143,15 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
                     $configuration->digits()
                 )
             ) {
-                return new Result\TotpValidationResult(
-                    Result\TotpValidationResult::VALID,
+                return new TimeBasedOtpValidationResult(
+                    TimeBasedOtpValidationResult::VALID,
                     $i
                 );
             }
         }
 
-        return new Result\TotpValidationResult(
-            Result\TotpValidationResult::INVALID_CREDENTIALS
+        return new TimeBasedOtpValidationResult(
+            TimeBasedOtpValidationResult::INVALID_CREDENTIALS
         );
     }
 

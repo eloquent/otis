@@ -109,7 +109,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
-        $this->assertInstanceOf('Eloquent\Otis\Totp\Validator\Result\TotpValidationResult', $actual);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult', $actual);
         $this->assertSame($result, $actual->type());
         $this->assertSame($drift, $actual->drift());
     }
@@ -137,7 +137,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
-        $this->assertInstanceOf('Eloquent\Otis\Hotp\Validator\Result\HotpValidationResult', $actual);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult', $actual);
         $this->assertSame($result, $actual->type());
         $this->assertSame($newCounter, $actual->counter());
     }
@@ -169,7 +169,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
-        $this->assertInstanceOf('Eloquent\Otis\Motp\Validator\Result\MotpValidationResult', $actual);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult', $actual);
         $this->assertSame($result, $actual->type());
         $this->assertSame($drift, $actual->drift());
     }

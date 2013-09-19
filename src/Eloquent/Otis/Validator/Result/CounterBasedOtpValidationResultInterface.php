@@ -16,7 +16,7 @@ namespace Eloquent\Otis\Validator\Result;
  * results.
  */
 interface CounterBasedOtpValidationResultInterface extends
-    OtpValidationResultInterface
+    MfaValidationResultInterface
 {
     /**
      * Get the new counter value.

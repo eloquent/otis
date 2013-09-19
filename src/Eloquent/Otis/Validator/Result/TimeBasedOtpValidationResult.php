@@ -12,12 +12,10 @@
 namespace Eloquent\Otis\Validator\Result;
 
 /**
- * An abstract base class for implementing time-based one-time password
- * authentication results.
+ * Represents a time-based one-time password validation result.
  */
-abstract class AbstractTimeBasedOtpValidationResult
-    extends AbstractMfaValidationResult
-    implements TimeBasedOtpValidationResultInterface
+class TimeBasedOtpValidationResult extends MfaValidationResult implements
+    TimeBasedOtpValidationResultInterface
 {
     /**
      * Construct a new time-based one-time password validation result.

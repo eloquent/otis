@@ -101,7 +101,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
         }
         $actual = $this->validator->validateHotpSequence($configuration, $shared, $credentialSequence);
 
-        $this->assertInstanceOf(__NAMESPACE__ . '\Result\HotpValidationResult', $actual);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult', $actual);
         $this->assertSame($result, $actual->type());
         $this->assertSame($newCounter, $actual->counter());
     }
