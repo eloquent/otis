@@ -9,27 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Validator\Parameters;
+namespace Eloquent\Otis\Motp\Parameters;
 
 use PHPUnit_Framework_TestCase;
 
 /**
- * @covers \Eloquent\Otis\Motp\Validator\Parameters\MotpParameters
- * @covers \Eloquent\Otis\Validator\Parameters\AbstractOtpParameters
+ * @covers \Eloquent\Otis\Motp\Parameters\MotpSharedParameters
+ * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
  */
-class MotpParametersTest extends PHPUnit_Framework_TestCase
+class MotpSharedParametersTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->parameters = new MotpParameters('secret', 111, 'password');
+        $this->parameters = new MotpSharedParameters('secret', 111);
     }
 
     public function testConstructor()
     {
         $this->assertSame('secret', $this->parameters->secret());
-        $this->assertSame('password', $this->parameters->password());
         $this->assertSame(111, $this->parameters->pin());
     }
 }

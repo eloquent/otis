@@ -31,9 +31,9 @@ class MotpValidationResultTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorUnsuccessfulResult()
     {
-        $result = new MotpValidationResult(MotpValidationResult::INVALID_PASSWORD);
+        $result = new MotpValidationResult(MotpValidationResult::INVALID_CREDENTIALS);
 
-        $this->assertSame(MotpValidationResult::INVALID_PASSWORD, $result->type());
+        $this->assertSame(MotpValidationResult::INVALID_CREDENTIALS, $result->type());
         $this->assertFalse($result->isSuccessful());
         $this->assertNull($result->drift());
     }
@@ -47,6 +47,6 @@ class MotpValidationResultTest extends PHPUnit_Framework_TestCase
     public function testConstructorFailureUnsuccessfulWithDrift()
     {
         $this->setExpectedException('Eloquent\Otis\Validator\Result\Exception\InvalidMfaResultException');
-        new MotpValidationResult(MotpValidationResult::INVALID_PASSWORD, 111);
+        new MotpValidationResult(MotpValidationResult::INVALID_CREDENTIALS, 111);
     }
 }

@@ -12,6 +12,8 @@
 namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
+use Eloquent\Otis\Motp\Credentials\MotpCredentialsInterface;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 
 /**
  * The interface implemented by mOTP validators.
@@ -21,13 +23,15 @@ interface MotpValidatorInterface
     /**
      * Validate an mOTP password.
      *
-     * @param MotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\MotpParametersInterface $parameters    The parameters to validate.
+     * @param MotpConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MotpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MotpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\MotpValidationResultInterface The validation result.
      */
     public function validateMotp(
         MotpConfigurationInterface $configuration,
-        Parameters\MotpParametersInterface $parameters
+        MotpSharedParametersInterface $shared,
+        MotpCredentialsInterface $credentials
     );
 }

@@ -12,12 +12,15 @@
 namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
+use Eloquent\Otis\Motp\Credentials\MotpCredentialsInterface;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
+use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
-use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
 use Icecave\Isolator\Isolator;
 
 /**
@@ -55,59 +58,67 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
 
     /**
      * Returns true if this validator supports the supplied combination of
-     * configuration and parameters.
+     * configuration, shared parameters, and credentials.
      *
-     * @param MfaConfigurationInterface $configuration The configuration to use for validation.
-     * @param MfaParametersInterface    $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return boolean True if this validator supports the supplied combination.
      */
     public function supports(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof MotpConfigurationInterface &&
-            $parameters instanceof Parameters\MotpParametersInterface;
+            $shared instanceof MotpSharedParametersInterface &&
+            $credentials instanceof MotpCredentialsInterface;
     }
 
     /**
      * Validate a set of multi-factor authentication parameters.
      *
-     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\MfaValidationResultInterface          The validation result.
-     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
+     * @return MfaValidationResultInterface       The validation result.
+     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
-        if (!$this->supports($configuration, $parameters)) {
+        if (!$this->supports($configuration, $shared, $credentials)) {
             throw new UnsupportedMfaCombinationException(
                 $configuration,
-                $parameters
+                $shared,
+                $credentials
             );
         }
 
-        return $this->validateMotp($configuration, $parameters);
+        return $this->validateMotp($configuration, $shared, $credentials);
     }
 
     /**
      * Validate an mOTP password.
      *
-     * @param MotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\MotpParametersInterface $parameters    The parameters to validate.
+     * @param MotpConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MotpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MotpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\MotpValidationResultInterface The validation result.
      */
     public function validateMotp(
         MotpConfigurationInterface $configuration,
-        Parameters\MotpParametersInterface $parameters
+        MotpSharedParametersInterface $shared,
+        MotpCredentialsInterface $credentials
     ) {
-        if (strlen($parameters->password()) !== 6) {
+        if (strlen($credentials->password()) !== 6) {
             return new Result\MotpValidationResult(
-                Result\MotpValidationResult::PASSWORD_LENGTH_MISMATCH
+                Result\MotpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
         }
 
@@ -119,12 +130,12 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
             ++$i
         ) {
             $value = $this->generator()->generate(
-                $parameters->secret(),
-                $parameters->pin(),
+                $shared->secret(),
+                $shared->pin(),
                 $time + ($i * 10)
             );
 
-            if ($parameters->password() === $value) {
+            if ($credentials->password() === $value) {
                 return new Result\MotpValidationResult(
                     Result\MotpValidationResult::VALID,
                     $i
@@ -133,7 +144,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
         }
 
         return new Result\MotpValidationResult(
-            Result\MotpValidationResult::INVALID_PASSWORD
+            Result\MotpValidationResult::INVALID_CREDENTIALS
         );
     }
 

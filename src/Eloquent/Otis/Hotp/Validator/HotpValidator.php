@@ -12,13 +12,17 @@
 namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Hotp\Credentials\HotpCredentialsInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
+use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
+use Eloquent\Otis\Hotp\Parameters\HotpSharedParametersInterface;
+use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
-use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
 use Eloquent\Otis\Validator\Result\MfaValidationResultInterface;
 
 /**
@@ -52,75 +56,83 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
 
     /**
      * Returns true if this validator supports the supplied combination of
-     * configuration and parameters.
+     * configuration, shared parameters, and credentials.
      *
-     * @param MfaConfigurationInterface $configuration The configuration to use for validation.
-     * @param MfaParametersInterface    $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return boolean True if this validator supports the supplied combination.
      */
     public function supports(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof HotpConfigurationInterface &&
-            $parameters instanceof Parameters\HotpParametersInterface;
+            $shared instanceof HotpSharedParametersInterface &&
+            $credentials instanceof HotpCredentialsInterface;
     }
 
     /**
      * Validate a set of multi-factor authentication parameters.
      *
-     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\MfaValidationResultInterface          The validation result.
-     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
+     * @return MfaValidationResultInterface       The validation result.
+     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
-        if (!$this->supports($configuration, $parameters)) {
+        if (!$this->supports($configuration, $shared, $credentials)) {
             throw new UnsupportedMfaCombinationException(
                 $configuration,
-                $parameters
+                $shared,
+                $credentials
             );
         }
 
-        return $this->validateHotp($configuration, $parameters);
+        return $this->validateHotp($configuration, $shared, $credentials);
     }
 
     /**
      * Validate an HOTP password.
      *
-     * @param HotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\HotpParametersInterface $parameters    The parameters to validate.
+     * @param HotpConfigurationInterface    $configuration The configuration to use for validation.
+     * @param HotpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param HotpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
-        Parameters\HotpParametersInterface $parameters
+        HotpSharedParametersInterface $shared,
+        HotpCredentialsInterface $credentials
     ) {
-        if (strlen($parameters->password()) !== $configuration->digits()) {
+        if (strlen($credentials->password()) !== $configuration->digits()) {
             return new Result\HotpValidationResult(
-                Result\HotpValidationResult::PASSWORD_LENGTH_MISMATCH
+                Result\HotpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
         }
 
         for (
-            $counter = $parameters->counter();
-            $counter <= $parameters->counter() + $configuration->window();
+            $counter = $shared->counter();
+            $counter <= $shared->counter() + $configuration->window();
             ++$counter
         ) {
             $value = $this->generator()->generate(
-                $parameters->secret(),
+                $shared->secret(),
                 $counter,
                 $configuration->algorithm()
             );
 
             if (
-                $parameters->password() === $value->string(
+                $credentials->password() === $value->string(
                     $configuration->digits()
                 )
             ) {
@@ -132,34 +144,33 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
         }
 
         return new Result\HotpValidationResult(
-            Result\HotpValidationResult::INVALID_PASSWORD
+            Result\HotpValidationResult::INVALID_CREDENTIALS
         );
     }
 
     /**
      * Validate a sequence of HOTP passwords.
      *
-     * @param HotpConfigurationInterface $configuration The configuration to use for validation.
-     * @param string                     $secret        The shared secret.
-     * @param array<string>              $passwords     The password sequence to validate.
-     * @param integer                    $counter       The current counter value.
+     * @param HotpConfigurationInterface      $configuration      The configuration to use for validation.
+     * @param HotpSharedParametersInterface   $shared             The shared parameters to use for validation.
+     * @param array<HotpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
-        $secret,
-        array $passwords,
-        $counter
+        HotpSharedParametersInterface $shared,
+        array $credentialSequence
     ) {
-        if (count($passwords) < 1) {
+        if (count($credentialSequence) < 1) {
             return new Result\HotpValidationResult(
-                Result\HotpValidationResult::EMPTY_PASSWORD_SEQUENCE
+                Result\HotpValidationResult::EMPTY_CREDENTIAL_SEQUENCE
             );
         }
 
         $first = true;
-        foreach ($passwords as $password) {
+        $counter = $shared->counter();
+        foreach ($credentialSequence as $credentials) {
             if ($first) {
                 $window = $configuration->window();
             } else {
@@ -174,7 +185,8 @@ class HotpValidator implements MfaValidatorInterface, HotpValidatorInterface
                     $configuration->secretLength(),
                     $configuration->algorithm()
                 ),
-                new Parameters\HotpParameters($secret, $counter, $password)
+                new HotpSharedParameters($shared->secret(), $counter),
+                $credentials
             );
 
             if (!$result->isSuccessful()) {

@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Validator\Parameters;
+namespace Eloquent\Otis\Motp\Credentials;
 
-use Eloquent\Otis\Validator\Parameters\CounterBasedOtpParametersInterface;
+use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 
 /**
- * The interface implemented by HOTP validation parameters.
+ * The interface implemented by mOTP credentials.
  */
-interface HotpParametersInterface extends CounterBasedOtpParametersInterface
+interface MotpCredentialsInterface extends OtpCredentialsInterface
 {
 }

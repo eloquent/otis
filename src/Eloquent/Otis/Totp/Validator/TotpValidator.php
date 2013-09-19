@@ -12,12 +12,15 @@
 namespace Eloquent\Otis\Totp\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Credentials\MfaCredentialsInterface;
+use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
+use Eloquent\Otis\Totp\Credentials\TotpCredentialsInterface;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
+use Eloquent\Otis\Totp\Parameters\TotpSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
-use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
 use Icecave\Isolator\Isolator;
 
 /**
@@ -55,59 +58,67 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
 
     /**
      * Returns true if this validator supports the supplied combination of
-     * configuration and parameters.
+     * configuration, shared parameters, and credentials.
      *
-     * @param MfaConfigurationInterface $configuration The configuration to use for validation.
-     * @param MfaParametersInterface    $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return boolean True if this validator supports the supplied combination.
      */
     public function supports(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof TotpConfigurationInterface &&
-            $parameters instanceof Parameters\TotpParametersInterface;
+            $shared instanceof TotpSharedParametersInterface &&
+            $credentials instanceof TotpCredentialsInterface;
     }
 
     /**
      * Validate a set of multi-factor authentication parameters.
      *
-     * @param MfaConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\MfaParametersInterface $parameters    The parameters to validate.
+     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
+     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\MfaValidationResultInterface          The validation result.
-     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration and parameters is not supported.
+     * @return MfaValidationResultInterface       The validation result.
+     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials
     ) {
-        if (!$this->supports($configuration, $parameters)) {
+        if (!$this->supports($configuration, $shared, $credentials)) {
             throw new UnsupportedMfaCombinationException(
                 $configuration,
-                $parameters
+                $shared,
+                $credentials
             );
         }
 
-        return $this->validateTotp($configuration, $parameters);
+        return $this->validateTotp($configuration, $shared, $credentials);
     }
 
     /**
      * Validate a TOTP password.
      *
-     * @param TotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\TotpParametersInterface $parameters    The parameters to validate.
+     * @param TotpConfigurationInterface    $configuration The configuration to use for validation.
+     * @param TotpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param TotpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\TotpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,
-        Parameters\TotpParametersInterface $parameters
+        TotpSharedParametersInterface $shared,
+        TotpCredentialsInterface $credentials
     ) {
-        if (strlen($parameters->password()) !== $configuration->digits()) {
+        if (strlen($credentials->password()) !== $configuration->digits()) {
             return new Result\TotpValidationResult(
-                Result\TotpValidationResult::PASSWORD_LENGTH_MISMATCH
+                Result\TotpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
         }
 
@@ -119,14 +130,14 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
             ++$i
         ) {
             $value = $this->generator()->generate(
-                $parameters->secret(),
+                $shared->secret(),
                 $configuration->window(),
                 $time + ($i * $configuration->window()),
                 $configuration->algorithm()
             );
 
             if (
-                $parameters->password() === $value->string(
+                $credentials->password() === $value->string(
                     $configuration->digits()
                 )
             ) {
@@ -138,7 +149,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         }
 
         return new Result\TotpValidationResult(
-            Result\TotpValidationResult::INVALID_PASSWORD
+            Result\TotpValidationResult::INVALID_CREDENTIALS
         );
     }
 

@@ -12,6 +12,8 @@
 namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Hotp\Credentials\HotpCredentialsInterface;
+use Eloquent\Otis\Hotp\Parameters\HotpSharedParametersInterface;
 
 /**
  * The interface implemented by HOTP validators.
@@ -21,30 +23,30 @@ interface HotpValidatorInterface
     /**
      * Validate an HOTP password.
      *
-     * @param HotpConfigurationInterface         $configuration The configuration to use for validation.
-     * @param Parameters\HotpParametersInterface $parameters    The parameters to validate.
+     * @param HotpConfigurationInterface    $configuration The configuration to use for validation.
+     * @param HotpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param HotpCredentialsInterface      $credentials   The credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotp(
         HotpConfigurationInterface $configuration,
-        Parameters\HotpParametersInterface $parameters
+        HotpSharedParametersInterface $shared,
+        HotpCredentialsInterface $credentials
     );
 
     /**
      * Validate a sequence of HOTP passwords.
      *
-     * @param HotpConfigurationInterface $configuration The configuration to use for validation.
-     * @param string                     $secret        The shared secret.
-     * @param array<string>              $passwords     The password sequence to validate.
-     * @param integer                    $counter       The current counter value.
+     * @param HotpConfigurationInterface      $configuration      The configuration to use for validation.
+     * @param HotpSharedParametersInterface   $shared             The shared parameters to use for validation.
+     * @param array<HotpCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
      * @return Result\HotpValidationResultInterface The validation result.
      */
     public function validateHotpSequence(
         HotpConfigurationInterface $configuration,
-        $secret,
-        array $passwords,
-        $counter
+        HotpSharedParametersInterface $shared,
+        array $credentialSequence
     );
 }

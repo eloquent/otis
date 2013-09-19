@@ -9,20 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Parameters;
+namespace Eloquent\Otis\Credentials;
 
 /**
- * The interface implemented by OTP validation parameters.
+ * The interface implemented by one-time password credentials.
  */
-interface OtpParametersInterface extends MfaParametersInterface
+interface OtpCredentialsInterface extends MfaCredentialsInterface
 {
-    /**
-     * Get the shared secret.
-     *
-     * @return string The shared secret.
-     */
-    public function secret();
-
     /**
      * Get the password.
      *

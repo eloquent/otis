@@ -31,9 +31,9 @@ class TotpValidationResultTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorUnsuccessfulResult()
     {
-        $result = new TotpValidationResult(TotpValidationResult::INVALID_PASSWORD);
+        $result = new TotpValidationResult(TotpValidationResult::INVALID_CREDENTIALS);
 
-        $this->assertSame(TotpValidationResult::INVALID_PASSWORD, $result->type());
+        $this->assertSame(TotpValidationResult::INVALID_CREDENTIALS, $result->type());
         $this->assertFalse($result->isSuccessful());
         $this->assertNull($result->drift());
     }
@@ -47,6 +47,6 @@ class TotpValidationResultTest extends PHPUnit_Framework_TestCase
     public function testConstructorFailureUnsuccessfulWithDrift()
     {
         $this->setExpectedException('Eloquent\Otis\Validator\Result\Exception\InvalidMfaResultException');
-        new TotpValidationResult(TotpValidationResult::INVALID_PASSWORD, 111);
+        new TotpValidationResult(TotpValidationResult::INVALID_CREDENTIALS, 111);
     }
 }

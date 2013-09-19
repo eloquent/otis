@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Parameters;
+namespace Eloquent\Otis\Parameters;
 
 /**
- * The interface implemented by counter-based OTP validation parameters.
+ * The interface implemented by counter-based one-time password shared
+ * parameters.
  */
-interface CounterBasedOtpParametersInterface extends OtpParametersInterface
+interface CounterBasedOtpSharedParametersInterface extends
+    OtpSharedParametersInterface
 {
     /**
      * Get the current counter value.

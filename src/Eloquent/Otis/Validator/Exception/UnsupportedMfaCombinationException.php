@@ -12,12 +12,13 @@
 namespace Eloquent\Otis\Validator\Exception;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
-use Eloquent\Otis\Validator\Parameters\MfaParametersInterface;
+use Eloquent\Otis\Credentials\MfaCredentialsInterface;
+use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Exception;
 
 /**
- * An unsupported combination of multi-factor authentication configuration and
- * parameters was supplied.
+ * An unsupported combination of multi-factor authentication configuration,
+ * shared parameters, and credentials was supplied.
  */
 class UnsupportedMfaCombinationException extends Exception
 {
@@ -25,24 +26,29 @@ class UnsupportedMfaCombinationException extends Exception
      * Construct a new unsupported multi-factor authentication combination
      * exception.
      *
-     * @param MfaConfigurationInterface $configuration The supplied configuration.
-     * @param MfaParametersInterface    $parameters    The supplied parameters.
-     * @param Exception|null            $previous      The cause, if available.
+     * @param MfaConfigurationInterface    $configuration The configuration.
+     * @param MfaSharedParametersInterface $shared        The shared parameters.
+     * @param MfaCredentialsInterface      $credentials   The credentials.
+     * @param Exception|null               $previous      The cause, if available.
      */
     public function __construct(
         MfaConfigurationInterface $configuration,
-        MfaParametersInterface $parameters,
+        MfaSharedParametersInterface $shared,
+        MfaCredentialsInterface $credentials,
         Exception $previous = null
     ) {
         $this->configuration = $configuration;
-        $this->parameters = $parameters;
+        $this->shared = $shared;
+        $this->credentials = $credentials;
 
         parent::__construct(
             sprintf(
-                'Unsupported multi-factor configuration and parameters ' .
-                    'combination (%s and %s).',
+                'Unsupported combination of multi-factor authentication '.
+                    'configuration, shared parameters, and credentials ' .
+                    '(%s, %s and %s).',
                 var_export(get_class($configuration), true),
-                var_export(get_class($parameters), true)
+                var_export(get_class($shared), true),
+                var_export(get_class($credentials), true)
             ),
             0,
             $previous
@@ -50,9 +56,9 @@ class UnsupportedMfaCombinationException extends Exception
     }
 
     /**
-     * Get the supplied configuration.
+     * Get the configuration.
      *
-     * @return MfaConfigurationInterface The supplied configuration.
+     * @return MfaConfigurationInterface The configuration.
      */
     public function configuration()
     {
@@ -60,15 +66,26 @@ class UnsupportedMfaCombinationException extends Exception
     }
 
     /**
-     * Get the supplied parameters.
+     * Get the shared parameters.
      *
-     * @return MfaParametersInterface The supplied parameters.
+     * @return MfaSharedParametersInterface The shared parameters.
      */
-    public function parameters()
+    public function shared()
     {
-        return $this->parameters;
+        return $this->shared;
+    }
+
+    /**
+     * Get the credentials.
+     *
+     * @return MfaCredentialsInterface The credentials.
+     */
+    public function credentials()
+    {
+        return $this->credentials;
     }
 
     private $configuration;
-    private $parameters;
+    private $shared;
+    private $credentials;
 }

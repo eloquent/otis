@@ -9,25 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Parameters;
+namespace Eloquent\Otis\Parameters;
 
 /**
  * An abstract base class for implementing counter-based one-time password
- * validation parameters.
+ * shared parameters.
  */
-abstract class AbstractCounterBasedOtpParameters extends AbstractOtpParameters
-    implements CounterBasedOtpParametersInterface
+abstract class AbstractCounterBasedOtpSharedParameters
+    extends AbstractOtpSharedParameters
+    implements CounterBasedOtpSharedParametersInterface
 {
     /**
-     * Construct a new HOTP validation parameters instance.
+     * Construct a new counter-based one-time password shared parameters
+     * instance.
      *
-     * @param string  $secret   The shared secret.
-     * @param integer $counter  The current counter value.
-     * @param string  $password The password.
+     * @param string  $secret  The shared secret.
+     * @param integer $counter The current counter value.
      */
-    public function __construct($secret, $counter, $password)
+    public function __construct($secret, $counter)
     {
-        parent::__construct($secret, $password);
+        parent::__construct($secret);
 
         $this->counter = $counter;
     }

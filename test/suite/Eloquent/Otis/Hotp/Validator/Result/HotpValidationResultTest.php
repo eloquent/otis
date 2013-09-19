@@ -31,9 +31,9 @@ class HotpValidationResultTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorUnsuccessfulResult()
     {
-        $result = new HotpValidationResult(HotpValidationResult::INVALID_PASSWORD);
+        $result = new HotpValidationResult(HotpValidationResult::INVALID_CREDENTIALS);
 
-        $this->assertSame(HotpValidationResult::INVALID_PASSWORD, $result->type());
+        $this->assertSame(HotpValidationResult::INVALID_CREDENTIALS, $result->type());
         $this->assertFalse($result->isSuccessful());
         $this->assertNull($result->counter());
     }
@@ -47,6 +47,6 @@ class HotpValidationResultTest extends PHPUnit_Framework_TestCase
     public function testConstructorFailureUnsuccessfulWithCounter()
     {
         $this->setExpectedException('Eloquent\Otis\Validator\Result\Exception\InvalidMfaResultException');
-        new HotpValidationResult(HotpValidationResult::INVALID_PASSWORD, 111);
+        new HotpValidationResult(HotpValidationResult::INVALID_CREDENTIALS, 111);
     }
 }

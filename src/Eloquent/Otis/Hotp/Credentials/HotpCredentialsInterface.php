@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Parameters;
+namespace Eloquent\Otis\Hotp\Credentials;
+
+use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 
 /**
- * The interface used to identify multi-factor authentication validation
- * parameters.
+ * The interface implemented by HOTP credentials.
  */
-interface MfaParametersInterface
+interface HotpCredentialsInterface extends OtpCredentialsInterface
 {
 }

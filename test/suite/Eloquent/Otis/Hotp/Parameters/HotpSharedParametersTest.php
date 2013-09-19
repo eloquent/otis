@@ -9,28 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Validator\Parameters;
+namespace Eloquent\Otis\Hotp\Parameters;
 
 use PHPUnit_Framework_TestCase;
 
 /**
- * @covers \Eloquent\Otis\Hotp\Validator\Parameters\HotpParameters
- * @covers \Eloquent\Otis\Validator\Parameters\AbstractCounterBasedOtpParameters
- * @covers \Eloquent\Otis\Validator\Parameters\AbstractOtpParameters
+ * @covers \Eloquent\Otis\Hotp\Parameters\HotpSharedParameters
+ * @covers \Eloquent\Otis\Parameters\AbstractCounterBasedOtpSharedParameters
+ * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
  */
-class HotpParametersTest extends PHPUnit_Framework_TestCase
+class HotpSharedParametersTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->parameters = new HotpParameters('secret', 111, 'password');
+        $this->parameters = new HotpSharedParameters('secret', 111);
     }
 
     public function testConstructor()
     {
         $this->assertSame('secret', $this->parameters->secret());
-        $this->assertSame('password', $this->parameters->password());
         $this->assertSame(111, $this->parameters->counter());
     }
 }

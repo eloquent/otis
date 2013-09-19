@@ -17,24 +17,24 @@ namespace Eloquent\Otis\Validator\Result;
 interface MfaValidationResultInterface
 {
     /**
-     * The password is valid.
+     * The credentials are valid.
      */
     const VALID = 'valid';
 
     /**
-     * The password is not valid.
+     * The credentials are not valid.
      */
-    const INVALID_PASSWORD = 'invalid-password';
+    const INVALID_CREDENTIALS = 'invalid-credentials';
 
     /**
-     * The password does not match the configured password length.
+     * The supplied credential does not match the configured length.
      */
-    const PASSWORD_LENGTH_MISMATCH = 'password-length-mismatch';
+    const CREDENTIAL_LENGTH_MISMATCH = 'credential-length-mismatch';
 
     /**
-     * The supplied password sequence is empty.
+     * The supplied credential sequence is empty.
      */
-    const EMPTY_PASSWORD_SEQUENCE = 'empty-password-sequence';
+    const EMPTY_CREDENTIAL_SEQUENCE = 'empty-credential-sequence';
 
     /**
      * Get the result type.

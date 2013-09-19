@@ -12,9 +12,12 @@
 namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
+use Eloquent\Otis\Hotp\Credentials\HotpCredentials;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
+use Eloquent\Otis\Hotp\Parameters\HotpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Validator\Parameters\TotpParameters;
+use Eloquent\Otis\Totp\Credentials\TotpCredentials;
+use Eloquent\Otis\Totp\Parameters\TotpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
 class HotpValidatorTest extends PHPUnit_Framework_TestCase
@@ -41,42 +44,44 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
 
     public function supportsData()
     {
-        //                                       configuration          parameters                                                expected
+        //                                           configuration          shared                                   credentials                      expected
         return array(
-            'Valid combination'         => array(new HotpConfiguration, new Parameters\HotpParameters('secret', 111, 'password'), true),
-            'Unsupported parameters'    => array(new HotpConfiguration, new TotpParameters('secret', 'password'),                 false),
-            'Unsupported configuration' => array(new TotpConfiguration, new Parameters\HotpParameters('secret', 111, 'password'), false),
+            'Valid combination'             => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), new HotpCredentials('password'), true),
+            'Unsupported credentials'       => array(new HotpConfiguration, new HotpSharedParameters('secret', 123), new TotpCredentials('password'), false),
+            'Unsupported shared parameters' => array(new HotpConfiguration, new TotpSharedParameters('secret'),      new HotpCredentials('password'), false),
+            'Unsupported configuration'     => array(new TotpConfiguration, new HotpSharedParameters('secret', 123), new HotpCredentials('password'), false),
         );
     }
 
     /**
      * @dataProvider supportsData
      */
-    public function testSupports($configuration, $parameters, $expected)
+    public function testSupports($configuration, $shared, $credentials, $expected)
     {
-        $this->assertSame($expected, $this->validator->supports($configuration, $parameters));
+        $this->assertSame($expected, $this->validator->supports($configuration, $shared, $credentials));
     }
 
     public function testValidateFailureUnsupported()
     {
         $configuration = new TotpConfiguration;
-        $parameters = new TotpParameters('secret', 'password');
+        $shared = new TotpSharedParameters('secret');
+        $credentials = new TotpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
-        $this->validator->validate($configuration, $parameters);
+        $this->validator->validate($configuration, $shared, $credentials);
     }
 
     public function validateHotpSequenceData()
     {
-        //                                  passwords                  secret                  currentCounter digits window result                      newCounter
+        //                                  passwords                  secret                  currentCounter digits window result                        newCounter
         return array(
-            'No window, valid'     => array(array('969429', '338314'), '12345678901234567890', 3,             null,  null,  'valid',                    5),
-            'With window, valid'   => array(array('399871', '520489'), '12345678901234567890', 0,             null,  8,     'valid',                    10),
+            'No window, valid'     => array(array('969429', '338314'), '12345678901234567890', 3,             null,  null,  'valid',                      5),
+            'With window, valid'   => array(array('399871', '520489'), '12345678901234567890', 0,             null,  8,     'valid',                      10),
 
-            'No window, invalid'   => array(array('359152', '969429'), '12345678901234567890', 3,             null,  0,     'invalid-password',         null),
-            'With window, invalid' => array(array('755224', '359152'), '12345678901234567890', 0,             null,  100,   'invalid-password',         null),
-            'Length mismatch'      => array(array('969429', '338314'), '12345678901234567890', 3,             8,     null,  'password-length-mismatch', null),
-            'No passwords'         => array(array(),                   '12345678901234567890', 0,             null,  100,   'empty-password-sequence',  null),
+            'No window, invalid'   => array(array('359152', '969429'), '12345678901234567890', 3,             null,  0,     'invalid-credentials',        null),
+            'With window, invalid' => array(array('755224', '359152'), '12345678901234567890', 0,             null,  100,   'invalid-credentials',        null),
+            'Length mismatch'      => array(array('969429', '338314'), '12345678901234567890', 3,             8,     null,  'credential-length-mismatch', null),
+            'No credentials'       => array(array(),                   '12345678901234567890', 0,             null,  100,   'empty-credential-sequence',  null),
         );
     }
 
@@ -86,7 +91,12 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateHotpSequence($passwords, $secret, $currentCounter, $digits, $window, $result, $newCounter)
     {
         $configuration = new HotpConfiguration($digits, $window);
-        $actual = $this->validator->validateHotpSequence($configuration, $secret, $passwords, $currentCounter);
+        $shared = new HotpSharedParameters($secret, $currentCounter);
+        $credentialSequence = array();
+        foreach ($passwords as $password) {
+            $credentialSequence[] = new HotpCredentials($password);
+        }
+        $actual = $this->validator->validateHotpSequence($configuration, $shared, $credentialSequence);
 
         $this->assertInstanceOf(__NAMESPACE__ . '\Result\HotpValidationResult', $actual);
         $this->assertSame($result, $actual->type());

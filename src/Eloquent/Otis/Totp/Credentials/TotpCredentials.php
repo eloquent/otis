@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Validator\Parameters;
+namespace Eloquent\Otis\Totp\Credentials;
 
-use Eloquent\Otis\Validator\Parameters\AbstractOtpParameters;
+use Eloquent\Otis\Credentials\AbstractOtpCredentials;
 
 /**
- * Represents TOTP validation parameters.
+ * Represents A set of TOTP credentials.
  */
-class TotpParameters extends AbstractOtpParameters implements
-    TotpParametersInterface
+class TotpCredentials extends AbstractOtpCredentials implements
+    TotpCredentialsInterface
 {
 }
