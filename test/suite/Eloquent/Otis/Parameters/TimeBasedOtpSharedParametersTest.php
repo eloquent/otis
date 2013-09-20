@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Parameters;
+namespace Eloquent\Otis\Parameters;
 
 use Icecave\Isolator\Isolator;
 use Phake;
 use PHPUnit_Framework_TestCase;
 
 /**
- * @covers \Eloquent\Otis\Motp\Parameters\MotpSharedParameters
  * @covers \Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters
  * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
  */
-class MotpSharedParametersTest extends PHPUnit_Framework_TestCase
+class TimeBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
@@ -28,19 +27,18 @@ class MotpSharedParametersTest extends PHPUnit_Framework_TestCase
 
         $this->isolator = Phake::mock(Isolator::className());
         Phake::when($this->isolator)->time()->thenReturn(222);
-        $this->parameters = new MotpSharedParameters('secret', 1234, 111, $this->isolator);
+        $this->parameters = new TimeBasedOtpSharedParameters('secret', 111, $this->isolator);
     }
 
     public function testConstructor()
     {
         $this->assertSame('secret', $this->parameters->secret());
-        $this->assertSame(1234, $this->parameters->pin());
         $this->assertSame(111, $this->parameters->time());
     }
 
     public function testConstructorDefaults()
     {
-        $this->parameters = new MotpSharedParameters('secret', 1234, null, $this->isolator);
+        $this->parameters = new TimeBasedOtpSharedParameters('secret', null, $this->isolator);
 
         $this->assertSame(222, $this->parameters->time());
     }

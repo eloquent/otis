@@ -11,12 +11,14 @@
 
 namespace Eloquent\Otis\Hotp\Generator;
 
+use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
 class HotpGeneratorTest extends PHPUnit_Framework_TestCase
 {
-    public function generateData()
+    public function generateHotpData()
     {
         //                                          secret                  counter truncated   hotp      algorithm
         return array(
@@ -56,15 +58,20 @@ class HotpGeneratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider generateData
+     * @dataProvider generateHotpData
      */
-    public function testGenerate($secret, $counter, $truncated, $hotp, $algorithm)
+    public function testGenerateHotp($secret, $counter, $truncated, $hotp, $algorithm)
     {
         $this->generator = new HotpGenerator();
-        $result = $this->generator->generate(
-            $secret,
-            $counter,
-            HotpHashAlgorithm::memberByValueWithDefault($algorithm)
+        $result = $this->generator->generateHotp(
+            new HotpConfiguration(
+                null,
+                null,
+                null,
+                strlen($secret),
+                HotpHashAlgorithm::memberByValueWithDefault($algorithm)
+            ),
+            new CounterBasedOtpSharedParameters($secret, $counter)
         );
 
         $this->assertSame($truncated, $result->truncated());

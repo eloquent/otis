@@ -11,6 +11,9 @@
 
 namespace Eloquent\Otis\Motp\Generator;
 
+use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
+
 /**
  * The interface implemented by mOTP generators.
  */
@@ -21,11 +24,13 @@ interface MotpGeneratorInterface
      *
      * @link http://motp.sourceforge.net/#1.1
      *
-     * @param string       $secret The shared secret.
-     * @param string       $pin    The PIN.
-     * @param integer|null $time   The Unix timestamp to generate the password for.
+     * @param MotpConfigurationInterface    $configuration The configuration to use for generation.
+     * @param MotpSharedParametersInterface $shared        The shared parameters to use for generation.
      *
      * @return string The generated mOTP value.
      */
-    public function generate($secret, $pin, $time = null);
+    public function generateMotp(
+        MotpConfigurationInterface $configuration,
+        MotpSharedParametersInterface $shared
+    );
 }

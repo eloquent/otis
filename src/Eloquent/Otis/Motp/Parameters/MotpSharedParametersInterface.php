@@ -11,12 +11,13 @@
 
 namespace Eloquent\Otis\Motp\Parameters;
 
-use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 
 /**
  * The interface implemented by mOTP shared parameters.
  */
-interface MotpSharedParametersInterface extends OtpSharedParametersInterface
+interface MotpSharedParametersInterface extends
+    TimeBasedOtpSharedParametersInterface
 {
     /**
      * Get the PIN.

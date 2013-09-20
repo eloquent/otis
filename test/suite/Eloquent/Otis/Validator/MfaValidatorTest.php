@@ -18,7 +18,7 @@ use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use Eloquent\Otis\Motp\Validator\MotpValidator;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
-use Eloquent\Otis\Parameters\OtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Eloquent\Otis\Totp\Validator\TotpValidator;
 use Icecave\Isolator\Isolator;
@@ -38,7 +38,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->isolator = Phake::mock(Isolator::className());
-        $this->totpValidator = new TotpValidator(null, $this->isolator);
+        $this->totpValidator = new TotpValidator;
         $this->hotpValidator = new HotpValidator;
         $this->motpValidator = new MotpValidator(null, $this->isolator);
         $this->validators = array($this->totpValidator, $this->hotpValidator, $this->motpValidator);
@@ -67,10 +67,10 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     {
         //                                     configuration          shared                                              credentials                     expected
         return array(
-            'TOTP'                    => array(new TotpConfiguration, new OtpSharedParameters('secret'),                  new OtpCredentials('password'), true),
+            'TOTP'                    => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123),    new OtpCredentials('password'), true),
             'HOTP'                    => array(new HotpConfiguration, new CounterBasedOtpSharedParameters('secret', 111), new OtpCredentials('password'), true),
             'mOTP'                    => array(new MotpConfiguration, new MotpSharedParameters('secret', 1234),           new OtpCredentials('password'), true),
-            'Unsupported combination' => array(new HotpConfiguration, new OtpSharedParameters('secret'),                  new OtpCredentials('password'), false),
+            'Unsupported combination' => array(new HotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123),    new OtpCredentials('password'), false),
         );
     }
 
@@ -105,7 +105,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     {
         Phake::when($this->isolator)->time()->thenReturn($time);
         $configuration = new TotpConfiguration($digits, $window, $futureWindows, $pastWindows);
-        $shared = new OtpSharedParameters($secret);
+        $shared = new TimeBasedOtpSharedParameters($secret, $time, $this->isolator);
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
@@ -149,7 +149,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         //                                     configuration          shared                                              credentialSequence                                                     expected
         return array(
             'HOTP'                    => array(new HotpConfiguration, new CounterBasedOtpSharedParameters('secret', 111), array(new OtpCredentials('password'), new OtpCredentials('password')), true),
-            'Unsupported combination' => array(new TotpConfiguration, new OtpSharedParameters('secret'),                  array(new OtpCredentials('password'), $mockCredentials),               false),
+            'Unsupported combination' => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 111),    array(new OtpCredentials('password'), $mockCredentials),               false),
         );
     }
 
@@ -216,7 +216,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     {
         Phake::when($this->isolator)->time()->thenReturn($time);
         $configuration = new MotpConfiguration($futureWindows, $pastWindows);
-        $shared = new MotpSharedParameters($secret, $pin);
+        $shared = new MotpSharedParameters($secret, $pin, $time, $this->isolator);
         $credentials = new OtpCredentials($password);
         $actual = $this->validator->validate($configuration, $shared, $credentials);
 
@@ -228,7 +228,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupportedCombination()
     {
         $configuration = new HotpConfiguration;
-        $shared = new OtpSharedParameters('secret');
+        $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentials = new OtpCredentials('password');
 
         $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');
@@ -238,7 +238,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupportedCombinationSequence()
     {
         $configuration = new TotpConfiguration;
-        $shared = new OtpSharedParameters('secret');
+        $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentialSequence = array(
             new OtpCredentials('password'),
             Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'),

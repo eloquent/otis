@@ -188,10 +188,9 @@ class HotpValidator implements
             $counter <= $shared->counter() + $configuration->window();
             ++$counter
         ) {
-            $value = $this->generator()->generate(
-                $shared->secret(),
-                $counter,
-                $configuration->algorithm()
+            $value = $this->generator()->generateHotp(
+                $configuration,
+                new CounterBasedOtpSharedParameters($shared->secret(), $counter)
             );
 
             if (

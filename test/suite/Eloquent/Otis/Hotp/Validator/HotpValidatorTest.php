@@ -15,7 +15,7 @@ use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
-use Eloquent\Otis\Parameters\OtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
 use Phake;
@@ -67,7 +67,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupported()
     {
         $configuration = new TotpConfiguration;
-        $shared = new OtpSharedParameters('secret');
+        $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentials = new OtpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
@@ -77,7 +77,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateSequenceFailureUnsupportedConfig()
     {
         $configuration = new TotpConfiguration;
-        $shared = new OtpSharedParameters('secret');
+        $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentialSequence = array(
             new OtpCredentials('password'),
         );

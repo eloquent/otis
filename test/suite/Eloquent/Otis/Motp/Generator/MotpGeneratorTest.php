@@ -11,9 +11,9 @@
 
 namespace Eloquent\Otis\Motp\Generator;
 
-use Icecave\Isolator\Isolator;
+use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use PHPUnit_Framework_TestCase;
-use Phake;
 
 class MotpGeneratorTest extends PHPUnit_Framework_TestCase
 {
@@ -21,11 +21,10 @@ class MotpGeneratorTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->isolator = Phake::mock(Isolator::className());
-        $this->generator = new MotpGenerator($this->isolator);
+        $this->generator = new MotpGenerator;
     }
 
-    public function generateData()
+    public function generateMotpData()
     {
         //                                secret                          pin     time        expected
         return array(
@@ -38,19 +37,12 @@ class MotpGeneratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider generateData
+     * @dataProvider generateMotpData
      */
-    public function testGenerate($secret, $pin, $time, $motp)
+    public function testGenerateMotp($secret, $pin, $time, $motp)
     {
-        $result = $this->generator->generate($secret, $pin, $time);
+        $result = $this->generator->generateMotp(new MotpConfiguration, new MotpSharedParameters($secret, $pin, $time));
 
         $this->assertSame($motp, $result);
-    }
-
-    public function testGenerateCurrentTime()
-    {
-        Phake::when($this->isolator)->time()->thenReturn(1234);
-
-        $this->assertSame('6bfed1', $this->generator->generate('12345678', '1234', null));
     }
 }

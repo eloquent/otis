@@ -13,10 +13,9 @@ namespace Eloquent\Otis\Totp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Parameters\OtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
-use Icecave\Isolator\Isolator;
 use PHPUnit_Framework_TestCase;
 use Phake;
 
@@ -27,8 +26,7 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->generator = new TotpGenerator;
-        $this->isolator = Phake::mock(Isolator::className());
-        $this->validator = new TotpValidator($this->generator, $this->isolator);
+        $this->validator = new TotpValidator($this->generator);
     }
 
     public function testConstructor()
@@ -48,12 +46,12 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
         $mockCredentials = Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface');
         $mockSharedParameters = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
 
-        //                                           configuration          shared                                  credentials                     expected
+        //                                           configuration          shared                                           credentials                     expected
         return array(
-            'Valid combination'             => array(new TotpConfiguration, new OtpSharedParameters('secret'),      new OtpCredentials('password'), true),
-            'Unsupported credentials'       => array(new TotpConfiguration, new OtpSharedParameters('secret', 123), $mockCredentials,               false),
-            'Unsupported shared parameters' => array(new TotpConfiguration, $mockSharedParameters,                  new OtpCredentials('password'), false),
-            'Unsupported configuration'     => array(new HotpConfiguration, new OtpSharedParameters('secret'),      new OtpCredentials('password'), false),
+            'Valid combination'             => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), new OtpCredentials('password'), true),
+            'Unsupported credentials'       => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), $mockCredentials,               false),
+            'Unsupported shared parameters' => array(new TotpConfiguration, $mockSharedParameters,                           new OtpCredentials('password'), false),
+            'Unsupported configuration'     => array(new HotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), new OtpCredentials('password'), false),
         );
     }
 

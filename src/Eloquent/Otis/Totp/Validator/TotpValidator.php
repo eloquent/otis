@@ -15,7 +15,8 @@ use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
@@ -23,7 +24,6 @@ use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
-use Icecave\Isolator\Isolator;
 
 /**
  * Validates TOTP passwords.
@@ -34,18 +34,14 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
      * Construct a new TOTP validator.
      *
      * @param TotpGeneratorInterface|null $generator The generator to use.
-     * @param Isolator|null               $isolator  The isolator to use.
      */
-    public function __construct(
-        TotpGeneratorInterface $generator = null,
-        Isolator $isolator = null
-    ) {
+    public function __construct(TotpGeneratorInterface $generator = null)
+    {
         if (null === $generator) {
             $generator = new TotpGenerator;
         }
 
         $this->generator = $generator;
-        $this->isolator = Isolator::get($isolator);
     }
 
     /**
@@ -74,7 +70,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         return $configuration instanceof TotpConfigurationInterface &&
-            $shared instanceof OtpSharedParametersInterface &&
+            $shared instanceof TimeBasedOtpSharedParametersInterface &&
             $credentials instanceof OtpCredentialsInterface;
     }
 
@@ -103,15 +99,15 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
     /**
      * Validate a TOTP password.
      *
-     * @param TotpConfigurationInterface   $configuration The configuration to use for validation.
-     * @param OtpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param OtpCredentialsInterface      $credentials   The credentials to validate.
+     * @param TotpConfigurationInterface            $configuration The configuration to use for validation.
+     * @param TimeBasedOtpSharedParametersInterface $shared        The shared parameters to use for validation.
+     * @param OtpCredentialsInterface               $credentials   The credentials to validate.
      *
      * @return TimeBasedOtpValidationResultInterface The validation result.
      */
     public function validateTotp(
         TotpConfigurationInterface $configuration,
-        OtpSharedParametersInterface $shared,
+        TimeBasedOtpSharedParametersInterface $shared,
         OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
@@ -120,18 +116,17 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
             );
         }
 
-        $time = $this->isolator()->time();
-
         for (
             $i = -$configuration->pastWindows();
             $i <= $configuration->futureWindows();
             ++$i
         ) {
-            $value = $this->generator()->generate(
-                $shared->secret(),
-                $configuration->window(),
-                $time + ($i * $configuration->window()),
-                $configuration->algorithm()
+            $value = $this->generator()->generateTotp(
+                $configuration,
+                new TimeBasedOtpSharedParameters(
+                    $shared->secret(),
+                    $shared->time() + ($i * $configuration->window())
+                )
             );
 
             if (
@@ -151,16 +146,5 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         );
     }
 
-    /**
-     * Get the isolator.
-     *
-     * @return Isolator The isolator.
-     */
-    protected function isolator()
-    {
-        return $this->isolator;
-    }
-
     private $generator;
-    private $isolator;
 }

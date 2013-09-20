@@ -12,9 +12,11 @@
 namespace Eloquent\Otis\Parameters;
 
 /**
- * Represents a set of one-time password authentication shared parameters.
+ * An abstract base class for implementing one-time password authentication
+ * shared parameters.
  */
-class OtpSharedParameters implements OtpSharedParametersInterface
+abstract class AbstractOtpSharedParameters implements
+    OtpSharedParametersInterface
 {
     /**
      * Construct a new one-time password shared parameters instance.

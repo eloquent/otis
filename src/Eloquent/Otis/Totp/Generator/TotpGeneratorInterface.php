@@ -11,8 +11,9 @@
 
 namespace Eloquent\Otis\Totp\Generator;
 
-use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 use Eloquent\Otis\Hotp\Value\HotpValueInterface;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
+use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
  * The interface implemented by TOTP generators.
@@ -24,17 +25,13 @@ interface TotpGeneratorInterface
      *
      * @link http://tools.ietf.org/html/rfc6238#section-4
      *
-     * @param string                 $secret    The shared secret.
-     * @param integer|null           $window    The number of seconds each value is valid for.
-     * @param integer|null           $time      The Unix timestamp to generate the password for.
-     * @param HotpHashAlgorithm|null $algorithm The hash algorithm to use.
+     * @param TotpConfigurationInterface            $configuration The configuration to use for generation.
+     * @param TimeBasedOtpSharedParametersInterface $shared        The shared parameters to use for generation.
      *
      * @return HotpValueInterface The generated TOTP value.
      */
-    public function generate(
-        $secret,
-        $window = null,
-        $time = null,
-        HotpHashAlgorithm $algorithm = null
+    public function generateTotp(
+        TotpConfigurationInterface $configuration,
+        TimeBasedOtpSharedParametersInterface $shared
     );
 }

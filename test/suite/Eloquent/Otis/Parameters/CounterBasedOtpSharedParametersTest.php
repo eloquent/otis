@@ -13,6 +13,10 @@ namespace Eloquent\Otis\Parameters;
 
 use PHPUnit_Framework_TestCase;
 
+/**
+ * @covers \Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters
+ * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
+ */
 class CounterBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()

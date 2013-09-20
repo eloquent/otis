@@ -11,7 +11,8 @@
 
 namespace Eloquent\Otis\Hotp\Generator;
 
-use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 
 /**
  * Generates HOTP values.
@@ -23,23 +24,22 @@ class HotpGenerator implements HotpGeneratorInterface
      *
      * @link http://tools.ietf.org/html/rfc4226#section-5.3
      *
-     * @param string                 $secret    The shared secret.
-     * @param integer                $counter   The counter value.
-     * @param HotpHashAlgorithm|null $algorithm The hash algorithm to use.
+     * @param HotpConfigurationInterface               $configuration The configuration to use for generation.
+     * @param CounterBasedOtpSharedParametersInterface $shared        The shared parameters to use for generation.
      *
      * @return HotpValueInterface The generated HOTP value.
      */
-    public function generate(
-        $secret,
-        $counter,
-        HotpHashAlgorithm $algorithm = null
+    public function generateHotp(
+        HotpConfigurationInterface $configuration,
+        CounterBasedOtpSharedParametersInterface $shared
     ) {
-        if (null === $algorithm) {
-            $algorithm = HotpHashAlgorithm::SHA1();
-        }
-
         return new HotpValue(
-            hash_hmac($algorithm->value(), $this->pack($counter), $secret, true)
+            hash_hmac(
+                $configuration->algorithm()->value(),
+                $this->pack($shared->counter()),
+                $shared->secret(),
+                true
+            )
         );
     }
 

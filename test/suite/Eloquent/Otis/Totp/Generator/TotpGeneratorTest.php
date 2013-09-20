@@ -13,9 +13,9 @@ namespace Eloquent\Otis\Totp\Generator;
 
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
-use Icecave\Isolator\Isolator;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
+use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
-use Phake;
 
 class TotpGeneratorTest extends PHPUnit_Framework_TestCase
 {
@@ -24,8 +24,7 @@ class TotpGeneratorTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->hotpGenerator = new HotpGenerator;
-        $this->isolator = Phake::mock(Isolator::className());
-        $this->generator = new TotpGenerator($this->hotpGenerator, $this->isolator);
+        $this->generator = new TotpGenerator($this->hotpGenerator);
     }
 
     public function testConstructor()
@@ -40,7 +39,7 @@ class TotpGeneratorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new HotpGenerator, $this->generator->generator());
     }
 
-    public function generateData()
+    public function generateTotpData()
     {
         //                                      secret                                                              window time         expected    algorithm
         return array(
@@ -70,24 +69,22 @@ class TotpGeneratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider generateData
+     * @dataProvider generateTotpData
      */
-    public function testGenerate($secret, $window, $time, $totp, $algorithm)
+    public function testGenerateTotp($secret, $window, $time, $totp, $algorithm)
     {
-        $result = $this->generator->generate(
-            $secret,
-            $window,
-            $time,
-            HotpHashAlgorithm::memberByValueWithDefault($algorithm)
+        $result = $this->generator->generateTotp(
+            new TotpConfiguration(
+                8,
+                $window,
+                null,
+                null,
+                strlen($secret),
+                HotpHashAlgorithm::memberByValueWithDefault($algorithm)
+            ),
+            new TimeBasedOtpSharedParameters($secret, $time)
         );
 
         $this->assertSame($totp, $result->string(8));
-    }
-
-    public function testGenerateCurrentTime()
-    {
-        Phake::when($this->isolator)->time()->thenReturn(1111111111);
-
-        $this->assertSame('14050471', $this->generator->generate('12345678901234567890', null)->string(8));
     }
 }

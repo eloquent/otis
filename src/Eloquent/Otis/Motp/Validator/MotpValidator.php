@@ -17,13 +17,13 @@ use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
-use Icecave\Isolator\Isolator;
 
 /**
  * Validates mOTP passwords.
@@ -34,18 +34,14 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
      * Construct a new mOTP validator.
      *
      * @param MotpGeneratorInterface|null $generator The generator to use.
-     * @param Isolator|null               $isolator  The isolator to use.
      */
-    public function __construct(
-        MotpGeneratorInterface $generator = null,
-        Isolator $isolator = null
-    ) {
+    public function __construct(MotpGeneratorInterface $generator = null)
+    {
         if (null === $generator) {
             $generator = new MotpGenerator;
         }
 
         $this->generator = $generator;
-        $this->isolator = Isolator::get($isolator);
     }
 
     /**
@@ -120,17 +116,18 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
             );
         }
 
-        $time = $this->isolator()->time();
-
         for (
             $i = -$configuration->pastWindows();
             $i <= $configuration->futureWindows();
             ++$i
         ) {
-            $value = $this->generator()->generate(
-                $shared->secret(),
-                $shared->pin(),
-                $time + ($i * 10)
+            $value = $this->generator()->generateMotp(
+                $configuration,
+                new MotpSharedParameters(
+                    $shared->secret(),
+                    $shared->pin(),
+                    $shared->time() + ($i * 10)
+                )
             );
 
             if ($credentials->password() === $value) {
@@ -146,16 +143,5 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
         );
     }
 
-    /**
-     * Get the isolator.
-     *
-     * @return Isolator The isolator.
-     */
-    protected function isolator()
-    {
-        return $this->isolator;
-    }
-
     private $generator;
-    private $isolator;
 }

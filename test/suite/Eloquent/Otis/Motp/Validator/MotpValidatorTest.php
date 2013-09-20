@@ -16,9 +16,8 @@ use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
-use Eloquent\Otis\Parameters\OtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Icecave\Isolator\Isolator;
 use PHPUnit_Framework_TestCase;
 use Phake;
 
@@ -29,8 +28,7 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->generator = new MotpGenerator;
-        $this->isolator = Phake::mock(Isolator::className());
-        $this->validator = new MotpValidator($this->generator, $this->isolator);
+        $this->validator = new MotpValidator($this->generator);
     }
 
     public function testConstructor()
@@ -70,7 +68,7 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
     public function testValidateFailureUnsupported()
     {
         $configuration = new TotpConfiguration;
-        $shared = new OtpSharedParameters('secret');
+        $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentials = new OtpCredentials('password');
 
         $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');

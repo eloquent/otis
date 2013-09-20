@@ -11,7 +11,8 @@
 
 namespace Eloquent\Otis\Motp\Generator;
 
-use Icecave\Isolator\Isolator;
+use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 
 /**
  * Generates mOTP values.
@@ -19,48 +20,27 @@ use Icecave\Isolator\Isolator;
 class MotpGenerator implements MotpGeneratorInterface
 {
     /**
-     * Construct a new mOTP generator.
-     *
-     * @param Isolator|null $isolator The isolator to use.
-     */
-    public function __construct(Isolator $isolator = null)
-    {
-        $this->isolator = Isolator::get($isolator);
-    }
-
-    /**
      * Generate an mOTP value.
      *
      * @link http://motp.sourceforge.net/#1.1
      *
-     * @param string       $secret The shared secret.
-     * @param string       $pin    The PIN.
-     * @param integer|null $time   The Unix timestamp to generate the password for.
+     * @param MotpConfigurationInterface    $configuration The configuration to use for generation.
+     * @param MotpSharedParametersInterface $shared        The shared parameters to use for generation.
      *
      * @return string The generated mOTP value.
      */
-    public function generate($secret, $pin, $time = null)
-    {
-        if (null === $time) {
-            $time = $this->isolator()->time();
-        }
-
+    public function generateMotp(
+        MotpConfigurationInterface $configuration,
+        MotpSharedParametersInterface $shared
+    ) {
         return substr(
-            md5(strval(intval($time / 10)) . bin2hex($secret) . $pin),
+            md5(
+                strval(intval($shared->time() / 10)) .
+                    bin2hex($shared->secret()) .
+                    $shared->pin()
+            ),
             0,
             6
         );
     }
-
-    /**
-     * Get the isolator.
-     *
-     * @return Isolator The isolator.
-     */
-    protected function isolator()
-    {
-        return $this->isolator;
-    }
-
-    private $isolator;
 }
