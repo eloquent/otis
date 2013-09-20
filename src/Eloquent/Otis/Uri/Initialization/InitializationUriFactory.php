@@ -13,7 +13,7 @@ namespace Eloquent\Otis\Uri\Initialization;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Exception\UnsupportedArgumentsException;
-use Eloquent\Otis\GoogleAuthenticator\Uri\GoogleAuthenticatorUriFactory;
+use Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorUriFactory;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 
 /**

@@ -11,7 +11,7 @@
 
 namespace Eloquent\Otis\Uri\Initialization;
 
-use Eloquent\Otis\GoogleAuthenticator\Uri\GoogleAuthenticatorUriFactory;
+use Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorUriFactory;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
@@ -22,7 +22,7 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers \Eloquent\Otis\Uri\Initialization\InitializationUriFactory
- * @covers \Eloquent\Otis\GoogleAuthenticator\Uri\GoogleAuthenticatorUriFactory
+ * @covers \Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorUriFactory
  */
 class InitializationUriFactoryTest extends PHPUnit_Framework_TestCase
 {

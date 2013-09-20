@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\GoogleAuthenticator\Uri;
+namespace Eloquent\Otis\GoogleAuthenticator\Uri\Initialization;
 
 use Base32\Base32;
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;

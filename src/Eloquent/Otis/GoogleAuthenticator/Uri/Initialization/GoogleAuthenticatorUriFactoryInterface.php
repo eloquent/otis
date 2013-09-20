@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\GoogleAuthenticator\Uri;
+namespace Eloquent\Otis\GoogleAuthenticator\Uri\Initialization;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
