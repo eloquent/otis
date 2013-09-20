@@ -231,7 +231,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentials = new OtpCredentials('password');
 
-        $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
         $this->validator->validate($configuration, $shared, $credentials);
     }
 
@@ -244,7 +244,7 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
             Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'),
         );
 
-        $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
         $this->validator->validateSequence($configuration, $shared, $credentialSequence);
     }
 }

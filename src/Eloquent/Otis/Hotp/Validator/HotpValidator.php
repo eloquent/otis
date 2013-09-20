@@ -14,6 +14,7 @@ namespace Eloquent\Otis\Hotp\Validator;
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
+use Eloquent\Otis\Exception\UnsupportedArgumentsException;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
@@ -21,7 +22,6 @@ use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaSequenceValidatorInterface;
 use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResultInterface;
@@ -85,8 +85,8 @@ class HotpValidator implements
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return MfaValidationResultInterface       The validation result.
-     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return MfaValidationResultInterface  The validation result.
+     * @throws UnsupportedArgumentsException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
@@ -94,7 +94,7 @@ class HotpValidator implements
         MfaCredentialsInterface $credentials
     ) {
         if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedMfaCombinationException;
+            throw new UnsupportedArgumentsException;
         }
 
         return $this->validateHotp($configuration, $shared, $credentials);
@@ -138,8 +138,8 @@ class HotpValidator implements
      * @param MfaSharedParametersInterface   $shared             The shared parameters to use for validation.
      * @param array<MfaCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
-     * @return MfaValidationResultInterface       The validation result.
-     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return MfaValidationResultInterface  The validation result.
+     * @throws UnsupportedArgumentsException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validateSequence(
         MfaConfigurationInterface $configuration,
@@ -153,7 +153,7 @@ class HotpValidator implements
                 $credentialSequence
             )
         ) {
-            throw new UnsupportedMfaCombinationException;
+            throw new UnsupportedArgumentsException;
         }
 
         return $this->validateHotpSequence(

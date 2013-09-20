@@ -71,7 +71,7 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
         $shared = new TimeBasedOtpSharedParameters('secret', 123);
         $credentials = new OtpCredentials('password');
 
-        $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
         $this->validator->validate($configuration, $shared, $credentials);
     }
 }

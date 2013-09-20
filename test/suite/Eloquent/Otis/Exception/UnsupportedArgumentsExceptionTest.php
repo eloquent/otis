@@ -9,23 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Exception;
+namespace Eloquent\Otis\Exception;
 
 use Exception;
 use PHPUnit_Framework_TestCase;
 
-class UnsupportedMfaCombinationExceptionTest extends PHPUnit_Framework_TestCase
+class UnsupportedArgumentsExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {
         $previous = new Exception;
-        $exception = new UnsupportedMfaCombinationException($previous);
+        $exception = new UnsupportedArgumentsException($previous);
 
-        $this->assertSame(
-            'Unsupported combination of multi-factor authentication, ' .
-                'configuration, shared parameters, and credentials.',
-            $exception->getMessage()
-        );
+        $this->assertSame('The supplied arguments are not supported by this method.', $exception->getMessage());
         $this->assertSame(0, $exception->getCode());
         $this->assertSame($previous, $exception->getPrevious());
     }

@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Uri\GoogleAuthenticator;
+namespace Eloquent\Otis\GoogleAuthenticator\Uri;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
+use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
 
@@ -25,7 +29,44 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
         $this->factory = new GoogleAuthenticatorUriFactory;
     }
 
-    public function createHotpUriData()
+    public function supportsData()
+    {
+        //                                           configuration          shared                                              expected
+        return array(
+            'HOTP'                          => array(new HotpConfiguration, new CounterBasedOtpSharedParameters('secret', 111), true),
+            'TOTP'                          => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 111),    true),
+            'Unsupported configuration'     => array(new MotpConfiguration, new TimeBasedOtpSharedParameters('secret', 111),    false),
+            'Unsupported shared parameters' => array(new HotpConfiguration, new MotpSharedParameters('secret', 111),            false),
+        );
+    }
+
+    /**
+     * @dataProvider supportsData
+     */
+    public function testSupports($configuration, $shared, $expected)
+    {
+        $this->assertSame($expected, $this->factory->supports($configuration, $shared));
+    }
+
+    public function testCreateFailureUnsupportedConfiguration()
+    {
+        $configuration = new MotpConfiguration;
+        $shared = new CounterBasedOtpSharedParameters('secret', 111);
+
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
+        $this->factory->create($configuration, $shared, 'label');
+    }
+
+    public function testCreateFailureUnsupportedSharedParameters()
+    {
+        $configuration = new HotpConfiguration;
+        $shared = new MotpSharedParameters('secret', 111);
+
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
+        $this->factory->create($configuration, $shared, 'label');
+    }
+
+    public function createHotpData()
     {
         //                               secret                  label                    issuer    counter digits algorithm issuerInLabel expected
         return array(
@@ -36,9 +77,9 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider createHotpUriData
+     * @dataProvider createHotpData
      */
-    public function testCreateHotpUri(
+    public function testCreateHotp(
         $secret,
         $label,
         $issuer,
@@ -55,11 +96,15 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
             null,
             HotpHashAlgorithm::memberByValueWithDefault($algorithm)
         );
+        $shared = new CounterBasedOtpSharedParameters($secret, $counter);
 
-        $this->assertSame($expected, $this->factory->createHotpUri($configuration, $secret, $label, $counter, $issuer, $issuerInLabel));
+        $this->assertSame(
+            $expected,
+            $this->factory->createHotp($configuration, $shared, $label, $issuer, $issuerInLabel)
+        );
     }
 
-    public function createTotpUriData()
+    public function createTotpData()
     {
         //                               secret                  label                    issuer    window  digits algorithm issuerInLabel expected
         return array(
@@ -70,9 +115,9 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider createTotpUriData
+     * @dataProvider createTotpData
      */
-    public function testCreateTotpUri(
+    public function testCreateTotp(
         $secret,
         $label,
         $issuer,
@@ -90,10 +135,11 @@ class GoogleAuthenticatorUriFactoryTest extends PHPUnit_Framework_TestCase
             null,
             HotpHashAlgorithm::memberByValueWithDefault($algorithm)
         );
+        $shared = new TimeBasedOtpSharedParameters($secret, 111);
 
         $this->assertSame(
             $expected,
-            $this->factory->createTotpUri($configuration, $secret, $label, $issuer, $issuerInLabel)
+            $this->factory->createTotp($configuration, $shared, $label, $issuer, $issuerInLabel)
         );
     }
 }

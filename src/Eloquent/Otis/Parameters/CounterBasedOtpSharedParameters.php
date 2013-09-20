@@ -22,11 +22,15 @@ class CounterBasedOtpSharedParameters extends AbstractOtpSharedParameters
      * Construct a new counter-based one-time password shared parameters
      * instance.
      *
-     * @param string  $secret  The shared secret.
-     * @param integer $counter The current counter value.
+     * @param string       $secret  The shared secret.
+     * @param integer|null $counter The current counter value.
      */
-    public function __construct($secret, $counter)
+    public function __construct($secret, $counter = null)
     {
+        if (null === $counter) {
+            $counter = 1;
+        }
+
         parent::__construct($secret);
 
         $this->counter = $counter;

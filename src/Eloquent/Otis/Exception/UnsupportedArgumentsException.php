@@ -9,27 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Validator\Exception;
+namespace Eloquent\Otis\Exception;
 
 use Exception;
 
 /**
- * An unsupported combination of multi-factor authentication configuration,
- * shared parameters, and credentials was supplied.
+ * The supplied arguments are not supported by this method.
  */
-class UnsupportedMfaCombinationException extends Exception
+class UnsupportedArgumentsException extends Exception
 {
     /**
-     * Construct a new unsupported multi-factor authentication combination
-     * exception.
+     * Construct a new unsupported arguments exception.
      *
      * @param Exception|null $previous The cause, if available.
      */
     public function __construct(Exception $previous = null)
     {
         parent::__construct(
-            'Unsupported combination of multi-factor authentication, ' .
-                'configuration, shared parameters, and credentials.',
+            'The supplied arguments are not supported by this method.',
             0,
             $previous
         );

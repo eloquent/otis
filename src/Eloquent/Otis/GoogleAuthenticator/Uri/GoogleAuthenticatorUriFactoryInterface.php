@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Uri\GoogleAuthenticator;
+namespace Eloquent\Otis\GoogleAuthenticator\Uri;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
@@ -27,17 +29,17 @@ interface GoogleAuthenticatorUriFactoryInterface
      * code, and follows a special set of conventions understood by Google
      * Authenticator, and other OTP apps.
      *
-     * @param TotpConfigurationInterface $configuration The TOTP configuration.
-     * @param string                     $secret        The shared secret.
-     * @param string                     $label         The label for the account.
-     * @param string|null                $issuer        The issuer name.
-     * @param boolean|null               $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
+     * @param TotpConfigurationInterface            $configuration The TOTP configuration.
+     * @param TimeBasedOtpSharedParametersInterface $shared        The shared parameters.
+     * @param string                                $label         The label for the account.
+     * @param string|null                           $issuer        The issuer name.
+     * @param boolean|null                          $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
      *
      * @return string The TOTP URI.
      */
-    public function createTotpUri(
+    public function createTotp(
         TotpConfigurationInterface $configuration,
-        $secret,
+        TimeBasedOtpSharedParametersInterface $shared,
         $label,
         $issuer = null,
         $issuerInLabel = null
@@ -51,20 +53,18 @@ interface GoogleAuthenticatorUriFactoryInterface
      * code, and follows a special set of conventions understood by Google
      * Authenticator, and other OTP apps.
      *
-     * @param HotpConfigurationInterface $configuration The HOTP configuration.
-     * @param string                     $secret        The shared secret.
-     * @param string                     $label         The label for the account.
-     * @param integer|null               $counter       The current counter value.
-     * @param string|null                $issuer        The issuer name.
-     * @param boolean|null               $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
+     * @param HotpConfigurationInterface               $configuration The HOTP configuration.
+     * @param CounterBasedOtpSharedParametersInterface $shared        The shared parameters.
+     * @param string                                   $label         The label for the account.
+     * @param string|null                              $issuer        The issuer name.
+     * @param boolean|null                             $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
      *
      * @return string The HOTP URI.
      */
-    public function createHotpUri(
+    public function createHotp(
         HotpConfigurationInterface $configuration,
-        $secret,
+        CounterBasedOtpSharedParametersInterface $shared,
         $label,
-        $counter = null,
         $issuer = null,
         $issuerInLabel = null
     );

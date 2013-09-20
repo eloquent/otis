@@ -69,7 +69,7 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
         $shared = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
         $credentials = new OtpCredentials('password');
 
-        $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
+        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
         $this->validator->validate($configuration, $shared, $credentials);
     }
 }

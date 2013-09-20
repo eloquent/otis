@@ -17,7 +17,6 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers \Eloquent\Otis\Motp\Parameters\MotpSharedParameters
- * @covers \Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters
  * @covers \Eloquent\Otis\Parameters\AbstractOtpSharedParameters
  */
 class MotpSharedParametersTest extends PHPUnit_Framework_TestCase

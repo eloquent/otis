@@ -13,6 +13,7 @@ namespace Eloquent\Otis\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
+use Eloquent\Otis\Exception\UnsupportedArgumentsException;
 use Eloquent\Otis\Hotp\Validator\HotpValidator;
 use Eloquent\Otis\Motp\Validator\MotpValidator;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
@@ -82,8 +83,8 @@ class MfaValidator implements MfaSequenceValidatorInterface
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return Result\MfaValidationResultInterface          The validation result.
-     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return Result\MfaValidationResultInterface The validation result.
+     * @throws UnsupportedArgumentsException       If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
@@ -100,7 +101,7 @@ class MfaValidator implements MfaSequenceValidatorInterface
             }
         }
 
-        throw new Exception\UnsupportedMfaCombinationException;
+        throw new UnsupportedArgumentsException;
     }
 
     /**
@@ -141,8 +142,8 @@ class MfaValidator implements MfaSequenceValidatorInterface
      * @param MfaSharedParametersInterface   $shared             The shared parameters to use for validation.
      * @param array<MfaCredentialsInterface> $credentialSequence The sequence of credentials to validate.
      *
-     * @return Result\MfaValidationResultInterface          The validation result.
-     * @throws Exception\UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return Result\MfaValidationResultInterface The validation result.
+     * @throws UnsupportedArgumentsException       If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validateSequence(
         MfaConfigurationInterface $configuration,
@@ -166,7 +167,7 @@ class MfaValidator implements MfaSequenceValidatorInterface
             }
         }
 
-        throw new Exception\UnsupportedMfaCombinationException;
+        throw new UnsupportedArgumentsException;
     }
 
     private $validators;

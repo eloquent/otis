@@ -31,4 +31,11 @@ class CounterBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
         $this->assertSame('secret', $this->parameters->secret());
         $this->assertSame(111, $this->parameters->counter());
     }
+
+    public function testConstructorDefaults()
+    {
+        $this->parameters = new CounterBasedOtpSharedParameters('secret');
+
+        $this->assertSame(1, $this->parameters->counter());
+    }
 }

@@ -14,13 +14,13 @@ namespace Eloquent\Otis\Totp\Validator;
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
+use Eloquent\Otis\Exception\UnsupportedArgumentsException;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
-use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
@@ -81,8 +81,8 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return MfaValidationResultInterface       The validation result.
-     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return MfaValidationResultInterface  The validation result.
+     * @throws UnsupportedArgumentsException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
@@ -90,7 +90,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedMfaCombinationException;
+            throw new UnsupportedArgumentsException;
         }
 
         return $this->validateTotp($configuration, $shared, $credentials);

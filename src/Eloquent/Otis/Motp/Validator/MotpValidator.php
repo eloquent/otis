@@ -14,13 +14,13 @@ namespace Eloquent\Otis\Motp\Validator;
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
+use Eloquent\Otis\Exception\UnsupportedArgumentsException;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
@@ -81,8 +81,8 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return MfaValidationResultInterface       The validation result.
-     * @throws UnsupportedMfaCombinationException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return MfaValidationResultInterface  The validation result.
+     * @throws UnsupportedArgumentsException If the combination of configuration, shared parameters, and credentials is not supported.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
@@ -90,7 +90,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedMfaCombinationException;
+            throw new UnsupportedArgumentsException;
         }
 
         return $this->validateMotp($configuration, $shared, $credentials);
