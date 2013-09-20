@@ -94,11 +94,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedMfaCombinationException(
-                $configuration,
-                $shared,
-                $credentials
-            );
+            throw new UnsupportedMfaCombinationException;
         }
 
         return $this->validateMotp($configuration, $shared, $credentials);

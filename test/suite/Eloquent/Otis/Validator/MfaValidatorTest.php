@@ -142,6 +142,57 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame($newCounter, $actual->counter());
     }
 
+    public function supportsSequenceData()
+    {
+        $mockCredentials = Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface');
+
+        //                                     configuration          shared                                              credentialSequence                                                     expected
+        return array(
+            'HOTP'                    => array(new HotpConfiguration, new CounterBasedOtpSharedParameters('secret', 111), array(new OtpCredentials('password'), new OtpCredentials('password')), true),
+            'Unsupported combination' => array(new TotpConfiguration, new OtpSharedParameters('secret'),                  array(new OtpCredentials('password'), $mockCredentials),               false),
+        );
+    }
+
+    /**
+     * @dataProvider supportsSequenceData
+     */
+    public function testSupportsSequence($configuration, $shared, $credentialSequence, $expected)
+    {
+        $this->assertSame($expected, $this->validator->supportsSequence($configuration, $shared, $credentialSequence));
+    }
+
+    public function validateHotpSequenceData()
+    {
+        //                                  passwords                  secret                  currentCounter digits window result                        newCounter
+        return array(
+            'No window, valid'     => array(array('969429', '338314'), '12345678901234567890', 3,             null,  null,  'valid',                      5),
+            'With window, valid'   => array(array('399871', '520489'), '12345678901234567890', 0,             null,  8,     'valid',                      10),
+
+            'No window, invalid'   => array(array('359152', '969429'), '12345678901234567890', 3,             null,  0,     'invalid-credentials',        null),
+            'With window, invalid' => array(array('755224', '359152'), '12345678901234567890', 0,             null,  100,   'invalid-credentials',        null),
+            'Length mismatch'      => array(array('969429', '338314'), '12345678901234567890', 3,             8,     null,  'credential-length-mismatch', null),
+            'No credentials'       => array(array(),                   '12345678901234567890', 0,             null,  100,   'empty-credential-sequence',  null),
+        );
+    }
+
+    /**
+     * @dataProvider validateHotpSequenceData
+     */
+    public function testValidateHotpSequence($passwords, $secret, $currentCounter, $digits, $window, $result, $newCounter)
+    {
+        $configuration = new HotpConfiguration($digits, $window);
+        $shared = new CounterBasedOtpSharedParameters($secret, $currentCounter);
+        $credentialSequence = array();
+        foreach ($passwords as $password) {
+            $credentialSequence[] = new OtpCredentials($password);
+        }
+        $actual = $this->validator->validateSequence($configuration, $shared, $credentialSequence);
+
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult', $actual);
+        $this->assertSame($result, $actual->type());
+        $this->assertSame($newCounter, $actual->counter());
+    }
+
     public function validateMotpData()
     {
         //                                     password   secret      pin   time        pastWindows futureWindows result                        drift
@@ -182,5 +233,18 @@ class MfaValidatorTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');
         $this->validator->validate($configuration, $shared, $credentials);
+    }
+
+    public function testValidateFailureUnsupportedCombinationSequence()
+    {
+        $configuration = new TotpConfiguration;
+        $shared = new OtpSharedParameters('secret');
+        $credentialSequence = array(
+            new OtpCredentials('password'),
+            Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'),
+        );
+
+        $this->setExpectedException(__NAMESPACE__ . '\Exception\UnsupportedMfaCombinationException');
+        $this->validator->validateSequence($configuration, $shared, $credentialSequence);
     }
 }

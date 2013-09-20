@@ -94,11 +94,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
         MfaCredentialsInterface $credentials
     ) {
         if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedMfaCombinationException(
-                $configuration,
-                $shared,
-                $credentials
-            );
+            throw new UnsupportedMfaCombinationException;
         }
 
         return $this->validateTotp($configuration, $shared, $credentials);

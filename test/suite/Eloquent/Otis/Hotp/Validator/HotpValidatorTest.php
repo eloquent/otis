@@ -74,35 +74,28 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
         $this->validator->validate($configuration, $shared, $credentials);
     }
 
-    public function validateHotpSequenceData()
+    public function testValidateSequenceFailureUnsupportedConfig()
     {
-        //                                  passwords                  secret                  currentCounter digits window result                        newCounter
-        return array(
-            'No window, valid'     => array(array('969429', '338314'), '12345678901234567890', 3,             null,  null,  'valid',                      5),
-            'With window, valid'   => array(array('399871', '520489'), '12345678901234567890', 0,             null,  8,     'valid',                      10),
-
-            'No window, invalid'   => array(array('359152', '969429'), '12345678901234567890', 3,             null,  0,     'invalid-credentials',        null),
-            'With window, invalid' => array(array('755224', '359152'), '12345678901234567890', 0,             null,  100,   'invalid-credentials',        null),
-            'Length mismatch'      => array(array('969429', '338314'), '12345678901234567890', 3,             8,     null,  'credential-length-mismatch', null),
-            'No credentials'       => array(array(),                   '12345678901234567890', 0,             null,  100,   'empty-credential-sequence',  null),
+        $configuration = new TotpConfiguration;
+        $shared = new OtpSharedParameters('secret');
+        $credentialSequence = array(
+            new OtpCredentials('password'),
         );
+
+        $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
+        $this->validator->validateSequence($configuration, $shared, $credentialSequence);
     }
 
-    /**
-     * @dataProvider validateHotpSequenceData
-     */
-    public function testValidateHotpSequence($passwords, $secret, $currentCounter, $digits, $window, $result, $newCounter)
+    public function testValidateSequenceFailureUnsupportedCredential()
     {
-        $configuration = new HotpConfiguration($digits, $window);
-        $shared = new CounterBasedOtpSharedParameters($secret, $currentCounter);
-        $credentialSequence = array();
-        foreach ($passwords as $password) {
-            $credentialSequence[] = new OtpCredentials($password);
-        }
-        $actual = $this->validator->validateHotpSequence($configuration, $shared, $credentialSequence);
+        $configuration = new HotpConfiguration;
+        $shared = new CounterBasedOtpSharedParameters('secret', 123);
+        $credentialSequence = array(
+            new OtpCredentials('password'),
+            Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface'),
+        );
 
-        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\CounterBasedOtpValidationResult', $actual);
-        $this->assertSame($result, $actual->type());
-        $this->assertSame($newCounter, $actual->counter());
+        $this->setExpectedException('Eloquent\Otis\Validator\Exception\UnsupportedMfaCombinationException');
+        $this->validator->validateSequence($configuration, $shared, $credentialSequence);
     }
 }
