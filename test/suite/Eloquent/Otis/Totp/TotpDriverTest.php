@@ -13,6 +13,7 @@ namespace Eloquent\Otis\Totp;
 
 use Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorTotpUriFactory;
 use Eloquent\Otis\Parameters\Generator\TimeBasedOtpSharedParametersGenerator;
+use Eloquent\Otis\Validator\TimeBasedOtpValidator;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -25,7 +26,9 @@ class TotpDriverTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->validator = new Validator\TotpValidator;
+        $this->validator = new TimeBasedOtpValidator(
+            new Value\TotpValueGenerator
+        );
         $this->sharedParametersGenerator = new TimeBasedOtpSharedParametersGenerator;
         $this->initializationUriFactory = new GoogleAuthenticatorTotpUriFactory;
         $this->driver = new TotpDriver(

@@ -9,49 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Validator;
+namespace Eloquent\Otis\Validator;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
-use Eloquent\Otis\Credentials\OtpCredentialsInterface;
-use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
-use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
-use Eloquent\Otis\Motp\Value\MotpValueGenerator;
-use Eloquent\Otis\Motp\Value\MotpValueGeneratorInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
-use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
 
 /**
- * Validates mOTP passwords.
+ * Validates time-based one-time passwords.
  */
-class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
+class TimeBasedOtpValidator extends AbstractOtpValidator
 {
-    /**
-     * Construct a new mOTP validator.
-     *
-     * @param MotpValueGeneratorInterface|null $generator The generator to use.
-     */
-    public function __construct(MotpValueGeneratorInterface $generator = null)
-    {
-        if (null === $generator) {
-            $generator = new MotpValueGenerator;
-        }
-
-        $this->generator = $generator;
-    }
-
-    /**
-     * Get the generator.
-     *
-     * @return MotpValueGeneratorInterface The generator.
-     */
-    public function generator()
-    {
-        return $this->generator;
-    }
-
     /**
      * Validate a set of multi-factor authentication parameters.
      *
@@ -59,29 +28,12 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return MfaValidationResultInterface The validation result.
+     * @return Result\MfaValidationResultInterface The validation result.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
         MfaSharedParametersInterface $shared,
         MfaCredentialsInterface $credentials
-    ) {
-        return $this->validateMotp($configuration, $shared, $credentials);
-    }
-
-    /**
-     * Validate an mOTP password.
-     *
-     * @param MotpConfigurationInterface    $configuration The configuration to use for validation.
-     * @param MotpSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param OtpCredentialsInterface       $credentials   The credentials to validate.
-     *
-     * @return TimeBasedOtpValidationResultInterface The validation result.
-     */
-    public function validateMotp(
-        MotpConfigurationInterface $configuration,
-        MotpSharedParametersInterface $shared,
-        OtpCredentialsInterface $credentials
     ) {
         if (strlen($credentials->password()) !== $configuration->digits()) {
             return new TimeBasedOtpValidationResult(
@@ -99,7 +51,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
                 $shared->time() + ($i * $configuration->window())
             );
 
-            $value = $this->generator()->generateMotp(
+            $value = $this->generator()->generate(
                 $configuration,
                 $currentShared
             );
@@ -120,6 +72,4 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
             TimeBasedOtpValidationResult::INVALID_CREDENTIALS
         );
     }
-
-    private $generator;
 }

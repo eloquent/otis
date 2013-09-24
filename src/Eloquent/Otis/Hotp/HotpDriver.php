@@ -16,6 +16,7 @@ use Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorHotp
 use Eloquent\Otis\Parameters\Generator\CounterBasedOtpSharedParametersGenerator;
 use Eloquent\Otis\Parameters\Generator\MfaSharedParametersGeneratorInterface;
 use Eloquent\Otis\Uri\Initialization\InitializationUriFactoryInterface;
+use Eloquent\Otis\Validator\CounterBasedOtpValidator;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 
 /**
@@ -36,7 +37,9 @@ class HotpDriver extends AbstractMfaDriver
         InitializationUriFactoryInterface $initializationUriFactory = null
     ) {
         if (null === $validator) {
-            $validator = new Validator\HotpValidator;
+            $validator = new CounterBasedOtpValidator(
+                new Value\HotpValueGenerator
+            );
         }
         if (null === $sharedParametersGenerator) {
             $sharedParametersGenerator =

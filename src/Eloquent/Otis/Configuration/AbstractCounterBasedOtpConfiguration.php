@@ -52,6 +52,16 @@ abstract class AbstractCounterBasedOtpConfiguration
     }
 
     /**
+     * Set the amount of counter increments to search through for a match.
+     *
+     * @param integer $window The amount of counter increments to search through for a match.
+     */
+    public function setWindow($window)
+    {
+        $this->window = $window;
+    }
+
+    /**
      * Get the amount of counter increments to search through for a match.
      *
      * @return integer The amount of counter increments to search through for a match.

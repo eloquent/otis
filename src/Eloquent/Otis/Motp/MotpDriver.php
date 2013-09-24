@@ -14,6 +14,7 @@ namespace Eloquent\Otis\Motp;
 use Eloquent\Otis\Driver\AbstractMfaDriver;
 use Eloquent\Otis\Parameters\Generator\MfaSharedParametersGeneratorInterface;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
+use Eloquent\Otis\Validator\TimeBasedOtpValidator;
 
 /**
  * Multi-factor authentication driver for mOTP.
@@ -31,7 +32,8 @@ class MotpDriver extends AbstractMfaDriver
         MfaSharedParametersGeneratorInterface $sharedParametersGenerator = null
     ) {
         if (null === $validator) {
-            $validator = new Validator\MotpValidator;
+            $valueGenerator = new Value\MotpValueGenerator;
+            $validator = new TimeBasedOtpValidator($valueGenerator);
         }
         if (null === $sharedParametersGenerator) {
             $sharedParametersGenerator =

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Validator;
+namespace Eloquent\Otis\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
@@ -17,26 +17,23 @@ use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
-class HotpValidatorTest extends PHPUnit_Framework_TestCase
+/**
+ * @covers \Eloquent\Otis\Validator\CounterBasedOtpValidator
+ * @covers \Eloquent\Otis\Validator\AbstractOtpValidator
+ */
+class CounterBasedOtpValidatorTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
         $this->generator = new HotpValueGenerator;
-        $this->validator = new HotpValidator($this->generator);
+        $this->validator = new CounterBasedOtpValidator($this->generator);
     }
 
     public function testConstructor()
     {
         $this->assertSame($this->generator, $this->validator->generator());
-    }
-
-    public function testConstructorDefaults()
-    {
-        $this->validator = new HotpValidator;
-
-        $this->assertEquals($this->generator, $this->validator->generator());
     }
 
     public function validateHotpData()

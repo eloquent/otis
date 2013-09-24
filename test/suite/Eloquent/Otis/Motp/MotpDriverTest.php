@@ -11,6 +11,7 @@
 
 namespace Eloquent\Otis\Motp;
 
+use Eloquent\Otis\Validator\TimeBasedOtpValidator;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -23,7 +24,9 @@ class MotpDriverTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->validator = new Validator\MotpValidator;
+        $this->validator = new TimeBasedOtpValidator(
+            new Value\MotpValueGenerator
+        );
         $this->sharedParametersGenerator = new Parameters\Generator\MotpSharedParametersGenerator;
         $this->driver = new MotpDriver(
             $this->validator,

@@ -17,6 +17,7 @@ use Eloquent\Otis\Parameters\Generator\MfaSharedParametersGeneratorInterface;
 use Eloquent\Otis\Parameters\Generator\TimeBasedOtpSharedParametersGenerator;
 use Eloquent\Otis\Uri\Initialization\InitializationUriFactoryInterface;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
+use Eloquent\Otis\Validator\TimeBasedOtpValidator;
 
 /**
  * Multi-factor authentication driver for TOTP.
@@ -36,7 +37,8 @@ class TotpDriver extends AbstractMfaDriver
         InitializationUriFactoryInterface $initializationUriFactory = null
     ) {
         if (null === $validator) {
-            $validator = new Validator\TotpValidator;
+            $valueGenerator = new Value\TotpValueGenerator;
+            $validator = new TimeBasedOtpValidator($valueGenerator);
         }
         if (null === $sharedParametersGenerator) {
             $sharedParametersGenerator =

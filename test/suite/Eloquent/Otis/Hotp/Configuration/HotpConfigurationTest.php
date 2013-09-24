@@ -59,4 +59,11 @@ class HotpConfigurationTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('Eloquent\Otis\Exception\InvalidPasswordLengthException');
         new HotpConfiguration(11);
     }
+
+    public function testSetWindow()
+    {
+        $this->configuration->setWindow(555);
+
+        $this->assertSame(555, $this->configuration->window());
+    }
 }

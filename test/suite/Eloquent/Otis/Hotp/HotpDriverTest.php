@@ -13,6 +13,7 @@ namespace Eloquent\Otis\Hotp;
 
 use Eloquent\Otis\GoogleAuthenticator\Uri\Initialization\GoogleAuthenticatorHotpUriFactory;
 use Eloquent\Otis\Parameters\Generator\CounterBasedOtpSharedParametersGenerator;
+use Eloquent\Otis\Validator\CounterBasedOtpValidator;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -25,7 +26,7 @@ class HotpDriverTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->validator = new Validator\HotpValidator;
+        $this->validator = new CounterBasedOtpValidator(new Value\HotpValueGenerator);
         $this->sharedParametersGenerator = new CounterBasedOtpSharedParametersGenerator;
         $this->initializationUriFactory = new GoogleAuthenticatorHotpUriFactory;
         $this->driver = new HotpDriver(
