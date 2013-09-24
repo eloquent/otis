@@ -11,17 +11,24 @@
 
 namespace Eloquent\Otis\Exception;
 
+use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Exception;
 use PHPUnit_Framework_TestCase;
 
-class UnsupportedArgumentsExceptionTest extends PHPUnit_Framework_TestCase
+class UnsupportedConfigurationExceptionTest extends PHPUnit_Framework_TestCase
 {
     public function testException()
     {
         $previous = new Exception;
-        $exception = new UnsupportedArgumentsException($previous);
+        $configuration = new TotpConfiguration;
+        $exception = new UnsupportedConfigurationException($configuration, $previous);
 
-        $this->assertSame('The supplied arguments are not supported by this method.', $exception->getMessage());
+        $this->assertSame($configuration, $exception->configuration());
+        $this->assertSame(
+            "Unsupported configuration of type " .
+                "'Eloquent\\\\Otis\\\\Totp\\\\Configuration\\\\TotpConfiguration' supplied.",
+            $exception->getMessage()
+        );
         $this->assertSame(0, $exception->getCode());
         $this->assertSame($previous, $exception->getPrevious());
     }

@@ -14,7 +14,6 @@ namespace Eloquent\Otis\Motp\Validator;
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
-use Eloquent\Otis\Exception\UnsupportedArgumentsException;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
@@ -55,44 +54,19 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
     }
 
     /**
-     * Returns true if this validator supports the supplied combination of
-     * configuration, shared parameters, and credentials.
-     *
-     * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
-     * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
-     * @param MfaCredentialsInterface      $credentials   The credentials to validate.
-     *
-     * @return boolean True if this validator supports the supplied combination.
-     */
-    public function supports(
-        MfaConfigurationInterface $configuration,
-        MfaSharedParametersInterface $shared,
-        MfaCredentialsInterface $credentials
-    ) {
-        return $configuration instanceof MotpConfigurationInterface &&
-            $shared instanceof MotpSharedParametersInterface &&
-            $credentials instanceof OtpCredentialsInterface;
-    }
-
-    /**
      * Validate a set of multi-factor authentication parameters.
      *
      * @param MfaConfigurationInterface    $configuration The configuration to use for validation.
      * @param MfaSharedParametersInterface $shared        The shared parameters to use for validation.
      * @param MfaCredentialsInterface      $credentials   The credentials to validate.
      *
-     * @return MfaValidationResultInterface  The validation result.
-     * @throws UnsupportedArgumentsException If the combination of configuration, shared parameters, and credentials is not supported.
+     * @return MfaValidationResultInterface The validation result.
      */
     public function validate(
         MfaConfigurationInterface $configuration,
         MfaSharedParametersInterface $shared,
         MfaCredentialsInterface $credentials
     ) {
-        if (!$this->supports($configuration, $shared, $credentials)) {
-            throw new UnsupportedArgumentsException;
-        }
-
         return $this->validateMotp($configuration, $shared, $credentials);
     }
 

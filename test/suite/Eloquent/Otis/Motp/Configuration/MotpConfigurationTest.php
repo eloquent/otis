@@ -13,6 +13,11 @@ namespace Eloquent\Otis\Motp\Configuration;
 
 use PHPUnit_Framework_TestCase;
 
+/**
+ * @covers \Eloquent\Otis\Motp\Configuration\MotpConfiguration
+ * @covers \Eloquent\Otis\Configuration\AbstractTimeBasedOtpConfiguration
+ * @covers \Eloquent\Otis\Configuration\AbstractOtpConfiguration
+ */
 class MotpConfigurationTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()

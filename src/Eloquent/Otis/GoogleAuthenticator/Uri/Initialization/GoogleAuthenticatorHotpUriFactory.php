@@ -11,39 +11,42 @@
 
 namespace Eloquent\Otis\GoogleAuthenticator\Uri\Initialization;
 
+use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
-use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
-use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
+use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 
 /**
- * The interface implemented by Google Authenticator URI factories.
+ * Generates HOTP URIs for use with Google Authenticator, and other compatible
+ * OTP apps.
  */
-interface GoogleAuthenticatorUriFactoryInterface
+class GoogleAuthenticatorHotpUriFactory
+    extends AbstractGoogleAuthenticatorUriFactory
+    implements GoogleAuthenticatorHotpUriFactoryInterface
 {
     /**
-     * Create a TOTP URI for use with Google Authenticator.
+     * Create an initialization URI.
      *
      * Note that this is not a URI for the QR code used by Google Authenticator.
      * The URI produced by this method is used as the actual content of the QR
      * code, and follows a special set of conventions understood by Google
      * Authenticator, and other OTP apps.
      *
-     * @param TotpConfigurationInterface            $configuration The TOTP configuration.
-     * @param TimeBasedOtpSharedParametersInterface $shared        The shared parameters.
-     * @param string                                $label         The label for the account.
-     * @param string|null                           $issuer        The issuer name.
-     * @param boolean|null                          $issuerInLabel True if legacy issuer support should be enabled by prefixing the label with the issuer name.
+     * @param MfaConfigurationInterface    $configuration The multi-factor authentication configuration.
+     * @param MfaSharedParametersInterface $shared        The shared parameters.
+     * @param string                       $label         The label for the account.
+     * @param string|null                  $issuer        The issuer name.
      *
-     * @return string The TOTP URI.
+     * @return string The initialization URI.
      */
-    public function createTotp(
-        TotpConfigurationInterface $configuration,
-        TimeBasedOtpSharedParametersInterface $shared,
+    public function create(
+        MfaConfigurationInterface $configuration,
+        MfaSharedParametersInterface $shared,
         $label,
-        $issuer = null,
-        $issuerInLabel = null
-    );
+        $issuer = null
+    ) {
+        return $this->createHotp($configuration, $shared, $label, $issuer);
+    }
 
     /**
      * Create a HOTP URI for use with Google Authenticator.
@@ -67,5 +70,21 @@ interface GoogleAuthenticatorUriFactoryInterface
         $label,
         $issuer = null,
         $issuerInLabel = null
-    );
+    ) {
+        if (1 === $shared->counter()) {
+            $parameters = '';
+        } else {
+            $parameters = '&counter=' . rawurlencode($shared->counter());
+        }
+
+        return $this->buildUri(
+            'hotp',
+            $parameters,
+            $configuration,
+            $shared,
+            $label,
+            $issuer,
+            $issuerInLabel
+        );
+    }
 }

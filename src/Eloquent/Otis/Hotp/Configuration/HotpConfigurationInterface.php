@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Otis package.
@@ -11,22 +11,13 @@
 
 namespace Eloquent\Otis\Hotp\Configuration;
 
+use Eloquent\Otis\Configuration\CounterBasedOtpConfigurationInterface;
+
 /**
  * The interface implemented by HOTP configurations.
  */
-interface HotpConfigurationInterface extends HotpBasedConfigurationInterface
+interface HotpConfigurationInterface extends
+    CounterBasedOtpConfigurationInterface,
+    HotpBasedConfigurationInterface
 {
-    /**
-     * Get the amount of counter increments to search through for a match.
-     *
-     * @return integer The amount of counter increments to search through for a match.
-     */
-    public function window();
-
-    /**
-     * Get the initial counter value.
-     *
-     * @return integer The initial counter value.
-     */
-    public function initialCounter();
 }

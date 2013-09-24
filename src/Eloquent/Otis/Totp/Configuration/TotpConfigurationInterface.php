@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Otis package.
@@ -11,31 +11,14 @@
 
 namespace Eloquent\Otis\Totp\Configuration;
 
+use Eloquent\Otis\Configuration\TimeBasedOtpConfigurationInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpBasedConfigurationInterface;
 
 /**
  * The interface implemented by TOTP configurations.
  */
-interface TotpConfigurationInterface extends HotpBasedConfigurationInterface
+interface TotpConfigurationInterface extends
+    TimeBasedOtpConfigurationInterface,
+    HotpBasedConfigurationInterface
 {
-    /**
-     * Get the number of seconds each token is valid for.
-     *
-     * @return integer The number of seconds each token is valid for.
-     */
-    public function window();
-
-    /**
-     * Get the number of future windows to check.
-     *
-     * @return integer The number of future windows to check.
-     */
-    public function futureWindows();
-
-    /**
-     * Get the number of past windows to check.
-     *
-     * @return integer The number of past windows to check.
-     */
-    public function pastWindows();
 }

@@ -12,14 +12,10 @@
 namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
-use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
-use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
-use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
-use Phake;
 
 class MotpValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -43,35 +39,34 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->generator, $this->validator->generator());
     }
 
-    public function supportsData()
+    public function validateMotpData()
     {
-        $mockCredentials = Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface');
-        $mockSharedParameters = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
-
-        //                                           configuration          shared                                   credentials                     expected
+        //                                     password   secret      pin   time        pastWindows futureWindows result                        drift
         return array(
-            'Valid combination'             => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'), true),
-            'Unsupported credentials'       => array(new MotpConfiguration, new MotpSharedParameters('secret', 123), $mockCredentials,               false),
-            'Unsupported shared parameters' => array(new MotpConfiguration, $mockSharedParameters,                   new OtpCredentials('password'), false),
-            'Unsupported configuration'     => array(new HotpConfiguration, new MotpSharedParameters('secret', 123), new OtpCredentials('password'), false),
+            'Valid, no drift'         => array('3fadec',  '12345678', 1234, 1111111111, null,       null,         'valid',                      0),
+            'Valid, 3 past drift'     => array('81d313',  '12345678', 1234, 1111111111, null,       null,         'valid',                      -3),
+            'Valid, 3 future drift'   => array('f5521c',  '12345678', 1234, 1111111111, null,       null,         'valid',                      3),
+            'Valid, 10 past drift'    => array('1ea954',  '12345678', 1234, 1111111111, 100,        100,          'valid',                      -10),
+            'Valid, 10 future drift'  => array('69bfeb',  '12345678', 1234, 1111111111, 100,        100,          'valid',                      10),
+
+            'Invalid, too far past'   => array('1ea954',  '12345678', 1234, 1111111111, 9,          null,         'invalid-credentials',        null),
+            'Invalid, too far future' => array('69bfeb',  '12345678', 1234, 1111111111, null,       9,            'invalid-credentials',        null),
+            'Length mismatch'         => array('1234567', '12345678', 1234, 1111111111, null,       null,         'credential-length-mismatch', null),
         );
     }
 
     /**
-     * @dataProvider supportsData
+     * @dataProvider validateMotpData
      */
-    public function testSupports($configuration, $shared, $credentials, $expected)
+    public function testValidateMotp($password, $secret, $pin, $time, $pastWindows, $futureWindows, $result, $drift)
     {
-        $this->assertSame($expected, $this->validator->supports($configuration, $shared, $credentials));
-    }
+        $configuration = new MotpConfiguration($futureWindows, $pastWindows);
+        $shared = new MotpSharedParameters($secret, $pin, $time);
+        $credentials = new OtpCredentials($password);
+        $actual = $this->validator->validate($configuration, $shared, $credentials);
 
-    public function testValidateFailureUnsupported()
-    {
-        $configuration = new TotpConfiguration;
-        $shared = new TimeBasedOtpSharedParameters('secret', 123);
-        $credentials = new OtpCredentials('password');
-
-        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
-        $this->validator->validate($configuration, $shared, $credentials);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult', $actual);
+        $this->assertSame($result, $actual->type());
+        $this->assertSame($drift, $actual->drift());
     }
 }

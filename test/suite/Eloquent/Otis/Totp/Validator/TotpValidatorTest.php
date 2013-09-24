@@ -12,12 +12,10 @@
 namespace Eloquent\Otis\Totp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
-use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
 use PHPUnit_Framework_TestCase;
-use Phake;
 
 class TotpValidatorTest extends PHPUnit_Framework_TestCase
 {
@@ -41,35 +39,34 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->generator, $this->validator->generator());
     }
 
-    public function supportsData()
+    public function validateTotpData()
     {
-        $mockCredentials = Phake::mock('Eloquent\Otis\Credentials\MfaCredentialsInterface');
-        $mockSharedParameters = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
-
-        //                                           configuration          shared                                           credentials                     expected
+        //                                     password    secret                  digits window time        pastWindows futureWindows result                        drift
         return array(
-            'Valid combination'             => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), new OtpCredentials('password'), true),
-            'Unsupported credentials'       => array(new TotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), $mockCredentials,               false),
-            'Unsupported shared parameters' => array(new TotpConfiguration, $mockSharedParameters,                           new OtpCredentials('password'), false),
-            'Unsupported configuration'     => array(new HotpConfiguration, new TimeBasedOtpSharedParameters('secret', 123), new OtpCredentials('password'), false),
+            'Valid, no drift'         => array('14050471', '12345678901234567890', 8,     null,  1111111111, null,       null,         'valid',                      0),
+            'Valid, 1 past drift'     => array('07081804', '12345678901234567890', 8,     null,  1111111111, null,       null,         'valid',                      -1),
+            'Valid, 1 future drift'   => array('44266759', '12345678901234567890', 8,     null,  1111111111, null,       null,         'valid',                      1),
+            'Valid, 10 past drift'    => array('13755423', '12345678901234567890', 8,     null,  1111111111, 100,        100,          'valid',                      -10),
+            'Valid, 10 future drift'  => array('78536305', '12345678901234567890', 8,     null,  1111111111, 100,        100,          'valid',                      10),
+
+            'Invalid, too far past'   => array('13755423', '12345678901234567890', 8,     null,  1111111111, 9,          null,         'invalid-credentials',        null),
+            'Invalid, too far future' => array('78536305', '12345678901234567890', 8,     null,  1111111111, null,       9,            'invalid-credentials',        null),
+            'Length mismatch'         => array('14050471', '12345678901234567890', null,  null,  1111111111, null,       null,         'credential-length-mismatch', null),
         );
     }
 
     /**
-     * @dataProvider supportsData
+     * @dataProvider validateTotpData
      */
-    public function testSupports($configuration, $shared, $credentials, $expected)
+    public function testValidateTotp($password, $secret, $digits, $window, $time, $pastWindows, $futureWindows, $result, $drift)
     {
-        $this->assertSame($expected, $this->validator->supports($configuration, $shared, $credentials));
-    }
+        $configuration = new TotpConfiguration($digits, $window, $futureWindows, $pastWindows);
+        $shared = new TimeBasedOtpSharedParameters($secret, $time);
+        $credentials = new OtpCredentials($password);
+        $actual = $this->validator->validate($configuration, $shared, $credentials);
 
-    public function testValidateFailureUnsupported()
-    {
-        $configuration = new HotpConfiguration;
-        $shared = Phake::mock('Eloquent\Otis\Parameters\MfaSharedParametersInterface');
-        $credentials = new OtpCredentials('password');
-
-        $this->setExpectedException('Eloquent\Otis\Exception\UnsupportedArgumentsException');
-        $this->validator->validate($configuration, $shared, $credentials);
+        $this->assertInstanceOf('Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult', $actual);
+        $this->assertSame($result, $actual->type());
+        $this->assertSame($drift, $actual->drift());
     }
 }

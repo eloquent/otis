@@ -29,10 +29,7 @@ class InvalidPasswordLengthException extends Exception
         $this->digits = $digits;
 
         parent::__construct(
-            sprintf(
-                'Invalid password length (%s).',
-                var_export($digits, true)
-            ),
+            sprintf('Invalid password length (%s).', var_export($digits, true)),
             0,
             $previous
         );

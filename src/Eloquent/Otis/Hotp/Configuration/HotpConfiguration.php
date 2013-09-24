@@ -11,13 +11,14 @@
 
 namespace Eloquent\Otis\Hotp\Configuration;
 
+use Eloquent\Otis\Configuration\AbstractCounterBasedOtpConfiguration;
 use Eloquent\Otis\Exception\InvalidPasswordLengthException;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 
 /**
  * Represents a complete set of HOTP configuration settings.
  */
-class HotpConfiguration extends AbstractHotpBasedOtpConfiguration implements
+class HotpConfiguration extends AbstractCounterBasedOtpConfiguration implements
     HotpConfigurationInterface
 {
     /**
@@ -38,39 +39,27 @@ class HotpConfiguration extends AbstractHotpBasedOtpConfiguration implements
         $secretLength = null,
         HotpHashAlgorithm $algorithm = null
     ) {
-        if (null === $window) {
-            $window = 10;
+        if (null !== $digits && $digits > 10) {
+            throw new InvalidPasswordLengthException($digits);
         }
-        if (null === $initialCounter) {
-            $initialCounter = 1;
+        if (null === $algorithm) {
+            $algorithm = HotpHashAlgorithm::SHA1();
         }
 
-        parent::__construct($digits, $secretLength, $algorithm);
+        parent::__construct($digits, $window, $initialCounter, $secretLength);
 
-        $this->window = $window;
-        $this->initialCounter = $initialCounter;
+        $this->algorithm = $algorithm;
     }
 
     /**
-     * Get the amount of counter increments to search through for a match.
+     * Get the underlying algorithm name.
      *
-     * @return integer The amount of counter increments to search through for a match.
+     * @return HotpHashAlgorithm The algorithm name.
      */
-    public function window()
+    public function algorithm()
     {
-        return $this->window;
+        return $this->algorithm;
     }
 
-    /**
-     * Get the initial counter value.
-     *
-     * @return integer The initial counter value.
-     */
-    public function initialCounter()
-    {
-        return $this->initialCounter;
-    }
-
-    private $window;
-    private $initialCounter;
+    private $algorithm;
 }

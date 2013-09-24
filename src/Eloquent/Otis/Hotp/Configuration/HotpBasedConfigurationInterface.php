@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Otis package.
@@ -11,29 +11,15 @@
 
 namespace Eloquent\Otis\Hotp\Configuration;
 
-use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Configuration\OtpConfigurationInterface;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 
 /**
  * The interface implemented by one-time password authentication configurations
  * based upon HOTP.
  */
-interface HotpBasedConfigurationInterface extends MfaConfigurationInterface
+interface HotpBasedConfigurationInterface extends OtpConfigurationInterface
 {
-    /**
-     * Get the number of password digits.
-     *
-     * @return integer The number of digits.
-     */
-    public function digits();
-
-    /**
-     * Get the length of the shared secret.
-     *
-     * @return integer The secret length.
-     */
-    public function secretLength();
-
     /**
      * Get the underlying algorithm name.
      *

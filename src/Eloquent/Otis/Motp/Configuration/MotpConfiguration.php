@@ -11,10 +11,13 @@
 
 namespace Eloquent\Otis\Motp\Configuration;
 
+use Eloquent\Otis\Configuration\AbstractTimeBasedOtpConfiguration;
+
 /**
  * Represents a complete set of mOTP configuration settings.
  */
-class MotpConfiguration implements MotpConfigurationInterface
+class MotpConfiguration extends AbstractTimeBasedOtpConfiguration implements
+    MotpConfigurationInterface
 {
     /**
      * Construct a new mOTP configuration.
@@ -31,30 +34,6 @@ class MotpConfiguration implements MotpConfigurationInterface
             $pastWindows = 3;
         }
 
-        $this->futureWindows = $futureWindows;
-        $this->pastWindows = $pastWindows;
+        parent::__construct(6, 10, $futureWindows, $pastWindows, 8);
     }
-
-    /**
-     * Get the number of future windows to check.
-     *
-     * @return integer The number of future windows to check.
-     */
-    public function futureWindows()
-    {
-        return $this->futureWindows;
-    }
-
-    /**
-     * Get the number of past windows to check.
-     *
-     * @return integer The number of past windows to check.
-     */
-    public function pastWindows()
-    {
-        return $this->pastWindows;
-    }
-
-    private $futureWindows;
-    private $pastWindows;
 }

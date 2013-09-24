@@ -13,27 +13,12 @@ namespace Eloquent\Otis\Uri\Initialization;
 
 use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Validator\Exception\UnsupportedArgumentsException;
 
 /**
  * The interface implemented by initialization URI factories.
  */
 interface InitializationUriFactoryInterface
 {
-    /**
-     * Returns true if this initialization URI factory supports the supplied
-     * combination of configuration and shared parameters.
-     *
-     * @param MfaConfigurationInterface    $configuration The multi-factor authentication configuration.
-     * @param MfaSharedParametersInterface $shared        The shared parameters.
-     *
-     * @return boolean True if the configuration and shared parameters are supported.
-     */
-    public function supports(
-        MfaConfigurationInterface $configuration,
-        MfaSharedParametersInterface $shared
-    );
-
     /**
      * Create an initialization URI.
      *
@@ -47,8 +32,7 @@ interface InitializationUriFactoryInterface
      * @param string                       $label         The label for the account.
      * @param string|null                  $issuer        The issuer name.
      *
-     * @return string                        The initialization URI.
-     * @throws UnsupportedArgumentsException If the combination of configuration and shared parameters is not supported.
+     * @return string The initialization URI.
      */
     public function create(
         MfaConfigurationInterface $configuration,

@@ -35,12 +35,12 @@ class MotpGenerator implements MotpGeneratorInterface
     ) {
         return substr(
             md5(
-                strval(intval($shared->time() / 10)) .
+                strval(intval($shared->time() / $configuration->window())) .
                     bin2hex($shared->secret()) .
                     $shared->pin()
             ),
             0,
-            6
+            $configuration->digits()
         );
     }
 }

@@ -16,7 +16,8 @@ use PHPUnit_Framework_TestCase;
 
 /**
  * @covers \Eloquent\Otis\Hotp\Configuration\HotpConfiguration
- * @covers \Eloquent\Otis\Hotp\Configuration\AbstractHotpBasedOtpConfiguration
+ * @covers \Eloquent\Otis\Configuration\AbstractCounterBasedOtpConfiguration
+ * @covers \Eloquent\Otis\Configuration\AbstractOtpConfiguration
  */
 class HotpConfigurationTest extends PHPUnit_Framework_TestCase
 {

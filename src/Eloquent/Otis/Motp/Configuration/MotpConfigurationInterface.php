@@ -1,4 +1,4 @@
-<?php // @codeCoverageIgnoreStart
+<?php
 
 /*
  * This file is part of the Otis package.
@@ -11,24 +11,11 @@
 
 namespace Eloquent\Otis\Motp\Configuration;
 
-use Eloquent\Otis\Configuration\MfaConfigurationInterface;
+use Eloquent\Otis\Configuration\TimeBasedOtpConfigurationInterface;
 
 /**
- * The interface implemented by mOTP configurations.
+ * The interface used to identify mOTP configurations.
  */
-interface MotpConfigurationInterface extends MfaConfigurationInterface
+interface MotpConfigurationInterface extends TimeBasedOtpConfigurationInterface
 {
-    /**
-     * Get the number of future windows to check.
-     *
-     * @return integer The number of future windows to check.
-     */
-    public function futureWindows();
-
-    /**
-     * Get the number of past windows to check.
-     *
-     * @return integer The number of past windows to check.
-     */
-    public function pastWindows();
 }
