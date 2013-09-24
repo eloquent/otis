@@ -2,79 +2,87 @@
 
 use Base32\Base32;
 use Eloquent\Asplode\Asplode;
-use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
-use Eloquent\Otis\Hotp\HotpGenerator;
-use Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactory;
-use Eloquent\Otis\Totp\TotpGenerator;
+use Eloquent\Otis\Driver\MfaDriverFactory;
+use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
+use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
+use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
+use Eloquent\Otis\Totp\Value\TotpValueGenerator;
+use Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactory;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
 Asplode::instance()->install();
 
-$uriFactory = new GoogleAuthenticatorUriFactory;
+$driverFactory = new MfaDriverFactory;
 $qrCodeUriFactory = new GoogleChartsQrCodeUriFactory;
 
 $secret = '1234567890';
 $time = time();
 
 $entries = array(
-    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-1',   'type' => 'totp', 'secret' => $secret, 'window' => 30, 'digits' => 6,  'algorithm' => 'SHA1'),
-    array('label' => 'TOTP, 30 seconds, 8-digit, SHA-1',   'type' => 'totp', 'secret' => $secret, 'window' => 30, 'digits' => 8,  'algorithm' => 'SHA1'),
-    array('label' => 'TOTP, 30 seconds, 10-digit, SHA-1',  'type' => 'totp', 'secret' => $secret, 'window' => 30, 'digits' => 10, 'algorithm' => 'SHA1'),
-    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-256', 'type' => 'totp', 'secret' => $secret, 'window' => 30, 'digits' => 6,  'algorithm' => 'SHA256'),
-    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-512', 'type' => 'totp', 'secret' => $secret, 'window' => 30, 'digits' => 6,  'algorithm' => 'SHA512'),
-    array('label' => 'TOTP, 60 seconds, 6-digit, SHA-1',   'type' => 'totp', 'secret' => $secret, 'window' => 60, 'digits' => 6,  'algorithm' => 'SHA1'),
+    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-1',   'configuration' => new TotpConfiguration(6, 30, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'TOTP, 30 seconds, 8-digit, SHA-1',   'configuration' => new TotpConfiguration(8, 30, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'TOTP, 30 seconds, 10-digit, SHA-1',  'configuration' => new TotpConfiguration(10, 30, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-256', 'configuration' => new TotpConfiguration(6, 30, null, null, null, HotpHashAlgorithm::SHA256())),
+    array('label' => 'TOTP, 30 seconds, 6-digit, SHA-512', 'configuration' => new TotpConfiguration(6, 30, null, null, null, HotpHashAlgorithm::SHA512())),
+    array('label' => 'TOTP, 60 seconds, 6-digit, SHA-1',   'configuration' => new TotpConfiguration(6, 60, null, null, null, HotpHashAlgorithm::SHA1())),
 
-    array('label' => 'HOTP, 6-digit, SHA-1',   'type' => 'hotp', 'secret' => $secret, 'digits' => 6,  'algorithm' => 'SHA1'),
-    array('label' => 'HOTP, 8-digit, SHA-1',   'type' => 'hotp', 'secret' => $secret, 'digits' => 8,  'algorithm' => 'SHA1'),
-    array('label' => 'HOTP, 10-digit, SHA-1',  'type' => 'hotp', 'secret' => $secret, 'digits' => 10, 'algorithm' => 'SHA1'),
-    array('label' => 'HOTP, 6-digit, SHA-256', 'type' => 'hotp', 'secret' => $secret, 'digits' => 6,  'algorithm' => 'SHA256'),
-    array('label' => 'HOTP, 6-digit, SHA-512', 'type' => 'hotp', 'secret' => $secret, 'digits' => 6,  'algorithm' => 'SHA512'),
+    array('label' => 'HOTP, 6-digit, SHA-1',   'configuration' => new HotpConfiguration(6, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'HOTP, 8-digit, SHA-1',   'configuration' => new HotpConfiguration(8, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'HOTP, 10-digit, SHA-1',  'configuration' => new HotpConfiguration(10, null, null, null, HotpHashAlgorithm::SHA1())),
+    array('label' => 'HOTP, 6-digit, SHA-256', 'configuration' => new HotpConfiguration(6, null, null, null, HotpHashAlgorithm::SHA256())),
+    array('label' => 'HOTP, 6-digit, SHA-512', 'configuration' => new HotpConfiguration(6, null, null, null, HotpHashAlgorithm::SHA512())),
 );
 
 foreach ($entries as $index => $entry) {
-    $entries[$index]['label'] = ($index + 1) . '. ' . $entry['label'];
+    if ($entry['configuration'] instanceof TotpConfiguration) {
+        $shared = new TimeBasedOtpSharedParameters($secret, $time);
 
-    if ('totp' === $entry['type']) {
-        $entries[$index]['uri'] = $uriFactory->createTotpUri(
-            $entry['secret'],
-            $entries[$index]['label'],
-            'Eloquent Software',
-            $entry['window'],
-            $entry['digits'],
-            $entry['algorithm'],
-            true
-        );
-
-        $generator = new TotpGenerator(new HotpGenerator($entry['algorithm']));
+        $generator = new TotpValueGenerator;
         $entries[$index]['values'] = array();
         for ($i = 0; $i < 6; ++$i) {
-            $thisTime = $time + ($i * $entry['window']);
+            $thisTime = $shared->time() +
+                ($i * $entry['configuration']->window());
+            $currentShared = clone $shared;
+            $currentShared->setTime($thisTime);
+
             $entries[$index]['values'][$thisTime] = $generator
-                ->generate($secret, $entry['window'], $thisTime)
-                ->string($entry['digits']);
+                ->generate($entry['configuration'], $currentShared)
+                ->string($entry['configuration']->digits());
         }
     } else {
-        $entries[$index]['uri'] = $uriFactory->createHotpUri(
-            $entry['secret'],
-            $entries[$index]['label'],
-            'Eloquent Software',
-            null,
-            $entry['digits'],
-            $entry['algorithm'],
-            true
+        $shared = new CounterBasedOtpSharedParameters(
+            $secret,
+            $entry['configuration']->initialCounter()
         );
 
-        $generator = new HotpGenerator($entry['algorithm']);
+        $generator = new HotpValueGenerator;
         $entries[$index]['values'] = array();
         for ($i = 0; $i < 6; ++$i) {
+            $currentShared = clone $shared;
+            $currentShared->setCounter($shared->counter() + $i);
+
             $entries[$index]['values'][] = $generator
-                ->generate($secret, $i)
-                ->string($entry['digits']);
+                ->generate($entry['configuration'], $currentShared)
+                ->string($entry['configuration']->digits());
         }
     }
 
-    $entries[$index]['qr-code-uri'] = $qrCodeUriFactory->createUri($entries[$index]['uri']);
+    $driver = $driverFactory->create($entry['configuration']);
+
+    $entries[$index]['label'] = ($index + 1) . '. ' . $entry['label'];
+    $entries[$index]['uri'] = $driver->initializationUriFactory()->create(
+        $entry['configuration'],
+        $shared,
+        $entries[$index]['label'],
+        'Eloquent Software'
+    );
+    $entries[$index]['qr-code-uri'] = $qrCodeUriFactory->createUri(
+        $entries[$index]['uri']
+    );
 }
 
 ?>
@@ -122,7 +130,7 @@ foreach ($entries as $index => $entry) {
                         <dl>
                             <dt>Expected values</dt>
                             <dd>
-                                <?php if ('totp' === $entry['type']): ?>
+                                <?php if ($entry['configuration'] instanceof TotpConfiguration): ?>
                                     <ul>
                                         <?php foreach ($entry['values'] as $thisTime => $value): ?>
                                             <li>
@@ -142,10 +150,10 @@ foreach ($entries as $index => $entry) {
                             </dd>
 
                             <dt>Secret</dt>
-                            <dd><?php echo htmlspecialchars($entry['secret']) ?></dd>
+                            <dd><?php echo htmlspecialchars($secret) ?></dd>
 
                             <dt>Secret (Base32)</dt>
-                            <dd><?php echo htmlspecialchars(Base32::encode($entry['secret'])) ?></dd>
+                            <dd><?php echo htmlspecialchars(Base32::encode($secret)) ?></dd>
 
                             <dt>Raw URI</dt>
                             <dd><a href="<?php echo htmlspecialchars($entry['uri']) ?>"><?php echo htmlspecialchars($entry['uri']) ?></a></dd>
