@@ -104,7 +104,11 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
                 )
             );
 
-            if ($credentials->password() === $value) {
+            if (
+                $credentials->password() === $value->string(
+                    $configuration->digits()
+                )
+            ) {
                 return new TimeBasedOtpValidationResult(
                     TimeBasedOtpValidationResult::VALID,
                     $i

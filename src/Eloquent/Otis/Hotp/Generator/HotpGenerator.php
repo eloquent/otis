@@ -12,6 +12,8 @@
 namespace Eloquent\Otis\Hotp\Generator;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
+use Eloquent\Otis\Hotp\Value\HotpValue;
+use Eloquent\Otis\Hotp\Value\HotpValueInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 
 /**

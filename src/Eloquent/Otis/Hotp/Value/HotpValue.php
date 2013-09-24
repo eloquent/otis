@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Generator;
+namespace Eloquent\Otis\Hotp\Value;
 
 use Eloquent\Otis\Exception\InvalidPasswordLengthException;
 
@@ -32,7 +32,7 @@ class HotpValue implements HotpValueInterface
     /**
      * Get the raw value.
      *
-     * @return string The raw value.
+     * @return mixed The raw value.
      */
     public function value()
     {
@@ -52,9 +52,9 @@ class HotpValue implements HotpValueInterface
     }
 
     /**
-     * Generate a numeric string with a fixed number of digits from the result.
+     * Generate a string with a fixed number of characters from the result.
      *
-     * @param integer|null $digits The number of digits in the result string.
+     * @param integer|null $length The number of characters in the result string.
      *
      * @return string                         The result string.
      * @throws InvalidPasswordLengthException If the requested length is invalid.
@@ -80,7 +80,7 @@ class HotpValue implements HotpValueInterface
     }
 
     /**
-     * Generate a numeric string with 6 digits from the result.
+     * Generate a string with the default number of characters from the result.
      *
      * @return string The result string.
      */

@@ -9,35 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Generator;
+namespace Eloquent\Otis\Otp\Value;
 
 use Eloquent\Otis\Exception\InvalidPasswordLengthException;
 
 /**
  * The interface implemented by generated OTP values.
  */
-interface HotpValueInterface
+interface OtpValueInterface
 {
     /**
      * Get the raw value.
      *
-     * @return string The raw value.
+     * @return mixed The raw value.
      */
     public function value();
 
     /**
-     * Get the truncated value.
+     * Generate a string with a fixed number of characters from the result.
      *
-     * @link http://tools.ietf.org/html/rfc4226#section-5.3
-     *
-     * @return integer The truncated value.
-     */
-    public function truncated();
-
-    /**
-     * Generate a numeric string with a fixed number of digits from the result.
-     *
-     * @param integer|null $digits The number of digits in the result string.
+     * @param integer|null $length The number of characters in the result string.
      *
      * @return string                         The result string.
      * @throws InvalidPasswordLengthException If the requested length is invalid.
@@ -45,7 +36,7 @@ interface HotpValueInterface
     public function string($digits = null);
 
     /**
-     * Generate a numeric string with 6 digits from the result.
+     * Generate a string with the default number of characters from the result.
      *
      * @return string The result string.
      */

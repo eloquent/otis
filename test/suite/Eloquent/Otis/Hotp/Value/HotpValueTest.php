@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Generator;
+namespace Eloquent\Otis\Hotp\Value;
 
 use PHPUnit_Framework_TestCase;
 

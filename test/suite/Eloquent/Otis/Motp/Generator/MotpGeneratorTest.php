@@ -43,6 +43,6 @@ class MotpGeneratorTest extends PHPUnit_Framework_TestCase
     {
         $result = $this->generator->generateMotp(new MotpConfiguration, new MotpSharedParameters($secret, $pin, $time));
 
-        $this->assertSame($motp, $result);
+        $this->assertSame($motp, $result->string());
     }
 }

@@ -13,6 +13,8 @@ namespace Eloquent\Otis\Motp\Generator;
 
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
+use Eloquent\Otis\Motp\Value\MotpValue;
+use Eloquent\Otis\Otp\Value\OtpValueInterface;
 
 /**
  * Generates mOTP values.
@@ -27,20 +29,18 @@ class MotpGenerator implements MotpGeneratorInterface
      * @param MotpConfigurationInterface    $configuration The configuration to use for generation.
      * @param MotpSharedParametersInterface $shared        The shared parameters to use for generation.
      *
-     * @return string The generated mOTP value.
+     * @return OtpValueInterface The generated mOTP value.
      */
     public function generateMotp(
         MotpConfigurationInterface $configuration,
         MotpSharedParametersInterface $shared
     ) {
-        return substr(
+        return new MotpValue(
             md5(
                 strval(intval($shared->time() / $configuration->window())) .
                     bin2hex($shared->secret()) .
                     $shared->pin()
-            ),
-            0,
-            $configuration->digits()
+            )
         );
     }
 }
