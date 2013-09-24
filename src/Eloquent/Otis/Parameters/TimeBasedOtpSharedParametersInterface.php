@@ -18,6 +18,13 @@ interface TimeBasedOtpSharedParametersInterface extends
     OtpSharedParametersInterface
 {
     /**
+     * Set the time value.
+     *
+     * @param integer $time The time in seconds since the Unix epoch.
+     */
+    public function setTime($time);
+
+    /**
      * Get the time in seconds since the Unix epoch.
      *
      * @return integer The time.

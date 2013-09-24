@@ -23,7 +23,7 @@ class CounterBasedOtpSharedParameters extends AbstractOtpSharedParameters
      * instance.
      *
      * @param string       $secret  The shared secret.
-     * @param integer|null $counter The current counter value.
+     * @param integer|null $counter The counter value.
      */
     public function __construct($secret, $counter = null)
     {
@@ -37,9 +37,19 @@ class CounterBasedOtpSharedParameters extends AbstractOtpSharedParameters
     }
 
     /**
-     * Get the current counter value.
+     * Set the counter value.
      *
-     * @return integer The current counter value.
+     * @param integer $counter The counter value.
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+    }
+
+    /**
+     * Get the counter value.
+     *
+     * @return integer The counter value.
      */
     public function counter()
     {

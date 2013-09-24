@@ -18,7 +18,6 @@ use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
 use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
-use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\MfaSequenceValidatorInterface;
@@ -120,9 +119,12 @@ class HotpValidator implements
             $counter <= $shared->counter() + $configuration->window();
             ++$counter
         ) {
+            $currentShared = clone $shared;
+            $currentShared->setCounter($counter);
+
             $value = $this->generator()->generateHotp(
                 $configuration,
-                new CounterBasedOtpSharedParameters($shared->secret(), $counter)
+                $currentShared
             );
 
             if (
@@ -171,6 +173,9 @@ class HotpValidator implements
                 $window = 0;
             }
 
+            $currentShared = clone $shared;
+            $currentShared->setCounter($counter);
+
             $result = $this->validateHotp(
                 new HotpConfiguration(
                     $configuration->digits(),
@@ -179,10 +184,7 @@ class HotpValidator implements
                     $configuration->secretLength(),
                     $configuration->algorithm()
                 ),
-                new CounterBasedOtpSharedParameters(
-                    $shared->secret(),
-                    $counter
-                ),
+                $currentShared,
                 $credentials
             );
 

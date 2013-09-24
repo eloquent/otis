@@ -15,7 +15,6 @@ use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
-use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 use Eloquent\Otis\Totp\Generator\TotpGenerator;
@@ -95,12 +94,14 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
             $i <= $configuration->futureWindows();
             ++$i
         ) {
+            $currentShared = clone $shared;
+            $currentShared->setTime(
+                $shared->time() + ($i * $configuration->window())
+            );
+
             $value = $this->generator()->generateTotp(
                 $configuration,
-                new TimeBasedOtpSharedParameters(
-                    $shared->secret(),
-                    $shared->time() + ($i * $configuration->window())
-                )
+                $currentShared
             );
 
             if (

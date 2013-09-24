@@ -19,9 +19,16 @@ interface CounterBasedOtpSharedParametersInterface extends
     OtpSharedParametersInterface
 {
     /**
-     * Get the current counter value.
+     * Set the counter value.
      *
-     * @return integer The current counter value.
+     * @param integer $counter The counter value.
+     */
+    public function setCounter($counter);
+
+    /**
+     * Get the counter value.
+     *
+     * @return integer The counter value.
      */
     public function counter();
 }

@@ -38,4 +38,11 @@ class CounterBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(1, $this->parameters->counter());
     }
+
+    public function testSetCounter()
+    {
+        $this->parameters->setCounter(222);
+
+        $this->assertSame(222, $this->parameters->counter());
+    }
 }

@@ -42,4 +42,11 @@ class TimeBasedOtpSharedParametersTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(222, $this->parameters->time());
     }
+
+    public function testSetTime()
+    {
+        $this->parameters->setTime(222);
+
+        $this->assertSame(222, $this->parameters->time());
+    }
 }

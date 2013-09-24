@@ -17,7 +17,6 @@ use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
-use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
@@ -84,7 +83,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
         MotpSharedParametersInterface $shared,
         OtpCredentialsInterface $credentials
     ) {
-        if (strlen($credentials->password()) !== 6) {
+        if (strlen($credentials->password()) !== $configuration->digits()) {
             return new TimeBasedOtpValidationResult(
                 TimeBasedOtpValidationResult::CREDENTIAL_LENGTH_MISMATCH
             );
@@ -95,13 +94,14 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
             $i <= $configuration->futureWindows();
             ++$i
         ) {
+            $currentShared = clone $shared;
+            $currentShared->setTime(
+                $shared->time() + ($i * $configuration->window())
+            );
+
             $value = $this->generator()->generateMotp(
                 $configuration,
-                new MotpSharedParameters(
-                    $shared->secret(),
-                    $shared->pin(),
-                    $shared->time() + ($i * 10)
-                )
+                $currentShared
             );
 
             if (

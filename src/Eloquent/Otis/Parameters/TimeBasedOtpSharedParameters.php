@@ -43,6 +43,16 @@ class TimeBasedOtpSharedParameters extends AbstractOtpSharedParameters
     }
 
     /**
+     * Set the time value.
+     *
+     * @param integer $time The time in seconds since the Unix epoch.
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
      * Get the time in seconds since the Unix epoch.
      *
      * @return integer The time.
