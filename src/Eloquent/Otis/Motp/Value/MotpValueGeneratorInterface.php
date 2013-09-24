@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Generator;
+namespace Eloquent\Otis\Motp\Value;
 
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
 use Eloquent\Otis\Otp\Value\OtpValueInterface;
 
 /**
- * The interface implemented by mOTP generators.
+ * The interface implemented by mOTP value generators.
  */
-interface MotpGeneratorInterface
+interface MotpValueGeneratorInterface
 {
     /**
      * Generate an mOTP value.

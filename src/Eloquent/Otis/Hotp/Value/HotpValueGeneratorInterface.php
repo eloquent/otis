@@ -9,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Generator;
+namespace Eloquent\Otis\Hotp\Value;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Hotp\Value\HotpValue;
-use Eloquent\Otis\Hotp\Value\HotpValueInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 
 /**
- * Generates HOTP values.
+ * The interface implemented by HOTP value generators.
  */
-class HotpGenerator implements HotpGeneratorInterface
+interface HotpValueGeneratorInterface
 {
     /**
      * Generate an HOTP value.
@@ -34,29 +32,5 @@ class HotpGenerator implements HotpGeneratorInterface
     public function generateHotp(
         HotpConfigurationInterface $configuration,
         CounterBasedOtpSharedParametersInterface $shared
-    ) {
-        return new HotpValue(
-            hash_hmac(
-                $configuration->algorithm()->value(),
-                $this->pack($shared->counter()),
-                $shared->secret(),
-                true
-            )
-        );
-    }
-
-    /**
-     * Pack a 64-bit integer into a binary representation.
-     *
-     * @param integer $integer The integer to pack.
-     *
-     * @return string The binary representation.
-     */
-    protected function pack($integer)
-    {
-        $highPart = ($integer & 0xffffffff00000000) >> 32;
-        $lowPart  = ($integer & 0x00000000ffffffff);
-
-        return pack('N2', $highPart, $lowPart);
-    }
+    );
 }

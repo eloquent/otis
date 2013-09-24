@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Hotp\Generator;
+namespace Eloquent\Otis\Hotp\Value;
 
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
-class HotpGeneratorTest extends PHPUnit_Framework_TestCase
+class HotpValueGeneratorTest extends PHPUnit_Framework_TestCase
 {
     public function generateHotpData()
     {
@@ -62,8 +62,8 @@ class HotpGeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testGenerateHotp($secret, $counter, $truncated, $hotp, $algorithm)
     {
-        $this->generator = new HotpGenerator();
-        $result = $this->generator->generateHotp(
+        $this->generator = new HotpValueGenerator();
+        $result = $this->generator->generate(
             new HotpConfiguration(
                 null,
                 null,

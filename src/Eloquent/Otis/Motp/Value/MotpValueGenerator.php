@@ -9,18 +9,37 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Generator;
+namespace Eloquent\Otis\Motp\Value;
 
+use Eloquent\Otis\Configuration\OtpConfigurationInterface;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
-use Eloquent\Otis\Motp\Value\MotpValue;
+use Eloquent\Otis\Otp\Value\OtpValueGeneratorInterface;
 use Eloquent\Otis\Otp\Value\OtpValueInterface;
+use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 
 /**
  * Generates mOTP values.
  */
-class MotpGenerator implements MotpGeneratorInterface
+class MotpValueGenerator implements
+    OtpValueGeneratorInterface,
+    MotpValueGeneratorInterface
 {
+    /**
+     * Generate an OTP value.
+     *
+     * @param OtpConfigurationInterface    $configuration The configuration to use for generation.
+     * @param OtpSharedParametersInterface $shared        The shared parameters to use for generation.
+     *
+     * @return OtpValueInterface The generated OTP value.
+     */
+    public function generate(
+        OtpConfigurationInterface $configuration,
+        OtpSharedParametersInterface $shared
+    ) {
+        return $this->generateMotp($configuration, $shared);
+    }
+
     /**
      * Generate an mOTP value.
      *

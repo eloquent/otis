@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Generator;
+namespace Eloquent\Otis\Totp\Value;
 
-use Eloquent\Otis\Hotp\Generator\HotpGenerator;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
+use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
 use PHPUnit_Framework_TestCase;
 
-class TotpGeneratorTest extends PHPUnit_Framework_TestCase
+class TotpValueGeneratorTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->hotpGenerator = new HotpGenerator;
-        $this->generator = new TotpGenerator($this->hotpGenerator);
+        $this->hotpGenerator = new HotpValueGenerator;
+        $this->generator = new TotpValueGenerator($this->hotpGenerator);
     }
 
     public function testConstructor()
@@ -34,9 +34,9 @@ class TotpGeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorDefaults()
     {
-        $this->generator = new TotpGenerator;
+        $this->generator = new TotpValueGenerator;
 
-        $this->assertEquals(new HotpGenerator, $this->generator->generator());
+        $this->assertEquals(new HotpValueGenerator, $this->generator->generator());
     }
 
     public function generateTotpData()
@@ -73,7 +73,7 @@ class TotpGeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testGenerateTotp($secret, $window, $time, $totp, $algorithm)
     {
-        $result = $this->generator->generateTotp(
+        $result = $this->generator->generate(
             new TotpConfiguration(
                 8,
                 $window,

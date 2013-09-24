@@ -16,8 +16,8 @@ use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\Configuration\HotpConfigurationInterface;
-use Eloquent\Otis\Hotp\Generator\HotpGenerator;
-use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
+use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
+use Eloquent\Otis\Hotp\Value\HotpValueGeneratorInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\MfaSequenceValidatorInterface;
@@ -35,12 +35,12 @@ class HotpValidator implements
     /**
      * Construct a new HOTP validator.
      *
-     * @param HotpGeneratorInterface|null $generator The generator to use.
+     * @param HotpValueGeneratorInterface|null $generator The generator to use.
      */
-    public function __construct(HotpGeneratorInterface $generator = null)
+    public function __construct(HotpValueGeneratorInterface $generator = null)
     {
         if (null === $generator) {
-            $generator = new HotpGenerator;
+            $generator = new HotpValueGenerator;
         }
 
         $this->generator = $generator;
@@ -49,7 +49,7 @@ class HotpValidator implements
     /**
      * Get the generator.
      *
-     * @return HotpGeneratorInterface The generator.
+     * @return HotpValueGeneratorInterface The generator.
      */
     public function generator()
     {

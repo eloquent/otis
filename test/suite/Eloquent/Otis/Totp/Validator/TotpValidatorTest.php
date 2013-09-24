@@ -14,7 +14,7 @@ namespace Eloquent\Otis\Totp\Validator;
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParameters;
 use Eloquent\Otis\Totp\Configuration\TotpConfiguration;
-use Eloquent\Otis\Totp\Generator\TotpGenerator;
+use Eloquent\Otis\Totp\Value\TotpValueGenerator;
 use PHPUnit_Framework_TestCase;
 
 class TotpValidatorTest extends PHPUnit_Framework_TestCase
@@ -23,7 +23,7 @@ class TotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->generator = new TotpGenerator;
+        $this->generator = new TotpValueGenerator;
         $this->validator = new TotpValidator($this->generator);
     }
 

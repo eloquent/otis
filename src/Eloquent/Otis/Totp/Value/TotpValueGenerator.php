@@ -9,30 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Generator;
+namespace Eloquent\Otis\Totp\Value;
 
+use Eloquent\Otis\Configuration\OtpConfigurationInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Generator\HotpGenerator;
-use Eloquent\Otis\Hotp\Generator\HotpGeneratorInterface;
+use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
+use Eloquent\Otis\Hotp\Value\HotpValueGeneratorInterface;
 use Eloquent\Otis\Hotp\Value\HotpValueInterface;
+use Eloquent\Otis\Otp\Value\OtpValueGeneratorInterface;
+use Eloquent\Otis\Otp\Value\OtpValueInterface;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
  * Generates TOTP values.
  */
-class TotpGenerator implements TotpGeneratorInterface
+class TotpValueGenerator implements
+    OtpValueGeneratorInterface,
+    TotpValueGeneratorInterface
 {
     /**
      * Construct a new TOTP generator.
      *
-     * @param HotpGeneratorInterface|null $generator The HOTP generator to use.
+     * @param HotpValueGeneratorInterface|null $generator The HOTP generator to use.
      */
-    public function __construct(HotpGeneratorInterface $generator = null)
+    public function __construct(HotpValueGeneratorInterface $generator = null)
     {
         if (null === $generator) {
-            $generator = new HotpGenerator;
+            $generator = new HotpValueGenerator;
         }
 
         $this->generator = $generator;
@@ -41,11 +47,26 @@ class TotpGenerator implements TotpGeneratorInterface
     /**
      * Get the HOTP generator.
      *
-     * @return HotpGeneratorInterface The HOTP generator.
+     * @return HotpValueGeneratorInterface The HOTP generator.
      */
     public function generator()
     {
         return $this->generator;
+    }
+
+    /**
+     * Generate an OTP value.
+     *
+     * @param OtpConfigurationInterface    $configuration The configuration to use for generation.
+     * @param OtpSharedParametersInterface $shared        The shared parameters to use for generation.
+     *
+     * @return OtpValueInterface The generated OTP value.
+     */
+    public function generate(
+        OtpConfigurationInterface $configuration,
+        OtpSharedParametersInterface $shared
+    ) {
+        return $this->generateTotp($configuration, $shared);
     }
 
     /**

@@ -37,7 +37,7 @@ interface MfaDriverInterface
     /**
      * Get the initialization URI factory.
      *
-     * @return InitializationUriFactoryInterface The initialization URI factory.
+     * @return InitializationUriFactoryInterface|null The initialization URI factory, or null if not supported.
      */
     public function initializationUriFactory();
 }

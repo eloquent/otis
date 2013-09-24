@@ -15,9 +15,9 @@ use Eloquent\Otis\Configuration\MfaConfigurationInterface;
 use Eloquent\Otis\Credentials\MfaCredentialsInterface;
 use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Motp\Configuration\MotpConfigurationInterface;
-use Eloquent\Otis\Motp\Generator\MotpGenerator;
-use Eloquent\Otis\Motp\Generator\MotpGeneratorInterface;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParametersInterface;
+use Eloquent\Otis\Motp\Value\MotpValueGenerator;
+use Eloquent\Otis\Motp\Value\MotpValueGeneratorInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
@@ -31,12 +31,12 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
     /**
      * Construct a new mOTP validator.
      *
-     * @param MotpGeneratorInterface|null $generator The generator to use.
+     * @param MotpValueGeneratorInterface|null $generator The generator to use.
      */
-    public function __construct(MotpGeneratorInterface $generator = null)
+    public function __construct(MotpValueGeneratorInterface $generator = null)
     {
         if (null === $generator) {
-            $generator = new MotpGenerator;
+            $generator = new MotpValueGenerator;
         }
 
         $this->generator = $generator;
@@ -45,7 +45,7 @@ class MotpValidator implements MfaValidatorInterface, MotpValidatorInterface
     /**
      * Get the generator.
      *
-     * @return MotpGeneratorInterface The generator.
+     * @return MotpValueGeneratorInterface The generator.
      */
     public function generator()
     {

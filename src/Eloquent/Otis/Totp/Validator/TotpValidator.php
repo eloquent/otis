@@ -17,8 +17,8 @@ use Eloquent\Otis\Credentials\OtpCredentialsInterface;
 use Eloquent\Otis\Parameters\MfaSharedParametersInterface;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
-use Eloquent\Otis\Totp\Generator\TotpGenerator;
-use Eloquent\Otis\Totp\Generator\TotpGeneratorInterface;
+use Eloquent\Otis\Totp\Value\TotpValueGenerator;
+use Eloquent\Otis\Totp\Value\TotpValueGeneratorInterface;
 use Eloquent\Otis\Validator\MfaValidatorInterface;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResult;
 use Eloquent\Otis\Validator\Result\TimeBasedOtpValidationResultInterface;
@@ -31,12 +31,12 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
     /**
      * Construct a new TOTP validator.
      *
-     * @param TotpGeneratorInterface|null $generator The generator to use.
+     * @param TotpValueGeneratorInterface|null $generator The generator to use.
      */
-    public function __construct(TotpGeneratorInterface $generator = null)
+    public function __construct(TotpValueGeneratorInterface $generator = null)
     {
         if (null === $generator) {
-            $generator = new TotpGenerator;
+            $generator = new TotpValueGenerator;
         }
 
         $this->generator = $generator;
@@ -45,7 +45,7 @@ class TotpValidator implements MfaValidatorInterface, TotpValidatorInterface
     /**
      * Get the generator.
      *
-     * @return TotpGeneratorInterface The generator.
+     * @return TotpValueGeneratorInterface The generator.
      */
     public function generator()
     {

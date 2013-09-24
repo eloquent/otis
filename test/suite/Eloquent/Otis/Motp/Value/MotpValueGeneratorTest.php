@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Motp\Generator;
+namespace Eloquent\Otis\Motp\Value;
 
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
-class MotpGeneratorTest extends PHPUnit_Framework_TestCase
+class MotpValueGeneratorTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         parent::setUp();
 
-        $this->generator = new MotpGenerator;
+        $this->generator = new MotpValueGenerator;
     }
 
     public function generateMotpData()
@@ -41,7 +41,7 @@ class MotpGeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testGenerateMotp($secret, $pin, $time, $motp)
     {
-        $result = $this->generator->generateMotp(new MotpConfiguration, new MotpSharedParameters($secret, $pin, $time));
+        $result = $this->generator->generate(new MotpConfiguration, new MotpSharedParameters($secret, $pin, $time));
 
         $this->assertSame($motp, $result->string());
     }

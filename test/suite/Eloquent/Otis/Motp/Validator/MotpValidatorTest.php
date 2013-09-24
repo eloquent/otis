@@ -13,8 +13,8 @@ namespace Eloquent\Otis\Motp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
-use Eloquent\Otis\Motp\Generator\MotpGenerator;
 use Eloquent\Otis\Motp\Parameters\MotpSharedParameters;
+use Eloquent\Otis\Motp\Value\MotpValueGenerator;
 use PHPUnit_Framework_TestCase;
 
 class MotpValidatorTest extends PHPUnit_Framework_TestCase
@@ -23,7 +23,7 @@ class MotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->generator = new MotpGenerator;
+        $this->generator = new MotpValueGenerator;
         $this->validator = new MotpValidator($this->generator);
     }
 

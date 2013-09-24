@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Eloquent\Otis\Totp\Generator;
+namespace Eloquent\Otis\Totp\Value;
 
 use Eloquent\Otis\Hotp\Value\HotpValueInterface;
 use Eloquent\Otis\Parameters\TimeBasedOtpSharedParametersInterface;
 use Eloquent\Otis\Totp\Configuration\TotpConfigurationInterface;
 
 /**
- * The interface implemented by TOTP generators.
+ * The interface implemented by TOTP value generators.
  */
-interface TotpGeneratorInterface
+interface TotpValueGeneratorInterface
 {
     /**
      * Generate a TOTP value.

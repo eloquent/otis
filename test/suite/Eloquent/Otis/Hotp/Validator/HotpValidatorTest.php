@@ -13,7 +13,7 @@ namespace Eloquent\Otis\Hotp\Validator;
 
 use Eloquent\Otis\Credentials\OtpCredentials;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
-use Eloquent\Otis\Hotp\Generator\HotpGenerator;
+use Eloquent\Otis\Hotp\Value\HotpValueGenerator;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
 use PHPUnit_Framework_TestCase;
 
@@ -23,7 +23,7 @@ class HotpValidatorTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->generator = new HotpGenerator;
+        $this->generator = new HotpValueGenerator;
         $this->validator = new HotpValidator($this->generator);
     }
 
