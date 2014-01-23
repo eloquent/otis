@@ -20,7 +20,7 @@ class ErrorCorrectionLevelTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        Liberator::liberateClass('Eloquent\Enumeration\Multiton')->members = array();
+        Liberator::liberateClass('Eloquent\Enumeration\AbstractMultiton')->members = array();
     }
 
     public function testMembers()

@@ -11,12 +11,12 @@
 
 namespace Eloquent\Otis\Hotp;
 
-use Eloquent\Enumeration\Enumeration;
+use Eloquent\Enumeration\AbstractEnumeration;
 
 /**
  * The available HOTP hash algorithms.
  */
-final class HotpHashAlgorithm extends Enumeration
+final class HotpHashAlgorithm extends AbstractEnumeration
 {
     /**
      * The SHA-1 hash algorithm.

@@ -12,7 +12,6 @@
 namespace Eloquent\Otis\Motp\Parameters\Generator;
 
 use Eloquent\Otis\Motp\Configuration\MotpConfiguration;
-use Eloquent\Otis\Motp\Parameters\Generator\MotpSharedParametersGenerator;
 use Icecave\Isolator\Isolator;
 use PHPUnit_Framework_TestCase;
 use Phake;

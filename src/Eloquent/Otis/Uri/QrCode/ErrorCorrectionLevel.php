@@ -11,12 +11,12 @@
 
 namespace Eloquent\Otis\Uri\QrCode;
 
-use Eloquent\Enumeration\Multiton;
+use Eloquent\Enumeration\AbstractMultiton;
 
 /**
  * The available error correction levels for QR codes.
  */
-final class ErrorCorrectionLevel extends Multiton
+final class ErrorCorrectionLevel extends AbstractMultiton
 {
     /**
      * Get the letter code.

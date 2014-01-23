@@ -14,14 +14,14 @@
     "require": {
         "php": ">=5.3",
         "christian-riesen/base32": "~1",
-        "eloquent/enumeration": "~4",
+        "eloquent/enumeration": "~5",
         "icecave/isolator": "~2"
     },
     "require-dev": {
         "eloquent/asplode": "~1",
         "eloquent/liberator": "~1",
         "eloquent/liftoff": "~0.1",
-        "icecave/archer": "1.0.0-alpha.2"
+        "icecave/archer": "~1"
     },
     "autoload": {
         "psr-0": {
