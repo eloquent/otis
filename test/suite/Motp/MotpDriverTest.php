@@ -24,14 +24,9 @@ class MotpDriverTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->validator = new TimeBasedOtpValidator(
-            new Value\MotpValueGenerator
-        );
+        $this->validator = new TimeBasedOtpValidator(new Value\MotpValueGenerator);
         $this->sharedParametersGenerator = new Parameters\Generator\MotpSharedParametersGenerator;
-        $this->driver = new MotpDriver(
-            $this->validator,
-            $this->sharedParametersGenerator
-        );
+        $this->driver = new MotpDriver($this->validator, $this->sharedParametersGenerator);
     }
 
     public function testConstructor()
