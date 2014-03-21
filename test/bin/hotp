@@ -3,25 +3,27 @@
 
 use Eloquent\Asplode\Asplode;
 use Eloquent\Liftoff\Launcher;
-use Eloquent\Otis\GoogleAuthenticator\GoogleAuthenticatorUriFactory;
-use Eloquent\Otis\Hotp\HotpValidator;
-use Eloquent\Otis\QrCode\GoogleChartsQrCodeUriFactory;
+use Eloquent\Otis\Credentials\OtpCredentials;
+use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
+use Eloquent\Otis\Hotp\HotpDriver;
+use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
+use Eloquent\Otis\Uri\QrCode\GoogleChartsQrCodeUriFactory;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 Asplode::instance()->install();
 set_time_limit(0);
 
-$uriFactory = new GoogleAuthenticatorUriFactory;
+$driver = new HotpDriver;
 $qrCodeUriFactory = new GoogleChartsQrCodeUriFactory;
-$validator = new HotpValidator;
 $launcher = new Launcher;
 
-$secret = sha1(mt_rand());
-$counter = 1;
+$configuration = new HotpConfiguration;
+$shared = new CounterBasedOtpSharedParameters(sha1(mt_rand()), 1);
 
-$uri = $uriFactory->createHotpUri(
-    $secret,
+$uri = $driver->initializationUriFactory()->create(
+    $configuration,
+    $shared,
     'Otis HOTP example',
     'Eloquent Software'
 );
@@ -35,9 +37,17 @@ while (true) {
     echo 'Enter password: ';
     $password = trim(fgets(STDIN));
 
-    if ($validator->validate($password, $secret, $counter, 10, $newCounter)) {
-        $actualWindow = $newCounter - $counter;
-        $counter = $newCounter;
+    $result = $driver->validator()
+        ->validate($configuration, $shared, new OtpCredentials($password));
+
+    if ($result->isSuccessful()) {
+        if (null !== $result->counter()) {
+            $actualWindow = $result->counter() - $shared->counter();
+            $shared->setCounter($result->counter());
+        } else {
+            $actualWindow = '???';
+        }
+
         printf(
             'Valid password found at %d passwords since last.' . PHP_EOL,
             $actualWindow
