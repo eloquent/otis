@@ -2,9 +2,9 @@
 
 *One-time password / multi-factor authentication library for PHP.*
 
-[![Build Status]][Latest build]
-[![Test Coverage]][Test coverage report]
-[![Uses Semantic Versioning]][SemVer]
+[![The most recent stable version is 0.3.0][version-image]][Semantic versioning]
+[![Current build status image][build-image]][Current build status]
+[![Current coverage status image][coverage-image]][Current coverage status]
 
 ## Installation and documentation
 
@@ -164,11 +164,12 @@ the wiki.
 [multi-factor authentication]: http://en.wikipedia.org/wiki/Multi-factor_authentication
 [URI format]: https://code.google.com/p/google-authenticator/wiki/KeyUriFormat
 
-[Build Status]: https://api.travis-ci.org/eloquent/otis.png?branch=master
+[API documentation]: http://lqnt.co/otis/artifacts/documentation/api/
 [Composer]: http://getcomposer.org/
+[build-image]: http://img.shields.io/travis/eloquent/otis/develop.svg "Current build status for the develop branch"
+[Current build status]: https://travis-ci.org/eloquent/otis
+[coverage-image]: http://img.shields.io/coveralls/eloquent/otis/develop.svg "Current test coverage for the develop branch"
+[Current coverage status]: https://coveralls.io/r/eloquent/otis
 [eloquent/otis]: https://packagist.org/packages/eloquent/otis
-[Latest build]: https://travis-ci.org/eloquent/otis
-[SemVer]: http://semver.org/
-[Test coverage report]: https://coveralls.io/r/eloquent/otis
-[Test Coverage]: https://coveralls.io/repos/eloquent/otis/badge.png?branch=master
-[Uses Semantic Versioning]: http://b.repl.ca/v1/semver-yes-brightgreen.png
+[Semantic versioning]: http://semver.org/
+[version-image]: http://img.shields.io/:semver-0.3.0-yellow.svg "This project uses semantic versioning"
