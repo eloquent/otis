@@ -24,8 +24,8 @@
         "icecave/archer": "~1"
     },
     "autoload": {
-        "psr-0": {
-            "Eloquent\\Otis": "src"
+        "psr-4": {
+            "Eloquent\\Otis\\": "src"
         }
     }
 }
