@@ -11,6 +11,7 @@
 
 namespace Eloquent\Otis\GoogleAuthenticator\Uri\Initialization;
 
+use Eloquent\Endec\Base32\Base32;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 use Eloquent\Otis\Parameters\CounterBasedOtpSharedParameters;
@@ -26,7 +27,20 @@ class GoogleAuthenticatorHotpUriFactoryTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
+        $this->base32Encoder = new Base32;
+        $this->factory = new GoogleAuthenticatorHotpUriFactory($this->base32Encoder);
+    }
+
+    public function testConstructor()
+    {
+        $this->assertSame($this->base32Encoder, $this->factory->base32Encoder());
+    }
+
+    public function testConstructorDefaults()
+    {
         $this->factory = new GoogleAuthenticatorHotpUriFactory;
+
+        $this->assertSame(Base32::instance(), $this->factory->base32Encoder());
     }
 
     public function createData()

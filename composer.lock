@@ -3,29 +3,35 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "04833ad04d76ab43f49a049706d72f0f",
+    "hash": "23100f4288e314e06530ae1b11080673",
     "packages": [
         {
-            "name": "christian-riesen/base32",
-            "version": "1.1",
+            "name": "eloquent/endec",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ChristianRiesen/base32.git",
-                "reference": "1.1"
+                "url": "https://github.com/eloquent/endec.git",
+                "reference": "07c98a9e5c2697a6b191229a34e3536d7ec9ea8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ChristianRiesen/base32/archive/1.1.zip",
-                "reference": "1.1",
+                "url": "https://api.github.com/repos/eloquent/endec/zipball/07c98a9e5c2697a6b191229a34e3536d7ec9ea8b",
+                "reference": "07c98a9e5c2697a6b191229a34e3536d7ec9ea8b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "icecave/isolator": "~2",
+                "php": ">=5.4",
+                "react/stream": "~0.4.0"
+            },
+            "require-dev": {
+                "eloquent/liberator": "~2",
+                "icecave/archer": "~1"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Base32": "src"
+                "psr-4": {
+                    "Eloquent\\Endec\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -34,21 +40,35 @@
             ],
             "authors": [
                 {
-                    "name": "Christian Riesen",
-                    "email": "chris.riesen@gmail.com",
-                    "homepage": "http://christianriesen.com",
-                    "role": "Developer"
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                },
+                {
+                    "name": "James Harris",
+                    "email": "james.harris@icecave.com.au",
+                    "homepage": "https://github.com/jmalloc"
                 }
             ],
-            "description": "Base32 encoder/decoder, unit tested, according to RFC 4648",
-            "homepage": "https://github.com/ChristianRiesen/base32",
+            "description": "Versatile encoding implementations for PHP.",
+            "homepage": "https://github.com/eloquent/endec",
             "keywords": [
+                "base16",
                 "base32",
+                "base32hex",
+                "base64",
+                "base64url",
+                "codec",
                 "decode",
+                "decoding",
                 "encode",
-                "rfc4648"
+                "encoding",
+                "hex",
+                "react",
+                "stream",
+                "streaming"
             ],
-            "time": "2013-01-29 09:48:22"
+            "time": "2014-03-19 12:07:29"
         },
         {
             "name": "eloquent/enumeration",
@@ -98,6 +118,52 @@
                 "type"
             ],
             "time": "2014-03-13 01:16:59"
+        },
+        {
+            "name": "evenement/evenement",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorw/evenement.git",
+                "reference": "f6e843799fd4f4184d54d8fc7b5b3551c9fa803e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/f6e843799fd4f4184d54d8fc7b5b3551c9fa803e",
+                "reference": "f6e843799fd4f4184d54d8fc7b5b3551c9fa803e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Evenement": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch",
+                    "homepage": "http://wiedler.ch/igor/"
+                }
+            ],
+            "description": "Événement is a very simple event dispatching library for PHP",
+            "keywords": [
+                "event-dispatcher",
+                "event-emitter"
+            ],
+            "time": "2012-11-02 14:49:47"
         },
         {
             "name": "icecave/isolator",
@@ -150,6 +216,50 @@
                 "unit"
             ],
             "time": "2014-02-27 04:33:16"
+        },
+        {
+            "name": "react/stream",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/stream.git",
+                "reference": "42bd0edc641901e6265a98aa84042b8e95e19540"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/42bd0edc641901e6265a98aa84042b8e95e19540",
+                "reference": "42bd0edc641901e6265a98aa84042b8e95e19540",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "~2.0",
+                "php": ">=5.4.0"
+            },
+            "suggest": {
+                "react/event-loop": "0.4.*",
+                "react/promise": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "React\\Stream\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Basic readable and writable stream interfaces that support piping.",
+            "keywords": [
+                "pipe",
+                "stream"
+            ],
+            "time": "2014-02-02 16:21:45"
         }
     ],
     "packages-dev": [

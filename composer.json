@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.3",
-        "christian-riesen/base32": "~1",
+        "eloquent/endec": "~0.1.0",
         "eloquent/enumeration": "~5",
         "icecave/isolator": "~2"
     },

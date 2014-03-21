@@ -32,9 +32,11 @@ class TotpDriver extends AbstractMfaDriver
      * @param InitializationUriFactoryInterface|null     $initializationUriFactory  The initialization URI factory to use, or null if not supported.
      */
     public function __construct(
+        // @codeCoverageIgnoreStart
         MfaValidatorInterface $validator = null,
         MfaSharedParametersGeneratorInterface $sharedParametersGenerator = null,
         InitializationUriFactoryInterface $initializationUriFactory = null
+        // @codeCoverageIgnoreEnd
     ) {
         if (null === $validator) {
             $valueGenerator = new Value\TotpValueGenerator;

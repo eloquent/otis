@@ -11,19 +11,44 @@
 
 namespace Eloquent\Otis\GoogleAuthenticator\Uri\Initialization;
 
-use Base32\Base32;
+use Eloquent\Endec\Base32\Base32;
+use Eloquent\Endec\EncoderInterface;
 use Eloquent\Otis\Hotp\Configuration\HotpBasedConfigurationInterface;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
 use Eloquent\Otis\Parameters\OtpSharedParametersInterface;
 use Eloquent\Otis\Uri\Initialization\InitializationUriFactoryInterface;
 
 /**
- * An abstract base class for implementing  Google Authenticator OTP URI
+ * An abstract base class for implementing Google Authenticator OTP URI
  * factories.
  */
 abstract class AbstractGoogleAuthenticatorUriFactory implements
     InitializationUriFactoryInterface
 {
+    /**
+     * Construct a new Google Authenticator OTP URI factory.
+     *
+     * @param EncoderInterface|null $base32Encoder The base32 encoder to use.
+     */
+    public function __construct(EncoderInterface $base32Encoder = null)
+    {
+        if (null === $base32Encoder) {
+            $base32Encoder = Base32::instance();
+        }
+
+        $this->base32Encoder = $base32Encoder;
+    }
+
+    /**
+     * Get the base32 encoder.
+     *
+     * @return EncoderInterface The base32 encoder.
+     */
+    public function base32Encoder()
+    {
+        return $this->base32Encoder;
+    }
+
     /**
      * Create an OTP URI for use with Google Authenticator.
      *
@@ -79,8 +104,10 @@ abstract class AbstractGoogleAuthenticatorUriFactory implements
             rawurlencode($type),
             $legacyIssuer,
             rawurlencode($label),
-            rawurlencode(Base32::encode($shared->secret())),
+            rawurlencode($this->base32Encoder()->encode($shared->secret())),
             $parameters
         );
     }
+
+    private $base32Encoder;
 }
