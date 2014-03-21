@@ -123,22 +123,21 @@ care:
 *Otis* has a simple demonstration system. In order to run the demos, these
 instructions must be followed:
 
-- [Install Google Authenticator] or a compatible OTP app
-- Clone the *Otis* repository
-- Install [Composer] dependencies, including dev dependencies
+- [Install Google Authenticator] or a compatible OTP app.
+- Clone the *Otis* repository.
+- Install [Composer] dependencies, including dev dependencies.
 - Run `test/bin/totp` or `test/bin/hotp` depending on which type of OTP system
-  is preferred
-- A link to a QR code image will be launched in the default browser
-- Scan this QR code with the OTP app
-- Return to the console and enter the passwords provided by the OTP app
+  is preferred.
+- A link to a QR code image will be launched in the default browser.
+- Scan this QR code with the OTP app.
+- Return to the console and enter the passwords provided by the OTP app.
 
 In addition, there is a test suite for determining the capabilities of OTP apps.
 In order to run the test suite follow these steps:
 
-- Install [Composer] dependencies as above
-- Change directory into `test/etc/otp-test-suite`
-- Run `php -S localhost:8000`
-- Visit [localhost:8000](http://localhost:8000/) in a browser
+- Install [Composer] dependencies as above.
+- Run `test/bin/otp-test-suite`.
+- The test suite will be launched in the default browser.
 
 ## OTP app capabilities
 

@@ -1,0 +1,6 @@
+#!/bin/sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+php --server localhost:8000 --docroot "$DIR/../etc/otp-test-suite" &
+echo 'Launching OTP test suite in browser...' . PHP_EOL;
+"$DIR/../../vendor/bin/liftoff" http://localhost:8000/
+wait

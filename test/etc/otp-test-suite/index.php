@@ -1,7 +1,7 @@
 <?php
 
-use Base32\Base32;
 use Eloquent\Asplode\Asplode;
+use Eloquent\Endec\Base32\Base32;
 use Eloquent\Otis\Driver\MfaDriverFactory;
 use Eloquent\Otis\Hotp\Configuration\HotpConfiguration;
 use Eloquent\Otis\Hotp\HotpHashAlgorithm;
@@ -94,7 +94,7 @@ foreach ($entries as $index => $entry) {
 
         <title>Otis OTP feature test suite</title>
 
-        <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <style type="text/css">
             body {
                 padding: 30px;
@@ -153,7 +153,7 @@ foreach ($entries as $index => $entry) {
                             <dd><?php echo htmlspecialchars($secret) ?></dd>
 
                             <dt>Secret (Base32)</dt>
-                            <dd><?php echo htmlspecialchars(Base32::encode($secret)) ?></dd>
+                            <dd><?php echo htmlspecialchars(Base32::instance()->encode($secret)) ?></dd>
 
                             <dt>Raw URI</dt>
                             <dd><a href="<?php echo htmlspecialchars($entry['uri']) ?>"><?php echo htmlspecialchars($entry['uri']) ?></a></dd>
