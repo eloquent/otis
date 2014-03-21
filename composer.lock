@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "23100f4288e314e06530ae1b11080673",
+    "hash": "10a1e0bedfe967ee537f4f47ebefac8a",
     "packages": [
         {
             "name": "eloquent/endec",
@@ -1458,7 +1458,7 @@
 
     ],
     "platform": {
-        "php": ">=5.3"
+        "php": ">=5.4"
     },
     "platform-dev": [
 
