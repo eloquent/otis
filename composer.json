@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "eloquent/endec": "dev-develop@dev",
+        "eloquent/endec": "~0.2",
         "eloquent/enumeration": "~5",
         "icecave/isolator": "~2"
     },
